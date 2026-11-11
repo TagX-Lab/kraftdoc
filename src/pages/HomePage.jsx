@@ -86,26 +86,26 @@ export default function HomePage({ onNavigate }) {
       tag: "Popular",
       tagColor: "bg-[#FF4E02] text-white",
       bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Photo & Image Resizer",
-      desc: "Resize image dimensions, crop freely, and set exact KB limits for any upload requirement.",
-      badge: "Custom Px & KB",
+      title: "Photo Resizer",
+      desc: "Crop, resize px & set exact KB limits freely.",
+      badge: "Custom KB",
       accentColor: "#FF4E02",
       icon: UserCheck,
       illustration: PhotoResizerIllustration,
-      pillPrice: "Free Forever",
+      pillPrice: "Free",
     },
     {
       id: "compress-image",
       tag: "Popular",
       tagColor: "bg-[#1400C3] text-white",
       bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
-      title: "Image Compressor",
-      desc: "Bulk shrink JPG, PNG, and WebP files up to 90% without visible quality degradation.",
-      badge: "-85% KB Savings",
+      title: "Compressor",
+      desc: "Bulk shrink JPG, PNG, WebP up to 90%.",
+      badge: "-85% KB",
       accentColor: "#1400C3",
       icon: Minimize2,
       illustration: CompressorIllustration,
-      pillPrice: "Free Forever",
+      pillPrice: "Free",
     },
     {
       id: "images-to-pdf",
@@ -113,51 +113,51 @@ export default function HomePage({ onNavigate }) {
       tagColor: "bg-[#1400C3] text-white",
       bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
       title: "Images to PDF",
-      desc: "Merge multiple camera photos into clean A4 or Letter PDFs with custom margins and layout.",
-      badge: "Instant A4 Merge",
+      desc: "Merge photos into clean A4 or Letter PDFs.",
+      badge: "Instant A4",
       accentColor: "#FF4E02",
       icon: FileText,
       illustration: ImagesToPdfIllustration,
-      pillPrice: "Free Forever",
+      pillPrice: "Free",
     },
     {
       id: "pdf-merge-split",
-      tag: "Top Utility",
+      tag: "Top Tool",
       tagColor: "bg-[#1400C3] text-white",
       bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
-      title: "PDF Merge & Split",
-      desc: "Combine multiple documents or extract custom page ranges (e.g. 1-3, 5) with zero cloud upload.",
-      badge: "Multi-Doc Engine",
+      title: "Merge & Split",
+      desc: "Combine docs or extract custom page ranges.",
+      badge: "Split / Join",
       accentColor: "#1400C3",
       icon: Layers,
       illustration: MergeSplitIllustration,
-      pillPrice: "Free Forever",
+      pillPrice: "Free",
     },
     {
       id: "image-converter",
       tag: "New",
       tagColor: "bg-emerald-600 text-white",
       bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
-      title: "Format Converter",
-      desc: "Bulk convert images across next-gen WebP, lossless PNG, and universal JPEG in 1-click.",
-      badge: "WebP / PNG / JPG",
+      title: "Format Convert",
+      desc: "Bulk convert across WebP, PNG & JPG.",
+      badge: "WebP / JPG",
       accentColor: "#1400C3",
       icon: RefreshCw,
       illustration: ConverterIllustration,
-      pillPrice: "Free Forever",
+      pillPrice: "Free",
     },
     {
       id: "pdf-organizer",
       tag: "Organize",
       tagColor: "bg-[#FF4E02] text-white",
       bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
-      title: "PDF Page Organizer",
-      desc: "Rotate pages 90°/180° and delete unwanted pages visually with instantaneous preview.",
-      badge: "Rotate & Delete",
+      title: "PDF Organizer",
+      desc: "Rotate pages 90°/180° and delete pages.",
+      badge: "Rotate & Cut",
       accentColor: "#FF4E02",
       icon: RotateCw,
       illustration: OrganizerIllustration,
-      pillPrice: "Free Forever",
+      pillPrice: "Free",
     },
   ];
 
@@ -167,8 +167,8 @@ export default function HomePage({ onNavigate }) {
       a: "Yes, 100%! DocuPix uses HTML5 Canvas and WebAssembly to process your images and PDFs directly inside your own web browser. Your files are NEVER uploaded to any external server or cloud.",
     },
     {
-      q: "How does the Govt Exam Photo Resizer work?",
-      a: "It includes pre-configured dimension and file-size specifications for TNPSC, SSC, UPSC, IBPS, and GATE. It automatically crops and compresses your photo or signature to meet official requirements in 1 click.",
+      q: "How does the Photo Resizer work?",
+      a: "It allows you to set custom pixel dimensions, aspect ratios, and target file size limits in KB. It resizes and compresses your photo instantly in your browser to meet any exact specifications.",
     },
     {
       q: "Is DocuPix completely free to use?",
@@ -305,14 +305,14 @@ export default function HomePage({ onNavigate }) {
       {/* ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-up">
-          <div className="rounded-[36px] sm:rounded-[44px] bg-[#F7EDBE] border-2 border-[#E6D799] p-6 sm:p-10 lg:p-12 shadow-sm">
+          <div className="rounded-[32px] sm:rounded-[40px] bg-[#F7EDBE] border-2 border-[#E6D799] p-5 sm:p-7 lg:p-8 shadow-sm">
             {/* Section Header */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 mb-6">
               <div>
                 <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
                   OUR FAVORITES
                 </span>
-                <h2 className="font-display text-3xl sm:text-5xl text-[#1400C3] tracking-tight uppercase">
+                <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
                   TOOLS YOU&apos;LL LOVE
                 </h2>
               </div>
@@ -326,8 +326,8 @@ export default function HomePage({ onNavigate }) {
               </button>
             </div>
 
-            {/* Grid of 6 Distinct Color-Blocked Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Grid of All 6 Modules in a Single Desktop View (No Scrolling Required) */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-3.5">
               {toolCards.map((tool) => {
                 const Illustration = tool.illustration;
 
@@ -335,48 +335,51 @@ export default function HomePage({ onNavigate }) {
                   <div
                     key={tool.id}
                     onClick={() => onNavigate(tool.id)}
-                    className={`human-card rounded-3xl p-6 border-2 transition-all cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-xl ${tool.bgClass}`}
+                    className={`human-card rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 border-2 transition-all cursor-pointer flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 ${tool.bgClass}`}
                   >
                     <div>
                       {/* Top Tag & Badge */}
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center justify-between gap-1 mb-2">
                         <span
-                          className={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-xs ${tool.tagColor}`}
+                          className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-xs truncate ${tool.tagColor}`}
                         >
                           {tool.tag}
                         </span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/80 text-[#1400C3] border border-[#1400C3]/15">
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-white/90 text-[#1400C3] border border-[#1400C3]/15 whitespace-nowrap">
                           {tool.badge}
                         </span>
                       </div>
 
                       {/* Tool Graphic Showcase Box with Bespoke 3D Vector Illustration */}
-                      <div className="my-4 h-36 rounded-2xl bg-white border border-black/5 flex items-center justify-center p-3 overflow-hidden shadow-inner group">
+                      <div className="my-1.5 h-24 sm:h-28 rounded-xl bg-white border border-black/5 flex items-center justify-center p-2 overflow-hidden shadow-inner group">
                         <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <Illustration />
                         </div>
                       </div>
 
                       {/* Title & Description */}
-                      <h3 className="font-display text-2xl text-[#1400C3] tracking-tight mb-1.5">
+                      <h3
+                        className="font-display text-sm sm:text-base text-[#1400C3] tracking-tight leading-tight mt-1.5 truncate"
+                        title={tool.title}
+                      >
                         {tool.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#3B3355] font-semibold leading-relaxed">
+                      <p className="text-[10px] sm:text-[11px] text-[#3B3355] font-semibold leading-snug line-clamp-2 mt-1 min-h-[28px]">
                         {tool.desc}
                       </p>
                     </div>
 
                     {/* Bottom Action Pill */}
-                    <div className="mt-6 pt-4 border-t border-black/10 flex items-center justify-between">
-                      <span className="text-xs font-black text-[#1400C3]">
+                    <div className="mt-3 pt-2.5 border-t border-black/10 flex items-center justify-between">
+                      <span className="text-[11px] font-black text-[#1400C3]">
                         {tool.pillPrice}
                       </span>
                       <button
                         type="button"
-                        className="px-4 py-2 rounded-full font-black text-xs bg-[#1400C3] hover:bg-[#FF4E02] text-white transition-all shadow-md flex items-center gap-1.5 cursor-pointer active:scale-95"
+                        className="px-2.5 py-1 rounded-full font-black text-[10px] sm:text-[11px] bg-[#1400C3] hover:bg-[#FF4E02] text-white transition-all shadow-xs flex items-center gap-1 cursor-pointer active:scale-95"
                       >
-                        <span>open tool</span>
-                        <span className="text-sm font-bold">+</span>
+                        <span>open</span>
+                        <span className="text-xs font-bold">+</span>
                       </button>
                     </div>
                   </div>
