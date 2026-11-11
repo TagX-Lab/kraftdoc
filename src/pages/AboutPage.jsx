@@ -1,5 +1,5 @@
 import React from "react";
-import { Sparkles, Shield, Cpu, Lock, ArrowLeft } from "lucide-react";
+import { Sparkles, Shield, Cpu, Lock, ArrowLeft, ExternalLink, Globe, Layers } from "lucide-react";
 import { siteConfig } from "../config/siteConfig";
 
 export default function AboutPage({ onBack }) {
@@ -18,25 +18,76 @@ export default function AboutPage({ onBack }) {
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
           About {siteConfig.name}
         </h1>
-        <p className="mt-3 text-base text-slate-400">
-          The privacy-first document and image utility suite built entirely for in-browser client execution.
+        <p className="mt-2 text-base text-slate-400">
+          An official in-house product engineered by <span className="text-sky-400 font-bold">{siteConfig.company.name}</span>.
         </p>
       </div>
 
-      <div className="prose prose-invert max-w-none space-y-6 text-sm text-slate-300 leading-relaxed">
+      <div className="prose prose-invert max-w-none space-y-8 text-sm text-slate-300 leading-relaxed">
+        {/* Parent Company Showcase Card */}
+        <section className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950/40 border border-sky-500/30 shadow-2xl space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 text-sky-400 flex items-center justify-center font-bold font-mono">
+                TX
+              </div>
+              <div>
+                <h3 className="font-extrabold text-white text-lg">
+                  Owned &amp; Engineered by {siteConfig.company.name}
+                </h3>
+                <p className="text-xs text-sky-400/90 font-mono">
+                  {siteConfig.company.tagline}
+                </p>
+              </div>
+            </div>
+
+            <a
+              href={siteConfig.company.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs transition-all shadow-md shadow-sky-600/20"
+            >
+              <span>Visit Official Studio</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            <strong>{siteConfig.company.name}</strong> is a next-generation software laboratory and product studio founded by ambitious developers. We engineer proprietary in-house digital products (such as <strong>MousePilot™</strong> for Windows and <strong>DocuPix</strong> for the web) alongside mission-critical digital systems.
+          </p>
+
+          <div className="pt-2 flex flex-wrap items-center gap-3 text-xs text-slate-400 border-t border-slate-800">
+            <span className="font-semibold text-white">TAGX Labs Products:</span>
+            <a
+              href={siteConfig.company.otherProducts[0].url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-cyan-300 font-medium flex items-center gap-1"
+            >
+              <span>MousePilot™ (Windows)</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            <span className="px-2.5 py-1 rounded-lg bg-slate-800/80 text-emerald-400 font-medium">
+              DocuPix (Web Suite) &bull; Live
+            </span>
+          </div>
+        </section>
+
+        {/* Product Mission */}
         <section className="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/60 space-y-3">
           <div className="flex items-center gap-2 text-indigo-400 font-bold text-base">
             <Sparkles className="w-5 h-5" />
-            <span>Our Mission</span>
+            <span>Our Mission for DocuPix</span>
           </div>
           <p>
             Millions of students, job seekers, and everyday internet users need to compress images, merge PDFs, and resize photos to prepare for government examinations (like TNPSC, UPSC, SSC, and Banking exams).
           </p>
           <p>
-            Traditional utility websites upload these confidential documents (which often include PAN cards, Aadhaar cards, personal photos, and signatures) to external cloud servers. We created <strong>{siteConfig.name}</strong> to eliminate this privacy risk completely.
+            Traditional utility websites upload these confidential documents (which often include PAN cards, Aadhaar cards, personal photos, and signatures) to external cloud servers. <strong>{siteConfig.company.name}</strong> created <strong>{siteConfig.name}</strong> to eliminate this privacy risk completely.
           </p>
         </section>
 
+        {/* Technical Architecture */}
         <section className="space-y-4">
           <h2 className="text-xl font-bold text-white">How Does In-Browser Processing Work?</h2>
           <p>
@@ -73,13 +124,6 @@ export default function AboutPage({ onBack }) {
               </p>
             </div>
           </div>
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="text-xl font-bold text-white">Free & Accessible For Everyone</h2>
-          <p>
-            We believe essential everyday productivity tools should be 100% free and open to everyone without paywalls, forced logins, or subscriptions. We keep our service running through non-intrusive advertisements.
-          </p>
         </section>
       </div>
     </div>

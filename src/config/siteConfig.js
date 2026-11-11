@@ -1,6 +1,6 @@
 /**
- * Site Configuration
- * Production-ready metadata, branding, and feature definitions.
+ * Site & Company Configuration
+ * Official Product of TAGX Labs™
  */
 
 export const siteConfig = {
@@ -9,8 +9,27 @@ export const siteConfig = {
   description:
     "100% private, client-side tools to compress images, resize govt exam photos, convert images to PDF, and merge or split PDFs without uploading files to any server.",
   domain: "https://docupix.pages.dev",
-  author: "DocuPix Team",
+  author: "TAGX Labs™",
+
+  // Company Information
+  company: {
+    name: "TAGX Labs™",
+    tagline: "Next-Gen Software Products & Bespoke Engineering",
+    website: "https://tagx-lab.github.io/tagx-labs-website/",
+    instagram: "https://www.instagram.com/tagx_lab",
+    github: "https://github.com/tagx-lab",
+    otherProducts: [
+      {
+        name: "MousePilot™",
+        url: "https://tagx-lab.github.io/mousepilot-website/",
+        desc: "Tactical Native Windows Software Utility",
+      },
+    ],
+  },
+
   keywords: [
+    "TAGX Labs",
+    "DocuPix",
     "image compressor",
     "govt exam photo resizer",
     "tnpsc photo compressor",
@@ -22,7 +41,7 @@ export const siteConfig = {
     "client-side pdf tools",
     "webp converter",
   ],
-  supportEmail: "support@docupix.tools",
+  supportEmail: "tagxlabs@gmail.com",
   features: [
     {
       id: "exam-resizer",

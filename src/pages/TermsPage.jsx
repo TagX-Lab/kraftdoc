@@ -20,7 +20,7 @@ export default function TermsPage({ onBack }) {
           <h1 className="text-3xl font-extrabold text-white">Terms of Service</h1>
         </div>
         <p className="text-xs text-slate-400">
-          Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+          Official terms of {siteConfig.company.name} &bull; Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
         </p>
       </div>
 
@@ -28,7 +28,7 @@ export default function TermsPage({ onBack }) {
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-white">1. Acceptance of Terms</h2>
           <p>
-            By accessing and using {siteConfig.name}, you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.
+            By accessing and using {siteConfig.name} (an official product of {siteConfig.company.name}), you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.
           </p>
         </section>
 

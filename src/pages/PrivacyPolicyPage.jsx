@@ -20,7 +20,7 @@ export default function PrivacyPolicyPage({ onBack }) {
           <h1 className="text-3xl font-extrabold text-white">Privacy Policy</h1>
         </div>
         <p className="text-xs text-slate-400">
-          Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+          Official policy of {siteConfig.company.name} &bull; Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
         </p>
       </div>
 
@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage({ onBack }) {
             Summary: We Never See or Store Your Files
           </h3>
           <p className="text-xs text-slate-300">
-            Unlike other conversion sites, {siteConfig.name} operates 100% on the client side (in your web browser). All image and PDF operations occur within your computer's memory. No uploaded files, photos, or documents are ever transferred to or saved on our servers.
+            {siteConfig.name} is an official in-house product of {siteConfig.company.name}. Unlike traditional conversion sites, our platform operates 100% on the client side (in your web browser). All image and PDF operations occur within your computer's local memory. No uploaded files, photos, or documents are ever transferred to or saved on our servers.
           </p>
         </section>
 
