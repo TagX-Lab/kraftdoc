@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   UserCheck,
   Minimize2,
@@ -59,17 +59,9 @@ function DoodleRays({ className = "" }) {
 }
 
 export default function HomePage({ onNavigate }) {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-
   const categories = [
     {
-      id: "all",
-      label: "All Modules (23)",
-      badge: "Complete Suite",
-    },
-    {
       id: "image",
-      label: "Image Studio (3)",
       title: "Image Studio",
       desc: "Crop, resize px, shrink KB, and instant format conversions",
       badge: "High-Speed Canvas",
@@ -77,7 +69,6 @@ export default function HomePage({ onNavigate }) {
     },
     {
       id: "organize-edit",
-      label: "Organize & Edit PDF (7)",
       title: "Organize & Edit PDF",
       desc: "Merge, split, rotate, crop margins, scale page size & N-up sheets",
       badge: "Vector Modification",
@@ -85,7 +76,6 @@ export default function HomePage({ onNavigate }) {
     },
     {
       id: "security-privacy",
-      label: "Security & Privacy (5)",
       title: "Security & Redaction",
       desc: "Digital sign, form flatten, redact black boxes, watermark & sanitize",
       badge: "100% In-Browser Privacy",
@@ -93,7 +83,6 @@ export default function HomePage({ onNavigate }) {
     },
     {
       id: "convert-create",
-      label: "Convert & Create (8)",
       title: "Convert, Create & Optimize",
       desc: "Compress, images to PDF, plain text, live webcam scan & invoice maker",
       badge: "Productivity Engine",
@@ -529,44 +518,18 @@ export default function HomePage({ onNavigate }) {
         <ScrollReveal animation="fade-up">
           <div className="rounded-[32px] sm:rounded-[44px] bg-[#F7EDBE] border-2 border-[#E6D799] p-5 sm:p-8 lg:p-10 shadow-sm space-y-8">
             {/* Main Section Header */}
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#E6D799] pb-6">
-              <div>
-                <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
-                  CATEGORIZED UTILITY ENGINE • 23 POWER TOOLS
-                </span>
-                <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
-                  TOOLS YOU&apos;LL LOVE
-                </h2>
-              </div>
-              <span className="text-xs font-bold text-[#6B627F]">
-                100% In-Browser • Free Forever • Zero Cloud Uploads
+            <div className="border-b border-[#E6D799] pb-5">
+              <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
+                CATEGORIZED UTILITY ENGINE • 23 POWER TOOLS
               </span>
-            </div>
-
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
-                    selectedCategory === cat.id
-                      ? "bg-[#1400C3] text-white shadow-md shadow-[#1400C3]/20 scale-105"
-                      : "bg-white/80 hover:bg-white text-[#3B3355] hover:text-[#1400C3] border border-[#E6D799]"
-                  }`}
-                >
-                  <span>{cat.label}</span>
-                </button>
-              ))}
+              <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
+                TOOLS YOU&apos;LL LOVE
+              </h2>
             </div>
 
             {/* Render Category Sections */}
             <div className="space-y-10">
-              {(selectedCategory === "all"
-                ? categories.filter((c) => c.id !== "all")
-                : categories.filter((c) => c.id === selectedCategory)
-              ).map((cat, catIdx, arr) => {
+              {categories.map((cat, catIdx, arr) => {
                 const CatIcon = cat.icon;
                 const catTools = toolCards.filter((t) => t.category === cat.id);
                 if (catTools.length === 0) return null;
@@ -652,8 +615,8 @@ export default function HomePage({ onNavigate }) {
                       })}
                     </div>
 
-                    {/* Divider between categories when viewing all */}
-                    {selectedCategory === "all" && catIdx < arr.length - 1 && (
+                    {/* Divider between categories */}
+                    {catIdx < arr.length - 1 && (
                       <div className="pt-6 border-b-2 border-dashed border-[#E6D799]" />
                     )}
                   </div>
