@@ -7,6 +7,7 @@ import {
   RefreshCw,
   RotateCw,
   ArrowRight,
+  ArrowDown,
   ShieldCheck,
   Zap,
   HelpCircle,
@@ -256,6 +257,30 @@ export default function HomePage({ onNavigate }) {
             </div>
           </div>
         </ScrollReveal>
+
+        {/* Scroll Down Indicator - Exactly where user drew the box */}
+        <div className="flex justify-center -mt-6 sm:-mt-7 relative z-20">
+          <button
+            type="button"
+            onClick={() => {
+              const target = document.getElementById("tools-section");
+              if (target) {
+                target.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="group inline-flex items-center gap-2.5 px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFDF5] text-[#1400C3] hover:text-[#FF4E02] border-2 border-[#1400C3] shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer text-xs font-black uppercase tracking-wider active:scale-95"
+            aria-label="Scroll down to start your work"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4E02] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF4E02]" />
+            </span>
+            <span>Scroll down to start your work</span>
+            <div className="w-5 h-5 rounded-full bg-[#1400C3] group-hover:bg-[#FF4E02] text-white flex items-center justify-center transition-colors shadow-xs animate-bounce">
+              <ArrowDown className="w-3 h-3 stroke-[3]" />
+            </div>
+          </button>
+        </div>
       </section>
 
       {/* ========================================================================= */}
@@ -297,7 +322,7 @@ export default function HomePage({ onNavigate }) {
       {/* ========================================================================= */}
       {/* "OUR FAVORITES / TOOLS YOU'LL LOVE" COLOR-BLOCK CARDS SECTION             */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="tools-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-up">
           <div className="rounded-[32px] sm:rounded-[40px] bg-[#F7EDBE] border-2 border-[#E6D799] p-5 sm:p-7 lg:p-8 shadow-sm">
             {/* Section Header */}
