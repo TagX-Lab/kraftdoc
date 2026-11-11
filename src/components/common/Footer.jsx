@@ -1,5 +1,5 @@
 import React from "react";
-import { Sparkles, Heart, ExternalLink, Globe } from "lucide-react";
+import { Sparkles, ExternalLink, Globe } from "lucide-react";
 import { siteConfig } from "../../config/siteConfig";
 
 function InstagramIcon(props) {
@@ -237,27 +237,10 @@ export default function Footer({ onNavigate }) {
         </div>
 
         {/* Slim Corporate Bottom Bar */}
-        <div className="border-t border-[#D6CA9E]/70 pt-4 mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#3B3355] font-semibold">
+        <div className="border-t border-[#D6CA9E]/70 pt-4 mt-6 text-xs text-[#3B3355] font-semibold text-center sm:text-left">
           <p>
             &copy; {CURRENT_YEAR} <strong className="text-[#1400C3]">{siteConfig.company.name}</strong>. All rights reserved.
           </p>
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] font-bold text-[#6B627F]">
-              100% Device Execution
-            </span>
-            <span className="text-[#D6CA9E]">•</span>
-            <p className="flex items-center gap-1">
-              Crafted with <Heart className="w-3 h-3 text-[#FF4E02] fill-[#FF4E02] inline" /> by{" "}
-              <a
-                href={siteConfig.company.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#1400C3] hover:text-[#FF4E02] font-black underline underline-offset-2"
-              >
-                {siteConfig.company.name}
-              </a>
-            </p>
-          </div>
         </div>
       </div>
     </footer>
