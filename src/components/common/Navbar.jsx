@@ -65,21 +65,6 @@ export default function Navbar({ currentRoute, onNavigate }) {
                 </span>
               </div>
             </div>
-
-            {/* Official Parent Company Tag */}
-            <a
-              href={siteConfig.company.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1400C3]/10 hover:bg-[#1400C3]/15 border border-[#1400C3]/25 text-[11px] font-bold text-[#1400C3] transition-all hover:scale-105 group"
-              title="Visit TAGX Labs Studio"
-            >
-              <span className="text-[#6B627F] font-normal">by</span>
-              <span className="font-extrabold text-[#1400C3] group-hover:text-[#FF4E02] transition-colors">
-                {siteConfig.company.name}
-              </span>
-              <span className="text-[#FF4E02] text-[10px] font-bold">↗</span>
-            </a>
           </div>
 
           {/* Desktop Navigation */}

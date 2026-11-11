@@ -185,12 +185,6 @@ export default function HomePage({ onNavigate }) {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
               {/* Left Column: Hero Copy */}
               <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                {/* Top Pill Tag */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#D6C275] text-[11px] font-black uppercase tracking-wider text-[#1400C3] shadow-xs">
-                  <span className="w-2 h-2 rounded-full bg-[#FF4E02] animate-pulse" />
-                  <span>100% Private In-Browser Utilities</span>
-                </div>
-
                 {/* Big Handcrafted Headline */}
                 <h1 className="font-display text-5xl sm:text-7xl lg:text-[76px] leading-[0.95] text-[#1400C3] tracking-tight uppercase">
                   PROCESS SMARTER.
