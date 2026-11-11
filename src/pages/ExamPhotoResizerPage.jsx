@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  UserCheck,
   CheckCircle2,
-  AlertCircle,
   Download,
-  Settings2,
   Sparkles,
-  RefreshCw,
   Sliders,
 } from "lucide-react";
 import ToolLayout from "../components/layout/ToolLayout";
@@ -16,9 +12,9 @@ import Badge from "../components/common/Badge";
 import DownloadAdModal from "../components/ads/DownloadAdModal";
 import { EXAM_PRESETS } from "../config/examPresets";
 import { compressImageToTargetKb, loadImage } from "../services/imageService";
-import { formatBytes } from "../utils/fileHelpers";
+import { formatBytes, validateFileSize, revokeUrlSafe } from "../utils/fileHelpers";
 import { downloadBlob } from "../utils/downloadHelpers";
-import { useToast } from "../context/ToastContext";
+import { useToast } from "../hooks/useToast";
 
 export default function ExamPhotoResizerPage({ onBack }) {
   const { showToast } = useToast();
@@ -64,6 +60,14 @@ export default function ExamPhotoResizerPage({ onBack }) {
     }
   };
 
+  // Cleanup object URLs on unmount
+  useEffect(() => {
+    return () => {
+      revokeUrlSafe(sourcePreviewUrl);
+      revokeUrlSafe(resultPreviewUrl);
+    };
+  }, [sourcePreviewUrl, resultPreviewUrl]);
+
   // Handle incoming file
   const handleFileSelected = async (files) => {
     const file = files[0];
@@ -74,7 +78,16 @@ export default function ExamPhotoResizerPage({ onBack }) {
       return;
     }
 
+    const sizeCheck = validateFileSize(file, 50);
+    if (!sizeCheck.valid) {
+      showToast(sizeCheck.error, "error");
+      return;
+    }
+
     try {
+      revokeUrlSafe(sourcePreviewUrl);
+      revokeUrlSafe(resultPreviewUrl);
+
       const url = URL.createObjectURL(file);
       const img = await loadImage(url);
 
@@ -92,7 +105,7 @@ export default function ExamPhotoResizerPage({ onBack }) {
       setResultMeta(null);
 
       showToast("Photo loaded successfully. Ready to process!", "success");
-    } catch (err) {
+    } catch {
       showToast("Could not load image. Please try another file.", "error");
     }
   };
@@ -121,6 +134,7 @@ export default function ExamPhotoResizerPage({ onBack }) {
         }
       );
 
+      revokeUrlSafe(resultPreviewUrl);
       const previewUrl = URL.createObjectURL(blob);
       setResultBlob(blob);
       setResultPreviewUrl(previewUrl);

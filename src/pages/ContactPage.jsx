@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Mail, Send, Check, Copy, ArrowLeft } from "lucide-react";
 import { siteConfig } from "../config/siteConfig";
 import Button from "../components/common/Button";
-import { useToast } from "../context/ToastContext";
+import { useToast } from "../hooks/useToast";
 
 export default function ContactPage({ onBack }) {
   const { showToast } = useToast();

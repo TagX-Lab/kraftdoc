@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Minimize2,
   Download,
   Trash2,
   Sparkles,
   Archive,
   Sliders,
-  CheckCircle2,
-  Image as ImageIcon,
 } from "lucide-react";
 import ToolLayout from "../components/layout/ToolLayout";
 import Dropzone from "../components/common/Dropzone";
@@ -15,9 +12,9 @@ import Button from "../components/common/Button";
 import Badge from "../components/common/Badge";
 import DownloadAdModal from "../components/ads/DownloadAdModal";
 import { compressStandardImage } from "../services/imageService";
-import { formatBytes, calculateSavings, changeFileExtension } from "../utils/fileHelpers";
+import { formatBytes, calculateSavings, changeFileExtension, validateFileSize, revokeUrlSafe } from "../utils/fileHelpers";
 import { downloadBlob, downloadMultipleAsZip } from "../utils/downloadHelpers";
-import { useToast } from "../context/ToastContext";
+import { useToast } from "../hooks/useToast";
 
 export default function ImageCompressorPage({ onBack }) {
   const { showToast } = useToast();
@@ -32,6 +29,13 @@ export default function ImageCompressorPage({ onBack }) {
   const [pendingDownload, setPendingDownload] = useState(null);
   const [showAdModal, setShowAdModal] = useState(false);
 
+  // Clean up previews on unmount
+  useEffect(() => {
+    return () => {
+      files.forEach((f) => revokeUrlSafe(f.preview));
+    };
+  }, [files]);
+
   const handleFilesAdded = (newFiles) => {
     const validImageFiles = newFiles.filter((f) => f.type.startsWith("image/"));
     if (validImageFiles.length === 0) {
@@ -39,7 +43,19 @@ export default function ImageCompressorPage({ onBack }) {
       return;
     }
 
-    const fileEntries = validImageFiles.map((file) => ({
+    const safeFiles = [];
+    for (const file of validImageFiles) {
+      const check = validateFileSize(file, 50);
+      if (!check.valid) {
+        showToast(`${file.name}: ${check.error}`, "error");
+      } else {
+        safeFiles.push(file);
+      }
+    }
+
+    if (safeFiles.length === 0) return;
+
+    const fileEntries = safeFiles.map((file) => ({
       id: Math.random().toString(36).substring(2, 9),
       file,
       preview: URL.createObjectURL(file),
@@ -51,14 +67,19 @@ export default function ImageCompressorPage({ onBack }) {
     }));
 
     setFiles((prev) => [...prev, ...fileEntries]);
-    showToast(`Added ${validImageFiles.length} image(s). Ready to compress!`, "success");
+    showToast(`Added ${safeFiles.length} image(s). Ready to compress!`, "success");
   };
 
   const removeFile = (id) => {
-    setFiles((prev) => prev.filter((f) => f.id !== id));
+    setFiles((prev) => {
+      const target = prev.find((f) => f.id === id);
+      if (target?.preview) revokeUrlSafe(target.preview);
+      return prev.filter((f) => f.id !== id);
+    });
   };
 
   const clearAll = () => {
+    files.forEach((f) => revokeUrlSafe(f.preview));
     setFiles([]);
   };
 

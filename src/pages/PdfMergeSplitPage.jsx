@@ -21,9 +21,9 @@ import {
   extractPdfPages,
   splitAllPdfPages,
 } from "../services/pdfService";
-import { formatBytes, parsePageRanges, readFileAsArrayBuffer } from "../utils/fileHelpers";
+import { formatBytes, parsePageRanges, readFileAsArrayBuffer, validateFileSize } from "../utils/fileHelpers";
 import { downloadBlob, downloadMultipleAsZip } from "../utils/downloadHelpers";
-import { useToast } from "../context/ToastContext";
+import { useToast } from "../hooks/useToast";
 
 export default function PdfMergeSplitPage({ onBack }) {
   const { showToast } = useToast();
@@ -60,6 +60,11 @@ export default function PdfMergeSplitPage({ onBack }) {
 
     const items = [];
     for (const file of valid) {
+      const check = validateFileSize(file, 50);
+      if (!check.valid) {
+        showToast(`${file.name}: ${check.error}`, "error");
+        continue;
+      }
       try {
         const buffer = await readFileAsArrayBuffer(file);
         const pageCount = await getPdfPageCount(buffer);
@@ -71,8 +76,8 @@ export default function PdfMergeSplitPage({ onBack }) {
           size: file.size,
           pages: pageCount,
         });
-      } catch (err) {
-        showToast(`Could not read ${file.name}. It may be encrypted.`, "error");
+      } catch {
+        showToast(`Could not read ${file.name}. It may be encrypted or corrupted.`, "error");
       }
     }
 
@@ -129,6 +134,12 @@ export default function PdfMergeSplitPage({ onBack }) {
       return;
     }
 
+    const check = validateFileSize(file, 50);
+    if (!check.valid) {
+      showToast(check.error, "error");
+      return;
+    }
+
     try {
       const buffer = await readFileAsArrayBuffer(file);
       const count = await getPdfPageCount(buffer);
@@ -138,7 +149,7 @@ export default function PdfMergeSplitPage({ onBack }) {
       setSplitResultBlob(null);
       setSplitZipFiles(null);
       showToast(`Loaded ${file.name} with ${count} pages.`, "success");
-    } catch (err) {
+    } catch {
       showToast("Could not read PDF. It might be password protected.", "error");
     }
   };

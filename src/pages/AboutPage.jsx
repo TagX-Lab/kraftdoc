@@ -1,5 +1,5 @@
 import React from "react";
-import { Sparkles, Shield, Cpu, Lock, ArrowLeft, ExternalLink, Globe, Layers } from "lucide-react";
+import { Sparkles, Shield, Cpu, Lock, ArrowLeft, ExternalLink } from "lucide-react";
 import { siteConfig } from "../config/siteConfig";
 
 export default function AboutPage({ onBack }) {

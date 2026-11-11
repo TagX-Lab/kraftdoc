@@ -2,6 +2,8 @@ import React from "react";
 import { ShieldCheck, ArrowLeft } from "lucide-react";
 import { siteConfig } from "../config/siteConfig";
 
+const LAST_UPDATED_DATE = "November 2026";
+
 export default function PrivacyPolicyPage({ onBack }) {
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 animate-fade-in space-y-8">
@@ -20,7 +22,7 @@ export default function PrivacyPolicyPage({ onBack }) {
           <h1 className="text-4xl font-black text-[#1400C3]">Privacy Policy</h1>
         </div>
         <p className="text-xs text-[#6B627F] font-bold">
-          Official policy of {siteConfig.company.name} &bull; Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+          Official policy of {siteConfig.company.name} &bull; Last updated: {LAST_UPDATED_DATE}
         </p>
       </div>
 

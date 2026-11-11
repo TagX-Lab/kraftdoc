@@ -8,7 +8,7 @@ export default function AdSidebar({ slotId = adConfig.slots.sidebarSticky, class
         if (typeof window !== "undefined") {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
-      } catch (err) {
+      } catch {
         // Suppress
       }
     }

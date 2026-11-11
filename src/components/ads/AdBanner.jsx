@@ -8,7 +8,7 @@ export default function AdBanner({ slotId = adConfig.slots.topBanner, format = "
         if (typeof window !== "undefined") {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
-      } catch (err) {
+      } catch {
         // Suppress
       }
     }

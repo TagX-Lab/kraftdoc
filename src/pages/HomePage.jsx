@@ -7,7 +7,6 @@ import {
   RefreshCw,
   RotateCw,
   ArrowRight,
-  Shield,
   Zap,
   Lock,
   CheckCircle,

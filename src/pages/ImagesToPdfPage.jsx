@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FileText,
   Download,
@@ -7,17 +7,15 @@ import {
   ArrowDown,
   Sparkles,
   Settings,
-  Plus,
 } from "lucide-react";
 import ToolLayout from "../components/layout/ToolLayout";
 import Dropzone from "../components/common/Dropzone";
 import Button from "../components/common/Button";
-import Badge from "../components/common/Badge";
 import DownloadAdModal from "../components/ads/DownloadAdModal";
 import { imagesToPdf } from "../services/pdfService";
-import { formatBytes } from "../utils/fileHelpers";
+import { formatBytes, validateFileSize, revokeUrlSafe } from "../utils/fileHelpers";
 import { downloadBlob } from "../utils/downloadHelpers";
-import { useToast } from "../context/ToastContext";
+import { useToast } from "../hooks/useToast";
 
 export default function ImagesToPdfPage({ onBack }) {
   const { showToast } = useToast();
@@ -33,6 +31,13 @@ export default function ImagesToPdfPage({ onBack }) {
   const [resultPdfBlob, setResultPdfBlob] = useState(null);
   const [showAdModal, setShowAdModal] = useState(false);
 
+  // Clean up object URLs on unmount
+  useEffect(() => {
+    return () => {
+      images.forEach((img) => revokeUrlSafe(img.preview));
+    };
+  }, [images]);
+
   const handleImagesAdded = (files) => {
     const valid = files.filter((f) => f.type.startsWith("image/"));
     if (valid.length === 0) {
@@ -40,7 +45,19 @@ export default function ImagesToPdfPage({ onBack }) {
       return;
     }
 
-    const newEntries = valid.map((file) => ({
+    const safeFiles = [];
+    for (const file of valid) {
+      const check = validateFileSize(file, 50);
+      if (!check.valid) {
+        showToast(`${file.name}: ${check.error}`, "error");
+      } else {
+        safeFiles.push(file);
+      }
+    }
+
+    if (safeFiles.length === 0) return;
+
+    const newEntries = safeFiles.map((file) => ({
       id: Math.random().toString(36).substring(2, 9),
       file,
       preview: URL.createObjectURL(file),
@@ -50,11 +67,15 @@ export default function ImagesToPdfPage({ onBack }) {
 
     setImages((prev) => [...prev, ...newEntries]);
     setResultPdfBlob(null);
-    showToast(`Added ${valid.length} image(s).`, "success");
+    showToast(`Added ${safeFiles.length} image(s).`, "success");
   };
 
   const removeImage = (id) => {
-    setImages((prev) => prev.filter((img) => img.id !== id));
+    setImages((prev) => {
+      const target = prev.find((img) => img.id === id);
+      if (target?.preview) revokeUrlSafe(target.preview);
+      return prev.filter((img) => img.id !== id);
+    });
     setResultPdfBlob(null);
   };
 

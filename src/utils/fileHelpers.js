@@ -1,6 +1,51 @@
 /**
- * File & Format Helper Utilities
+ * File & Format Helper Utilities with Security & Memory Safeguards
  */
+
+/**
+ * Sanitize filename to prevent directory traversal or invalid characters
+ */
+export function sanitizeFilename(filename, fallback = "file") {
+  if (!filename || typeof filename !== "string") return fallback;
+
+  // Strip path traversal and dangerous characters
+  const clean = filename
+    .replace(/^.*[\\/]/, "") // strip directories
+    .replace(/[<>:"/\\|?*]/g, "_") // strip illegal chars
+    .trim();
+
+  return clean.slice(0, 100) || fallback;
+}
+
+/**
+ * Validate that uploaded file does not exceed safe client memory threshold (Default 50 MB)
+ */
+export function validateFileSize(file, maxMb = 50) {
+  if (!file) return { valid: false, error: "No file provided.", message: "No file provided." };
+  const maxBytes = maxMb * 1024 * 1024;
+  if (file.size > maxBytes) {
+    const msg = `File exceeds ${maxMb} MB. Please upload files under ${maxMb} MB for smooth browser processing.`;
+    return {
+      valid: false,
+      error: msg,
+      message: msg,
+    };
+  }
+  return { valid: true };
+}
+
+/**
+ * Safely revoke Object URLs to prevent client-side memory leaks
+ */
+export function revokeUrlSafe(url) {
+  if (url && typeof url === "string" && url.startsWith("blob:")) {
+    try {
+      URL.revokeObjectURL(url);
+    } catch {
+      // Ignore
+    }
+  }
+}
 
 /**
  * Format raw bytes into human readable KB / MB / GB
@@ -26,9 +71,9 @@ export function getFileExtension(filename) {
  * Replace extension of a filename with a new one
  */
 export function changeFileExtension(filename, newExt) {
-  if (!filename) return `file.${newExt}`;
-  const dotIndex = filename.lastIndexOf(".");
-  const base = dotIndex > 0 ? filename.substring(0, dotIndex) : filename;
+  const safe = sanitizeFilename(filename, "file");
+  const dotIndex = safe.lastIndexOf(".");
+  const base = dotIndex > 0 ? safe.substring(0, dotIndex) : safe;
   const cleanExt = newExt.startsWith(".") ? newExt.slice(1) : newExt;
   return `${base}.${cleanExt}`;
 }
@@ -50,7 +95,7 @@ export function readFileAsDataUrl(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
-    reader.onerror = (err) => reject(err);
+    reader.onerror = () => reject(new Error("Unable to read file as data URL."));
     reader.readAsDataURL(file);
   });
 }
@@ -62,14 +107,13 @@ export function readFileAsArrayBuffer(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
-    reader.onerror = (err) => reject(err);
+    reader.onerror = () => reject(new Error("Unable to read file buffer."));
     reader.readAsArrayBuffer(file);
   });
 }
 
 /**
  * Parse string like "1-3, 5, 8-10" against totalPages
- * Returns array of 1-based page numbers
  */
 export function parsePageRanges(rangeString, totalPages) {
   if (!rangeString || !rangeString.trim()) {

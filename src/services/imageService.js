@@ -10,12 +10,20 @@ export function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.onload = () => resolve(img);
-    img.onerror = (err) => reject(new Error("Failed to load image. File may be corrupted or unsupported."));
+    let objectUrl = null;
+    img.onload = () => {
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      resolve(img);
+    };
+    img.onerror = () => {
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      reject(new Error("Failed to load image. File may be corrupted or unsupported."));
+    };
     if (typeof src === "string") {
       img.src = src;
     } else if (src instanceof Blob) {
-      img.src = URL.createObjectURL(src);
+      objectUrl = URL.createObjectURL(src);
+      img.src = objectUrl;
     } else {
       reject(new Error("Invalid image source provided."));
     }

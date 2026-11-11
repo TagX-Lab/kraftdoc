@@ -20,6 +20,8 @@ function GithubIcon(props) {
   );
 }
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function Footer({ onNavigate }) {
   return (
     <footer className="border-t border-[#D6CA9E] bg-[#EFE6C4] mt-24 text-[#3B3355] text-sm">
@@ -244,7 +246,7 @@ export default function Footer({ onNavigate }) {
         {/* Bottom Bar */}
         <div className="border-t border-[#D6CA9E] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#3B3355] font-semibold">
           <p>
-            &copy; {new Date().getFullYear()} <strong className="text-[#1400C3]">{siteConfig.company.name}</strong>. All rights reserved.
+            &copy; {CURRENT_YEAR} <strong className="text-[#1400C3]">{siteConfig.company.name}</strong>. All rights reserved.
           </p>
           <p className="flex items-center gap-1">
             Engineered with <Heart className="w-3.5 h-3.5 text-[#FF4E02] fill-[#FF4E02] inline" /> by{" "}

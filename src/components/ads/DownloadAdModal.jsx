@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Download, Sparkles, X, CheckCircle2 } from "lucide-react";
+import { Sparkles, X, CheckCircle2 } from "lucide-react";
 import { adConfig } from "../../config/adConfig";
 
 export default function DownloadAdModal({
@@ -12,13 +12,9 @@ export default function DownloadAdModal({
   const [countdown, setCountdown] = useState(adConfig.downloadCountdownSeconds || 3);
 
   useEffect(() => {
-    if (!isOpen) {
-      setCountdown(adConfig.downloadCountdownSeconds || 3);
-      return;
-    }
+    if (!isOpen) return;
 
-    setCountdown(adConfig.downloadCountdownSeconds || 3);
-
+    const initial = adConfig.downloadCountdownSeconds || 3;
     const timer = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
@@ -29,7 +25,10 @@ export default function DownloadAdModal({
       });
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      setCountdown(initial);
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;

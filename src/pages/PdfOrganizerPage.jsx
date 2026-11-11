@@ -4,19 +4,17 @@ import {
   Trash2,
   Download,
   Sparkles,
-  RotateCcw,
   Undo2,
   FileText,
 } from "lucide-react";
 import ToolLayout from "../components/layout/ToolLayout";
 import Dropzone from "../components/common/Dropzone";
 import Button from "../components/common/Button";
-import Badge from "../components/common/Badge";
 import DownloadAdModal from "../components/ads/DownloadAdModal";
 import { getPdfPageCount, organizePdfPages } from "../services/pdfService";
-import { formatBytes, readFileAsArrayBuffer } from "../utils/fileHelpers";
+import { formatBytes, readFileAsArrayBuffer, validateFileSize } from "../utils/fileHelpers";
 import { downloadBlob } from "../utils/downloadHelpers";
-import { useToast } from "../context/ToastContext";
+import { useToast } from "../hooks/useToast";
 
 export default function PdfOrganizerPage({ onBack }) {
   const { showToast } = useToast();
@@ -37,6 +35,12 @@ export default function PdfOrganizerPage({ onBack }) {
       return;
     }
 
+    const check = validateFileSize(file, 50);
+    if (!check.valid) {
+      showToast(check.error, "error");
+      return;
+    }
+
     try {
       const buffer = await readFileAsArrayBuffer(file);
       const pageCount = await getPdfPageCount(buffer);
@@ -45,7 +49,7 @@ export default function PdfOrganizerPage({ onBack }) {
       setExcludedPages(new Set());
       setResultBlob(null);
       showToast(`Loaded "${file.name}" (${pageCount} pages).`, "success");
-    } catch (err) {
+    } catch {
       showToast("Could not read PDF. Make sure it isn't password protected.", "error");
     }
   };

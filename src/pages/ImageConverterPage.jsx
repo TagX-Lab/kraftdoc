@@ -1,21 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  RefreshCw,
   Download,
   Trash2,
   Sparkles,
   Archive,
-  Layers,
 } from "lucide-react";
 import ToolLayout from "../components/layout/ToolLayout";
 import Dropzone from "../components/common/Dropzone";
 import Button from "../components/common/Button";
-import Badge from "../components/common/Badge";
 import DownloadAdModal from "../components/ads/DownloadAdModal";
 import { convertImageFormat } from "../services/imageService";
-import { formatBytes, changeFileExtension, getFileExtension } from "../utils/fileHelpers";
+import { formatBytes, changeFileExtension, getFileExtension, validateFileSize, revokeUrlSafe } from "../utils/fileHelpers";
 import { downloadBlob, downloadMultipleAsZip } from "../utils/downloadHelpers";
-import { useToast } from "../context/ToastContext";
+import { useToast } from "../hooks/useToast";
 
 export default function ImageConverterPage({ onBack }) {
   const { showToast } = useToast();
@@ -29,6 +26,13 @@ export default function ImageConverterPage({ onBack }) {
   const [pendingDownload, setPendingDownload] = useState(null);
   const [showAdModal, setShowAdModal] = useState(false);
 
+  // Clean up previews on unmount
+  useEffect(() => {
+    return () => {
+      files.forEach((f) => revokeUrlSafe(f.preview));
+    };
+  }, [files]);
+
   const handleFilesAdded = (newFiles) => {
     const valid = newFiles.filter((f) => f.type.startsWith("image/"));
     if (valid.length === 0) {
@@ -36,7 +40,19 @@ export default function ImageConverterPage({ onBack }) {
       return;
     }
 
-    const items = valid.map((file) => ({
+    const safeFiles = [];
+    for (const file of valid) {
+      const check = validateFileSize(file, 50);
+      if (!check.valid) {
+        showToast(`${file.name}: ${check.error}`, "error");
+      } else {
+        safeFiles.push(file);
+      }
+    }
+
+    if (safeFiles.length === 0) return;
+
+    const items = safeFiles.map((file) => ({
       id: Math.random().toString(36).substring(2, 9),
       file,
       preview: URL.createObjectURL(file),
@@ -51,7 +67,16 @@ export default function ImageConverterPage({ onBack }) {
   };
 
   const removeFile = (id) => {
-    setFiles((prev) => prev.filter((f) => f.id !== id));
+    setFiles((prev) => {
+      const target = prev.find((f) => f.id === id);
+      if (target?.preview) revokeUrlSafe(target.preview);
+      return prev.filter((f) => f.id !== id);
+    });
+  };
+
+  const clearAll = () => {
+    files.forEach((f) => revokeUrlSafe(f.preview));
+    setFiles([]);
   };
 
   const getTargetExt = () => {
@@ -192,6 +217,15 @@ export default function ImageConverterPage({ onBack }) {
               </span>
 
               <div className="flex items-center gap-2">
+                <Button
+                  onClick={clearAll}
+                  variant="outline"
+                  size="md"
+                  icon={Trash2}
+                >
+                  Clear
+                </Button>
+
                 <Button
                   onClick={handleConvertAll}
                   loading={isConverting}
