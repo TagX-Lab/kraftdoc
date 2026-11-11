@@ -10,6 +10,7 @@ import {
   UserCheck,
   Minimize2,
   FileText,
+  FileImage,
   Layers,
   RefreshCw,
   RotateCw,
@@ -75,6 +76,13 @@ export default function Navbar({ currentRoute, onNavigate }) {
       desc: "Merge photos into clean A4 or Letter PDFs",
       icon: FileText,
       iconBg: "bg-[#FFEBE5] text-[#FF4E02] border-[#F8C8BD]",
+    },
+    {
+      id: "pdf-to-images",
+      title: "PDF to Images",
+      desc: "Extract pages to high-res PNG/JPG or ZIP",
+      icon: FileImage,
+      iconBg: "bg-[#FFF0D9] text-[#FF4E02] border-[#F7D8A8]",
     },
     {
       id: "pdf-merge-split",

@@ -123,6 +123,15 @@ export default function Footer({ onNavigate }) {
                 <li>
                   <button
                     type="button"
+                    onClick={() => onNavigate("pdf-to-images")}
+                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
+                  >
+                    PDF to Images
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
                     onClick={() => onNavigate("pdf-merge-split")}
                     className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
                   >

@@ -15,6 +15,7 @@ import HomePage from "./pages/HomePage";
 const ExamPhotoResizerPage = lazy(() => import("./pages/ExamPhotoResizerPage"));
 const ImageCompressorPage = lazy(() => import("./pages/ImageCompressorPage"));
 const ImagesToPdfPage = lazy(() => import("./pages/ImagesToPdfPage"));
+const PdfToImagesPage = lazy(() => import("./pages/PdfToImagesPage"));
 const PdfMergeSplitPage = lazy(() => import("./pages/PdfMergeSplitPage"));
 const ImageConverterPage = lazy(() => import("./pages/ImageConverterPage"));
 const PdfOrganizerPage = lazy(() => import("./pages/PdfOrganizerPage"));
@@ -68,6 +69,8 @@ export default function App() {
         return <ImageCompressorPage onBack={() => navigateTo("home")} />;
       case "images-to-pdf":
         return <ImagesToPdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-to-images":
+        return <PdfToImagesPage onBack={() => navigateTo("home")} />;
       case "pdf-merge-split":
         return <PdfMergeSplitPage onBack={() => navigateTo("home")} />;
       case "image-converter":

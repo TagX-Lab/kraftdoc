@@ -1,5 +1,12 @@
 import { PDFDocument, degrees, rgb, StandardFonts } from "pdf-lib";
+import * as pdfjsLib from "pdfjs-dist";
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker.mjs?url";
+import JSZip from "jszip";
 import { canvasToBlob, loadImage, renderResizedCanvas } from "./imageService";
+
+if (typeof window !== "undefined" && pdfjsLib?.GlobalWorkerOptions) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+}
 
 /**
  * Standard Page Dimensions in points (72 points = 1 inch)
@@ -320,4 +327,87 @@ export async function addPageNumbersToPdf(pdfArrayBuffer, options = {}) {
 
   const bytes = await pdfDoc.save();
   return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Render all or selected PDF pages to images using PDF.js
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {Object} options
+ */
+export async function convertPdfPagesToImages(pdfArrayBuffer, options = {}) {
+  const {
+    format = "image/png",
+    scale = 2.0,
+    quality = 0.92,
+    onProgress = null,
+  } = options;
+
+  const loadingTask = pdfjsLib.getDocument({
+    data: new Uint8Array(pdfArrayBuffer),
+    useSystemFonts: true,
+  });
+
+  const pdfDoc = await loadingTask.promise;
+  const numPages = pdfDoc.numPages;
+  const pages = [];
+
+  for (let i = 1; i <= numPages; i++) {
+    const page = await pdfDoc.getPage(i);
+    const viewport = page.getViewport({ scale });
+
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.floor(viewport.width);
+    canvas.height = Math.floor(viewport.height);
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+
+    if (format === "image/jpeg") {
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    const renderContext = {
+      canvasContext: ctx,
+      viewport,
+    };
+
+    await page.render(renderContext).promise;
+
+    const blob = await new Promise((resolve) => {
+      canvas.toBlob((b) => resolve(b), format, quality);
+    });
+
+    const dataUrl = canvas.toDataURL(format, quality);
+
+    pages.push({
+      pageNumber: i,
+      blob,
+      dataUrl,
+      width: canvas.width,
+      height: canvas.height,
+    });
+
+    if (onProgress) {
+      onProgress(i, numPages);
+    }
+  }
+
+  return pages;
+}
+
+/**
+ * Package array of image objects into a downloadable ZIP file
+ * @param {Array<{ pageNumber: number, blob: Blob }>} images
+ * @param {string} baseName
+ * @param {string} ext
+ */
+export async function packageImagesAsZip(images, baseName = "page", ext = "png") {
+  const zip = new JSZip();
+  images.forEach((img) => {
+    zip.file(`${baseName}_page_${img.pageNumber}.${ext}`, img.blob);
+  });
+  return zip.generateAsync({
+    type: "blob",
+    compression: "DEFLATE",
+    compressionOptions: { level: 6 },
+  });
 }
