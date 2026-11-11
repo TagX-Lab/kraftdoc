@@ -187,9 +187,9 @@ export function PhotoResizerIllustration() {
       <path d="M35 95V102H42" stroke="#FF4E02" strokeWidth="3" strokeLinecap="round" />
       <path d="M125 95V102H118" stroke="#FF4E02" strokeWidth="3" strokeLinecap="round" />
       {/* Dimension Tag */}
-      <rect x="52" y="92" width="56" height="18" rx="9" fill="#1400C3" />
+      <rect x="48" y="92" width="64" height="18" rx="9" fill="#1400C3" />
       <text x="80" y="104" fill="#FFF" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
-        200 × 230 px
+        RESIZE PX
       </text>
     </svg>
   );

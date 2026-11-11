@@ -88,7 +88,6 @@ export default function HomePage({ onNavigate }) {
       bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
       title: "Photo Resizer",
       desc: "Crop, resize px & set exact KB limits freely.",
-      badge: "Custom KB",
       accentColor: "#FF4E02",
       icon: UserCheck,
       illustration: PhotoResizerIllustration,
@@ -101,7 +100,6 @@ export default function HomePage({ onNavigate }) {
       bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
       title: "Compressor",
       desc: "Bulk shrink JPG, PNG, WebP up to 90%.",
-      badge: "-85% KB",
       accentColor: "#1400C3",
       icon: Minimize2,
       illustration: CompressorIllustration,
@@ -114,7 +112,6 @@ export default function HomePage({ onNavigate }) {
       bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
       title: "Images to PDF",
       desc: "Merge photos into clean A4 or Letter PDFs.",
-      badge: "Instant A4",
       accentColor: "#FF4E02",
       icon: FileText,
       illustration: ImagesToPdfIllustration,
@@ -127,7 +124,6 @@ export default function HomePage({ onNavigate }) {
       bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
       title: "Merge & Split",
       desc: "Combine docs or extract custom page ranges.",
-      badge: "Split / Join",
       accentColor: "#1400C3",
       icon: Layers,
       illustration: MergeSplitIllustration,
@@ -140,7 +136,6 @@ export default function HomePage({ onNavigate }) {
       bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
       title: "Format Convert",
       desc: "Bulk convert across WebP, PNG & JPG.",
-      badge: "WebP / JPG",
       accentColor: "#1400C3",
       icon: RefreshCw,
       illustration: ConverterIllustration,
@@ -153,7 +148,6 @@ export default function HomePage({ onNavigate }) {
       bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
       title: "PDF Organizer",
       desc: "Rotate pages 90°/180° and delete pages.",
-      badge: "Rotate & Cut",
       accentColor: "#FF4E02",
       icon: RotateCw,
       illustration: OrganizerIllustration,
@@ -338,15 +332,12 @@ export default function HomePage({ onNavigate }) {
                     className={`human-card rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 border-2 transition-all cursor-pointer flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 ${tool.bgClass}`}
                   >
                     <div>
-                      {/* Top Tag & Badge */}
-                      <div className="flex items-center justify-between gap-1 mb-2">
+                      {/* Top Tag */}
+                      <div className="flex items-center mb-2">
                         <span
                           className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-xs truncate ${tool.tagColor}`}
                         >
                           {tool.tag}
-                        </span>
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-white/90 text-[#1400C3] border border-[#1400C3]/15 whitespace-nowrap">
-                          {tool.badge}
                         </span>
                       </div>
 
