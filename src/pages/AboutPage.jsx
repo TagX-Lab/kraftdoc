@@ -15,7 +15,7 @@ export default function AboutPage({ onBack }) {
           <span>Back to Home</span>
         </button>
 
-        <h1 className="text-4xl sm:text-5xl font-black text-[#1400C3] tracking-tight">
+        <h1 className="font-display text-4xl sm:text-5xl text-[#1400C3] tracking-tight uppercase">
           About {siteConfig.name}
         </h1>
         <p className="mt-2 text-base text-[#3B3355] font-semibold">

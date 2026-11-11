@@ -53,19 +53,16 @@ export default function Navbar({ currentRoute, onNavigate }) {
               onClick={() => handleNavClick("home")}
               className="flex items-center gap-2.5 cursor-pointer group"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#1400C3] p-0.5 shadow-md shadow-[#1400C3]/20 group-hover:scale-105 group-hover:shadow-[#1400C3]/40 transition-all flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-[#F8F2D8] group-hover:rotate-12 transition-transform" />
+              <div className="w-10 h-10 rounded-2xl bg-[#1400C3] shadow-md shadow-[#1400C3]/20 group-hover:rotate-6 group-hover:scale-105 transition-all flex items-center justify-center text-white">
+                <Sparkles className="w-5 h-5 text-[#F8F2D8]" />
               </div>
-              <div>
-                <span className="text-xl font-black tracking-tight text-[#1400C3] flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
+                <span className="font-display text-2xl tracking-tight text-[#1400C3] flex items-center gap-1.5 uppercase">
                   {siteConfig.name}
-                  <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-[#FF4E02] text-white">
-                    FREE
-                  </span>
                 </span>
-                <p className="text-[10px] text-[#6B627F] font-semibold -mt-1 hidden sm:block">
-                  In-Browser Privacy
-                </p>
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#FF4E02] text-white uppercase tracking-wider shadow-xs">
+                  FREE
+                </span>
               </div>
             </div>
 

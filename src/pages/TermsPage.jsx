@@ -19,7 +19,7 @@ export default function TermsPage({ onBack }) {
 
         <div className="flex items-center gap-2 mb-2">
           <FileCheck className="w-7 h-7 text-[#FF4E02]" />
-          <h1 className="text-4xl font-black text-[#1400C3]">Terms of Service</h1>
+          <h1 className="font-display text-4xl text-[#1400C3] uppercase">Terms of Service</h1>
         </div>
         <p className="text-xs text-[#6B627F] font-bold">
           Official terms of {siteConfig.company.name} &bull; Last updated: {LAST_UPDATED_DATE}

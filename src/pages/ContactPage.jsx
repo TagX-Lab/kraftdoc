@@ -44,7 +44,7 @@ export default function ContactPage({ onBack }) {
           <span>Back to Home</span>
         </button>
 
-        <h1 className="text-4xl font-black text-[#1400C3]">Contact &amp; Support</h1>
+        <h1 className="font-display text-4xl text-[#1400C3] uppercase">Contact &amp; Support</h1>
         <p className="mt-2 text-sm text-[#3B3355] font-semibold">
           Have a suggestion, noticed an updated exam notification specification, or want to report a bug? Reach out to {siteConfig.company.name}.
         </p>

@@ -20,7 +20,7 @@ export default function ToolHeader({
       )}
 
       <div className="flex flex-wrap items-center gap-3 mb-2">
-        <h1 className="text-3xl md:text-4xl font-black text-[#1400C3] tracking-tight">
+        <h1 className="font-display text-3xl md:text-4xl text-[#1400C3] tracking-tight uppercase">
           {title}
         </h1>
       </div>
