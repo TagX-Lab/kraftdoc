@@ -20,6 +20,15 @@ import {
   MergeSplitIllustration,
   ConverterIllustration,
   OrganizerIllustration,
+  CompressPdfIllustration,
+  SignPdfIllustration,
+  WatermarkIllustration,
+  PageNumbersIllustration,
+  CropPdfIllustration,
+  FlattenPdfIllustration,
+  BlackenIllustration,
+  PdfToImagesIllustration,
+  ComparePdfIllustration,
 } from "../components/illustrations/ToolIllustrations";
 
 function DoodleRays({ className = "" }) {
@@ -39,7 +48,7 @@ function DoodleRays({ className = "" }) {
 }
 
 export default function HomePage({ onNavigate }) {
-  // The 6 Handcrafted Tool Cards (matching the Happies favorite snacks grid)
+  // All 15 Handcrafted Tool Cards
   const toolCards = [
     {
       id: "exam-resizer",
@@ -111,6 +120,114 @@ export default function HomePage({ onNavigate }) {
       accentColor: "#FF4E02",
       icon: RotateCw,
       illustration: OrganizerIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-compress",
+      tag: "Essential",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
+      title: "Compress PDF",
+      desc: "Shrink PDF filesize with 3 smart strength presets.",
+      accentColor: "#FF4E02",
+      icon: Minimize2,
+      illustration: CompressPdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-sign",
+      tag: "Security",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
+      title: "Sign PDF",
+      desc: "Draw or upload signature & stamp onto any page.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: SignPdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-to-images",
+      tag: "Extract",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
+      title: "PDF to Images",
+      desc: "Extract pages to high-res PNG/JPG & batch ZIP.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: PdfToImagesIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-watermark",
+      tag: "Security",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
+      title: "Watermark PDF",
+      desc: "Stamp text watermarks across every page cleanly.",
+      accentColor: "#FF4E02",
+      icon: FileText,
+      illustration: WatermarkIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-page-numbers",
+      tag: "Utility",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
+      title: "Page Numbers",
+      desc: "Insert header or footer page numbers accurately.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: PageNumbersIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-crop",
+      tag: "Utility",
+      tagColor: "bg-emerald-600 text-white",
+      bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
+      title: "Crop PDF Pages",
+      desc: "Trim margins, headers & footers from all pages.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: CropPdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-flatten",
+      tag: "Lock",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
+      title: "Flatten PDF",
+      desc: "Lock interactive forms & prevent future tampering.",
+      accentColor: "#FF4E02",
+      icon: FileText,
+      illustration: FlattenPdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-blacken",
+      tag: "Privacy",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
+      title: "Blacken & Redact",
+      desc: "Censor sensitive data with solid black boxes.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: BlackenIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-compare",
+      tag: "Audit",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
+      title: "Compare PDFs",
+      desc: "Side-by-side visual difference audit comparison.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: ComparePdfIllustration,
       pillPrice: "Free",
     },
   ];
@@ -230,17 +347,22 @@ export default function HomePage({ onNavigate }) {
         <ScrollReveal animation="fade-up">
           <div className="rounded-[32px] sm:rounded-[40px] bg-[#F7EDBE] border-2 border-[#E6D799] p-5 sm:p-7 lg:p-8 shadow-sm">
             {/* Section Header */}
-            <div className="mb-6">
-              <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
-                OUR FAVORITES
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+              <div>
+                <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
+                  OUR FAVORITES • 15 POWER TOOLS
+                </span>
+                <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
+                  TOOLS YOU&apos;LL LOVE
+                </h2>
+              </div>
+              <span className="text-xs font-bold text-[#6B627F]">
+                100% In-Browser • Free Forever • Zero Cloud Uploads
               </span>
-              <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
-                TOOLS YOU&apos;LL LOVE
-              </h2>
             </div>
 
-            {/* Grid of All 6 Modules in a Single Desktop View (No Scrolling Required) */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-3.5">
+            {/* Grid of All 15 Modules */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
               {toolCards.map((tool) => {
                 const Illustration = tool.illustration;
 

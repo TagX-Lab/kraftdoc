@@ -329,3 +329,164 @@ export function OrganizerIllustration() {
     </svg>
   );
 }
+
+export function CompressPdfIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="44" y="18" width="72" height="84" rx="12" fill="#FFEAE3" stroke="#FF4E02" strokeWidth="2.5" />
+      <path d="M56 36H104M56 48H96M56 60H88" stroke="#1400C3" strokeWidth="2.5" strokeLinecap="round" />
+      {/* Vice arrows squeezing */}
+      <g stroke="#1400C3" strokeWidth="3" strokeLinecap="round">
+        <path d="M24 60H38M32 54L38 60L32 66" />
+        <path d="M136 60H122M128 54L122 60L128 66" />
+      </g>
+      <circle cx="104" cy="80" r="14" fill="#FF4E02" />
+      <text x="104" y="84" fill="#FFF" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
+        -70%
+      </text>
+    </svg>
+  );
+}
+
+export function SignPdfIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="42" y="16" width="76" height="88" rx="12" fill="#FFF8E0" stroke="#1400C3" strokeWidth="2.5" />
+      <path d="M54 32H106M54 44H94" stroke="#1400C3" strokeWidth="2" strokeLinecap="round" />
+      {/* Signature line & cursive loop */}
+      <path d="M54 84H106" stroke="#E5DCB8" strokeWidth="2" strokeDasharray="3 3" />
+      <path
+        d="M58 80C64 70 70 72 74 78C78 84 84 70 90 75C96 80 102 72 106 74"
+        stroke="#FF4E02"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      {/* Fountain Pen Nib */}
+      <g transform="translate(100, 48) rotate(45)">
+        <polygon points="0,0 8,16 0,22 -8,16" fill="#1400C3" />
+        <circle cx="0" cy="12" r="2" fill="#FFF" />
+      </g>
+    </svg>
+  );
+}
+
+export function WatermarkIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="42" y="16" width="76" height="88" rx="12" fill="#EBF2FD" stroke="#1400C3" strokeWidth="2.5" />
+      <path d="M54 32H106M54 44H88M54 56H98M54 68H90M54 80H100" stroke="#1400C3" strokeWidth="1.5" strokeOpacity="0.4" strokeLinecap="round" />
+      {/* Diagonal Watermark Banner */}
+      <g transform="rotate(-30 80 60)">
+        <rect x="25" y="50" width="110" height="22" rx="11" fill="#FF4E02" fillOpacity="0.9" />
+        <text x="80" y="65" fill="#FFF" fontSize="10" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
+          WATERMARK
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+export function PageNumbersIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="44" y="16" width="72" height="88" rx="12" fill="#EBF8EE" stroke="#1400C3" strokeWidth="2.5" />
+      <path d="M56 32H104M56 44H96M56 56H100M56 68H88" stroke="#1400C3" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
+      {/* Bottom Page Number Pill */}
+      <rect x="64" y="84" width="32" height="16" rx="8" fill="#1400C3" />
+      <text x="80" y="95" fill="#FFF" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
+        1 / 12
+      </text>
+    </svg>
+  );
+}
+
+export function CropPdfIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      {/* Outer original page */}
+      <rect x="36" y="14" width="88" height="92" rx="12" fill="#FFF" stroke="#E5DCB8" strokeWidth="2" strokeDasharray="4 4" />
+      {/* Active Crop Box */}
+      <rect x="48" y="24" width="64" height="72" rx="8" fill="#F3ECFB" stroke="#1400C3" strokeWidth="2.5" />
+      <path d="M58 40H102M58 52H92M58 64H98" stroke="#1400C3" strokeWidth="2" strokeLinecap="round" />
+      {/* Crop Corner Handles */}
+      <path d="M42 30V20H52" stroke="#FF4E02" strokeWidth="3" strokeLinecap="round" />
+      <path d="M118 30V20H108" stroke="#FF4E02" strokeWidth="3" strokeLinecap="round" />
+      <path d="M42 90V100H52" stroke="#FF4E02" strokeWidth="3" strokeLinecap="round" />
+      <path d="M118 90V100H108" stroke="#FF4E02" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function FlattenPdfIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="44" y="16" width="72" height="88" rx="12" fill="#FFF8E0" stroke="#1400C3" strokeWidth="2.5" />
+      {/* Mock form fields */}
+      <rect x="54" y="32" width="52" height="12" rx="4" fill="#FFF" stroke="#1400C3" strokeWidth="1.5" />
+      <rect x="54" y="50" width="52" height="12" rx="4" fill="#FFF" stroke="#1400C3" strokeWidth="1.5" />
+      {/* Lock Icon in Center */}
+      <circle cx="80" cy="74" r="16" fill="#1400C3" />
+      <rect x="74" y="70" width="12" height="10" rx="3" fill="#FF4E02" />
+      <path d="M76 70V67C76 64.79 77.79 63 80 63C82.21 63 84 64.79 84 67V70" stroke="#FFF" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function BlackenIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="42" y="16" width="76" height="88" rx="12" fill="#FFEAE3" stroke="#FF4E02" strokeWidth="2.5" />
+      <path d="M54 32H106M54 44H90" stroke="#1400C3" strokeWidth="2" strokeLinecap="round" />
+      {/* Solid Black Redaction Bars */}
+      <rect x="52" y="52" width="56" height="12" rx="3" fill="#000" />
+      <rect x="52" y="70" width="44" height="12" rx="3" fill="#000" />
+      {/* Eye censor / shield */}
+      <circle cx="104" cy="76" r="10" fill="#FF4E02" />
+      <text x="104" y="80" fill="#FFF" fontSize="10" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
+        ✕
+      </text>
+    </svg>
+  );
+}
+
+export function PdfToImagesIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      {/* Back PDF */}
+      <rect x="30" y="20" width="56" height="74" rx="10" fill="#1400C3" stroke="#1400C3" strokeWidth="2" />
+      <text x="58" y="58" fill="#FFF" fontSize="11" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
+        PDF
+      </text>
+      {/* Exploding / Converting Arrow */}
+      <path d="M78 56L96 56M90 50L96 56L90 62" stroke="#FF4E02" strokeWidth="3" strokeLinecap="round" />
+      {/* Front Image Polaroid */}
+      <rect x="92" y="24" width="52" height="68" rx="10" fill="#FFF" stroke="#FF4E02" strokeWidth="2.5" transform="rotate(8 92 24)" />
+      <rect x="97" y="30" width="42" height="40" rx="6" fill="#E8F4FD" transform="rotate(8 92 24)" />
+      <circle cx="118" cy="48" r="8" fill="#FF4E02" />
+    </svg>
+  );
+}
+
+export function ComparePdfIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      {/* Doc A */}
+      <rect x="24" y="20" width="50" height="74" rx="10" fill="#EBF2FD" stroke="#1400C3" strokeWidth="2.5" />
+      <text x="49" y="42" fill="#1400C3" fontSize="14" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
+        A
+      </text>
+      <path d="M34 56H64M34 66H56M34 76H50" stroke="#1400C3" strokeWidth="2" strokeLinecap="round" />
+
+      {/* Doc B */}
+      <rect x="86" y="20" width="50" height="74" rx="10" fill="#FFEAE3" stroke="#FF4E02" strokeWidth="2.5" />
+      <text x="111" y="42" fill="#FF4E02" fontSize="14" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
+        B
+      </text>
+      <path d="M96 56H126M96 66H118M96 76H112" stroke="#FF4E02" strokeWidth="2" strokeLinecap="round" />
+
+      {/* Center Difference / Compare Badge */}
+      <circle cx="80" cy="56" r="14" fill="#FFDF6D" stroke="#1400C3" strokeWidth="2" />
+      <path d="M74 56H86M80 50V62" stroke="#1400C3" strokeWidth="2.5" strokeLinecap="round" />
+    </svg>
+  );
+}
