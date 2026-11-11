@@ -8,11 +8,9 @@ import {
   RotateCw,
   ArrowRight,
   ArrowDown,
-  ShieldCheck,
   Zap,
   HelpCircle,
   ExternalLink,
-  Award,
   Smile,
   Cpu,
 } from "lucide-react";
@@ -46,40 +44,6 @@ function DoodleRays({ className = "" }) {
 }
 
 export default function HomePage({ onNavigate }) {
-  // 6 Circular Badges Strip (matching the Happies 6-icon bar)
-  const pillBadges = [
-    {
-      icon: ShieldCheck,
-      title: "Zero Uploads",
-      subtitle: "100% Client-Side",
-    },
-    {
-      icon: UserCheck,
-      title: "Photo Resizer",
-      subtitle: "Custom Px & KB",
-    },
-    {
-      icon: Minimize2,
-      title: "Lossless Shrink",
-      subtitle: "Up to 90% Saved",
-    },
-    {
-      icon: Award,
-      title: "No Watermarks",
-      subtitle: "Clean Free Output",
-    },
-    {
-      icon: Zap,
-      title: "Native RAM Speed",
-      subtitle: "WebAssembly Engine",
-    },
-    {
-      icon: Smile,
-      title: "TAGX Labs™",
-      subtitle: "Pure Human-Made",
-    },
-  ];
-
   // The 6 Handcrafted Tool Cards (matching the Happies favorite snacks grid)
   const toolCards = [
     {
@@ -282,42 +246,6 @@ export default function HomePage({ onNavigate }) {
           </button>
         </div>
       </section>
-
-      {/* ========================================================================= */}
-      {/* 6 CIRCULAR FEATURE BADGES STRIP (Matching the Happies 6-icon Row)        */}
-      {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal animation="fade-up">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-            {pillBadges.map((badge, idx) => {
-              const Icon = badge.icon;
-              return (
-                <div
-                  key={idx}
-                  className="flex flex-col items-center text-center p-4 rounded-3xl bg-white border-2 border-[#E5DCB8] hover:border-[#1400C3] hover:shadow-lg transition-all duration-300 group hover:-translate-y-1.5"
-                >
-                  <div className="w-14 h-14 rounded-full bg-[#F8F2D8] border border-[#D6CA9E] flex items-center justify-center text-[#1400C3] group-hover:bg-[#FF4E02] group-hover:text-white group-hover:border-[#FF4E02] transition-colors mb-3 shadow-xs">
-                    <Icon className="w-6 h-6 stroke-[2.2]" />
-                  </div>
-                  <h4 className="text-xs sm:text-sm font-black text-[#1400C3] leading-snug">
-                    {badge.title}
-                  </h4>
-                  <p className="text-[11px] text-[#6B627F] font-semibold mt-0.5">
-                    {badge.subtitle}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </ScrollReveal>
-      </section>
-
-      {/* Top Banner Ad between sections */}
-      <div className="max-w-6xl mx-auto px-4">
-        <ScrollReveal animation="fade-in">
-          <AdBanner slotId="1000000001" />
-        </ScrollReveal>
-      </div>
 
       {/* ========================================================================= */}
       {/* "OUR FAVORITES / TOOLS YOU'LL LOVE" COLOR-BLOCK CARDS SECTION             */}
