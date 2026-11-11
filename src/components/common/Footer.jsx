@@ -237,8 +237,8 @@ export default function Footer({ onNavigate }) {
         </div>
 
         {/* Slim Corporate Bottom Bar */}
-        <div className="border-t border-[#D6CA9E]/70 pt-4 mt-6 text-xs text-[#3B3355] font-semibold text-center sm:text-left">
-          <p>
+        <div className="border-t border-[#D6CA9E]/70 pt-4 mt-6 text-xs text-[#3B3355] font-semibold text-center flex justify-center items-center">
+          <p className="text-center">
             &copy; {CURRENT_YEAR} <strong className="text-[#1400C3]">{siteConfig.company.name}</strong>. All rights reserved.
           </p>
         </div>
