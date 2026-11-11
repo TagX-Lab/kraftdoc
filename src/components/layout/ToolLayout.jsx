@@ -24,17 +24,16 @@ export default function ToolLayout({
         onBack={onBack}
       />
 
-      {/* Top Banner Ad Slot */}
-      <AdBanner slotId={adConfig.slots.topBanner} />
-
       {/* Main Content Area + Optional Sidebar Ad */}
-      <div className="flex flex-col lg:flex-row gap-8 items-start mt-6">
-        <div className="flex-1 w-full min-w-0">{children}</div>
+      <div className="flex flex-col lg:flex-row gap-8 items-start mt-4">
+        <div className="flex-1 w-full min-w-0 space-y-8">
+          {children}
+
+          {/* Clean Non-Intrusive Bottom Banner Ad below user action area */}
+          <AdBanner slotId={adConfig.slots.bottomBanner} />
+        </div>
         {showSidebarAd && <AdSidebar slotId={adConfig.slots.sidebarSticky} />}
       </div>
-
-      {/* Bottom Banner Ad Slot */}
-      <AdBanner slotId={adConfig.slots.bottomBanner} className="mt-12" />
     </div>
   );
 }

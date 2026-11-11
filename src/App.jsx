@@ -2,7 +2,10 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 import ScrollProgress from "./components/common/ScrollProgress";
+import OfflineBanner from "./components/common/OfflineBanner";
+import ServerBusyModal from "./components/common/ServerBusyModal";
 import { ToastProvider } from "./context/ToastContext";
+import { useNetworkStatus } from "./hooks/useNetworkStatus";
 import { Loader2 } from "lucide-react";
 
 // Home is loaded eagerly for instant first-paint
@@ -31,6 +34,7 @@ function PageLoadingFallback() {
 
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState("home");
+  const { isServerBusy, setIsServerBusy, checkServerStatus } = useNetworkStatus();
 
   // Sync route with URL hash on load and hash change
   useEffect(() => {
@@ -86,6 +90,7 @@ export default function App() {
     <ToastProvider>
       <div className="min-h-screen flex flex-col bg-[#F8F2D8] text-[#1400C3] selection:bg-[#FF4E02] selection:text-white">
         <ScrollProgress />
+        <OfflineBanner />
         <Navbar currentRoute={currentRoute} onNavigate={navigateTo} />
 
         <main className="flex-1 w-full">
@@ -95,6 +100,12 @@ export default function App() {
         </main>
 
         <Footer onNavigate={navigateTo} />
+
+        <ServerBusyModal
+          isOpen={isServerBusy}
+          onClose={() => setIsServerBusy(false)}
+          onRetry={checkServerStatus}
+        />
       </div>
     </ToastProvider>
   );

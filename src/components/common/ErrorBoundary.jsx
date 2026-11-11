@@ -24,6 +24,11 @@ export default class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
+      const isChunkError =
+        this.state.error?.name === "ChunkLoadError" ||
+        this.state.error?.message?.includes("dynamically imported module") ||
+        this.state.error?.message?.includes("Failed to fetch");
+
       return (
         <div className="min-h-screen bg-[#F8F2D8] flex items-center justify-center p-6 text-center">
           <div className="max-w-md w-full p-8 rounded-3xl bg-white border-2 border-[#E5DCB8] shadow-2xl space-y-5">
@@ -32,11 +37,13 @@ export default class ErrorBoundary extends React.Component {
             </div>
 
             <h2 className="text-2xl font-black text-[#1400C3]">
-              Something went wrong
+              {isChunkError ? "Server Temporarily Busy" : "Something went wrong"}
             </h2>
 
-            <p className="text-sm text-[#3B3355] font-semibold">
-              An unexpected error occurred while processing your file. Your data is safe on your device.
+            <p className="text-sm text-[#3B3355] font-semibold leading-relaxed">
+              {isChunkError
+                ? "The server is momentarily busy or network connection dropped. Please reconnect and reload the tool."
+                : "An unexpected error occurred while processing your file. Your data is safe on your device."}
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">

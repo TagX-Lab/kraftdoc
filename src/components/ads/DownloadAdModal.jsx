@@ -25,11 +25,19 @@ export default function DownloadAdModal({
       });
     }, 1000);
 
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
     return () => {
       clearInterval(timer);
       setCountdown(initial);
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -88,22 +96,22 @@ export default function DownloadAdModal({
         </div>
 
         {/* Action Button in Blaze Orange */}
-        <div className="mt-6">
+        <div className="mt-6 space-y-2">
           <button
             type="button"
             onClick={handleDownload}
             className={`w-full py-4 px-6 rounded-2xl font-black text-sm flex items-center justify-center gap-2.5 transition-all shadow-xl cursor-pointer ${
               countdown > 0
-                ? "bg-white hover:bg-[#F3ECCE] text-[#1400C3] border border-[#D6CA9E]"
+                ? "bg-[#1400C3] hover:bg-[#0E008F] text-white shadow-[#1400C3]/20"
                 : "bg-[#FF4E02] hover:bg-[#E04200] text-white shadow-[#FF4E02]/30 active:scale-95"
             }`}
           >
             {countdown > 0 ? (
               <>
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#1400C3] text-xs font-black text-white">
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white text-xs font-black text-[#1400C3]">
                   {countdown}
                 </span>
-                <span>Download Ready Soon... (or Click to Skip)</span>
+                <span>Download Ready Soon &bull; Click to Skip</span>
               </>
             ) : (
               <>
@@ -111,6 +119,14 @@ export default function DownloadAdModal({
                 <span>Download Now</span>
               </>
             )}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleDownload}
+            className="text-xs font-bold text-[#6B627F] hover:text-[#1400C3] transition-colors cursor-pointer py-1"
+          >
+            Skip waiting &amp; save file immediately &rarr;
           </button>
         </div>
       </div>
