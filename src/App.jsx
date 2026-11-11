@@ -1,6 +1,7 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
+import ScrollProgress from "./components/common/ScrollProgress";
 import { ToastProvider } from "./context/ToastContext";
 import { Loader2 } from "lucide-react";
 
@@ -84,6 +85,7 @@ export default function App() {
   return (
     <ToastProvider>
       <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white">
+        <ScrollProgress />
         <Navbar currentRoute={currentRoute} onNavigate={navigateTo} />
 
         <main className="flex-1 w-full">
