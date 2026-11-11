@@ -7,7 +7,6 @@ import {
   Minimize2,
   FileText,
   Layers,
-  ShieldCheck,
 } from "lucide-react";
 import { siteConfig } from "../../config/siteConfig";
 
@@ -79,13 +78,7 @@ export default function Navbar({ currentRoute, onNavigate }) {
             })}
           </nav>
 
-          {/* Right Status / Privacy Badge */}
-          <div className="hidden sm:flex items-center gap-3">
-            <div className="inline-flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full font-medium">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Zero Server Uploads</span>
-            </div>
-          </div>
+
 
           {/* Mobile Menu Button */}
           <button
@@ -115,12 +108,7 @@ export default function Navbar({ currentRoute, onNavigate }) {
               {item.label}
             </button>
           ))}
-          <div className="pt-2">
-            <div className="inline-flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full font-medium w-full justify-center">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>100% Client-Side &bull; Safe & Private</span>
-            </div>
-          </div>
+
         </div>
       )}
     </header>
