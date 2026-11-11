@@ -21,6 +21,13 @@ import {
   Lock,
   Square,
   GitCompare,
+  FileCode,
+  Scaling,
+  LayoutGrid,
+  Camera,
+  Monitor,
+  Wrench,
+  Receipt,
 } from "lucide-react";
 import { siteConfig } from "../../config/siteConfig";
 
@@ -158,6 +165,62 @@ export default function Navbar({ currentRoute, onNavigate }) {
       desc: "Side-by-side visual difference audit",
       icon: GitCompare,
       iconBg: "bg-[#EAF2FD] text-[#1400C3] border-[#C2D8FA]",
+    },
+    {
+      id: "pdf-metadata",
+      title: "Edit Metadata",
+      desc: "Change author, title & sanitize info",
+      icon: FileCode,
+      iconBg: "bg-[#FFF4D4] text-[#FF4E02] border-[#F2DE9F]",
+    },
+    {
+      id: "pdf-page-size",
+      title: "Change Page Size",
+      desc: "Rescale to standard A4, Letter, A3",
+      icon: Scaling,
+      iconBg: "bg-[#FFEBE5] text-[#FF4E02] border-[#F8C8BD]",
+    },
+    {
+      id: "pdf-pages-per-sheet",
+      title: "Pages Per Sheet",
+      desc: "Fit 2 or 4 pages per sheet (N-Up)",
+      icon: LayoutGrid,
+      iconBg: "bg-[#EBF7ED] text-[#1400C3] border-[#C2E7C9]",
+    },
+    {
+      id: "pdf-extract-text",
+      title: "Extract Text",
+      desc: "Export clean plain .TXT files",
+      icon: FileText,
+      iconBg: "bg-[#F3ECFB] text-[#1400C3] border-[#D8C4F4]",
+    },
+    {
+      id: "camera-to-pdf",
+      title: "Camera Scanner",
+      desc: "Scan documents via webcam into PDF",
+      icon: Camera,
+      iconBg: "bg-[#FFF0D9] text-[#FF4E02] border-[#F7D8A8]",
+    },
+    {
+      id: "screen-to-pdf",
+      title: "Screen to PDF",
+      desc: "Capture window or screen to PDF",
+      icon: Monitor,
+      iconBg: "bg-[#EAF2FD] text-[#1400C3] border-[#C2D8FA]",
+    },
+    {
+      id: "pdf-repair",
+      title: "Repair PDF",
+      desc: "Fix corrupted xref tables & streams",
+      icon: Wrench,
+      iconBg: "bg-[#FFEBE5] text-[#FF4E02] border-[#F8C8BD]",
+    },
+    {
+      id: "create-invoice",
+      title: "Invoice Maker",
+      desc: "Generate professional vector invoices",
+      icon: Receipt,
+      iconBg: "bg-[#FFF4D4] text-[#1400C3] border-[#F2DE9F]",
     },
   ];
 

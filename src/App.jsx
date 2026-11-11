@@ -27,6 +27,14 @@ const CropPdfPage = lazy(() => import("./pages/CropPdfPage"));
 const FlattenPdfPage = lazy(() => import("./pages/FlattenPdfPage"));
 const BlackenPdfPage = lazy(() => import("./pages/BlackenPdfPage"));
 const ComparePdfPage = lazy(() => import("./pages/ComparePdfPage"));
+const EditPdfMetadataPage = lazy(() => import("./pages/EditPdfMetadataPage"));
+const ResizePdfPage = lazy(() => import("./pages/ResizePdfPage"));
+const PagesPerSheetPage = lazy(() => import("./pages/PagesPerSheetPage"));
+const PdfExtractTextPage = lazy(() => import("./pages/PdfExtractTextPage"));
+const CameraToPdfPage = lazy(() => import("./pages/CameraToPdfPage"));
+const CaptureScreenToPdfPage = lazy(() => import("./pages/CaptureScreenToPdfPage"));
+const RepairPdfPage = lazy(() => import("./pages/RepairPdfPage"));
+const CreateInvoicePage = lazy(() => import("./pages/CreateInvoicePage"));
 const AllToolsPage = lazy(() => import("./pages/AllToolsPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
@@ -100,6 +108,22 @@ export default function App() {
         return <BlackenPdfPage onBack={() => navigateTo("home")} />;
       case "pdf-compare":
         return <ComparePdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-metadata":
+        return <EditPdfMetadataPage onBack={() => navigateTo("home")} />;
+      case "pdf-page-size":
+        return <ResizePdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-pages-per-sheet":
+        return <PagesPerSheetPage onBack={() => navigateTo("home")} />;
+      case "pdf-extract-text":
+        return <PdfExtractTextPage onBack={() => navigateTo("home")} />;
+      case "camera-to-pdf":
+        return <CameraToPdfPage onBack={() => navigateTo("home")} />;
+      case "screen-to-pdf":
+        return <CaptureScreenToPdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-repair":
+        return <RepairPdfPage onBack={() => navigateTo("home")} />;
+      case "create-invoice":
+        return <CreateInvoicePage onBack={() => navigateTo("home")} />;
       case "all-tools":
         return <AllToolsPage onNavigate={navigateTo} />;
       case "about":

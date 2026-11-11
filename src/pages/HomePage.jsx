@@ -29,6 +29,14 @@ import {
   BlackenIllustration,
   PdfToImagesIllustration,
   ComparePdfIllustration,
+  MetadataIllustration,
+  ResizePdfIllustration,
+  PagesPerSheetIllustration,
+  ExtractTextIllustration,
+  CameraScanIllustration,
+  ScreenCaptureIllustration,
+  RepairPdfIllustration,
+  InvoiceIllustration,
 } from "../components/illustrations/ToolIllustrations";
 
 function DoodleRays({ className = "" }) {
@@ -230,6 +238,102 @@ export default function HomePage({ onNavigate }) {
       illustration: ComparePdfIllustration,
       pillPrice: "Free",
     },
+    {
+      id: "pdf-metadata",
+      tag: "Security",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
+      title: "Edit Metadata",
+      desc: "Change author, title & sanitize tracking info.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: MetadataIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-page-size",
+      tag: "Utility",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
+      title: "Change Page Size",
+      desc: "Rescale to standard A4, Letter, A3 & Legal.",
+      accentColor: "#FF4E02",
+      icon: FileText,
+      illustration: ResizePdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-pages-per-sheet",
+      tag: "Paper Saver",
+      tagColor: "bg-emerald-600 text-white",
+      bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
+      title: "Pages Per Sheet",
+      desc: "Combine 2 or 4 pages side-by-side on 1 sheet.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: PagesPerSheetIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-extract-text",
+      tag: "Extract",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
+      title: "Extract Text",
+      desc: "Pull readable text & export clean .TXT files.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: ExtractTextIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "camera-to-pdf",
+      tag: "Live Scan",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
+      title: "Camera Scanner",
+      desc: "Scan physical documents via camera into PDF.",
+      accentColor: "#FF4E02",
+      icon: FileText,
+      illustration: CameraScanIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "screen-to-pdf",
+      tag: "Capture",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
+      title: "Screen to PDF",
+      desc: "Capture active window or screen to high-res PDF.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: ScreenCaptureIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-repair",
+      tag: "Fix",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
+      title: "Repair PDF",
+      desc: "Rebuild corrupted xref tables & broken streams.",
+      accentColor: "#FF4E02",
+      icon: FileText,
+      illustration: RepairPdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "create-invoice",
+      tag: "Finance",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
+      title: "Invoice Maker",
+      desc: "Generate professional billing invoices in seconds.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: InvoiceIllustration,
+      pillPrice: "Free",
+    },
   ];
 
   return (
@@ -350,7 +454,7 @@ export default function HomePage({ onNavigate }) {
             <div className="mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
               <div>
                 <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
-                  OUR FAVORITES • 15 POWER TOOLS
+                  OUR FAVORITES • 23 POWER TOOLS
                 </span>
                 <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
                   TOOLS YOU&apos;LL LOVE
@@ -361,7 +465,7 @@ export default function HomePage({ onNavigate }) {
               </span>
             </div>
 
-            {/* Grid of All 15 Modules */}
+            {/* Grid of All 23 Modules */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
               {toolCards.map((tool) => {
                 const Illustration = tool.illustration;

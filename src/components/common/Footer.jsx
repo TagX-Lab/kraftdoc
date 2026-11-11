@@ -198,7 +198,7 @@ export default function Footer({ onNavigate }) {
                     onClick={() => onNavigate("all-tools")}
                     className="text-[#FF4E02] font-black hover:underline transition-colors cursor-pointer text-left flex items-center gap-1 pt-1"
                   >
-                    <span>View all 15+ tools &rarr;</span>
+                    <span>View all 23 tools directory &rarr;</span>
                   </button>
                 </li>
               </ul>

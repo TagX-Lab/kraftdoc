@@ -12,8 +12,11 @@ if (typeof window !== "undefined" && pdfjsLib?.GlobalWorkerOptions) {
  * Standard Page Dimensions in points (72 points = 1 inch)
  */
 export const PAGE_SIZES = {
+  A3: { width: 841.89, height: 1190.55 },
   A4: { width: 595.28, height: 841.89 },
+  A5: { width: 419.53, height: 595.28 },
   LETTER: { width: 612.0, height: 792.0 },
+  LEGAL: { width: 612.0, height: 1008.0 },
 };
 
 /**
@@ -567,5 +570,423 @@ export async function compressPdfDocument(pdfArrayBuffer, quality = 0.75, onProg
   }
 
   const bytes = await newDoc.save({ useObjectStreams: true });
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Read PDF document metadata fields
+ * @param {ArrayBuffer} pdfArrayBuffer
+ */
+export async function readPdfMetadata(pdfArrayBuffer) {
+  const pdfDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+  return {
+    title: pdfDoc.getTitle() || "",
+    author: pdfDoc.getAuthor() || "",
+    subject: pdfDoc.getSubject() || "",
+    keywords: (pdfDoc.getKeywords() || []).join(", "),
+    creator: pdfDoc.getCreator() || "",
+    producer: pdfDoc.getProducer() || "",
+    creationDate: pdfDoc.getCreationDate() ? pdfDoc.getCreationDate().toISOString() : "",
+    modificationDate: pdfDoc.getModificationDate() ? pdfDoc.getModificationDate().toISOString() : "",
+  };
+}
+
+/**
+ * Update or sanitize PDF document metadata
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {Object} metadata
+ * @param {boolean} sanitize
+ */
+export async function writePdfMetadata(pdfArrayBuffer, metadata = {}, sanitize = false) {
+  const pdfDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+
+  if (sanitize) {
+    pdfDoc.setTitle("");
+    pdfDoc.setAuthor("");
+    pdfDoc.setSubject("");
+    pdfDoc.setKeywords([]);
+    pdfDoc.setCreator("");
+    pdfDoc.setProducer("");
+  } else {
+    if (metadata.title !== undefined) pdfDoc.setTitle(metadata.title);
+    if (metadata.author !== undefined) pdfDoc.setAuthor(metadata.author);
+    if (metadata.subject !== undefined) pdfDoc.setSubject(metadata.subject);
+    if (metadata.keywords !== undefined) {
+      const kw = metadata.keywords.split(",").map((s) => s.trim()).filter(Boolean);
+      pdfDoc.setKeywords(kw);
+    }
+    if (metadata.creator !== undefined) pdfDoc.setCreator(metadata.creator);
+    if (metadata.producer !== undefined) pdfDoc.setProducer(metadata.producer);
+  }
+
+  const bytes = await pdfDoc.save();
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Resize all pages of a PDF to a target standard size
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {string} targetSize - 'A4' | 'LETTER' | 'A3' | 'A5' | 'LEGAL'
+ * @param {string} orientation - 'portrait' | 'landscape'
+ */
+export async function resizePdfDocument(pdfArrayBuffer, targetSize = "A4", orientation = "portrait") {
+  const srcDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+  const newDoc = await PDFDocument.create();
+
+  const baseSize = PAGE_SIZES[targetSize] || PAGE_SIZES.A4;
+  const isLandscape = orientation === "landscape";
+  const targetW = isLandscape ? baseSize.height : baseSize.width;
+  const targetH = isLandscape ? baseSize.width : baseSize.height;
+
+  const pageCount = srcDoc.getPageCount();
+
+  for (let i = 0; i < pageCount; i++) {
+    const [embedded] = await newDoc.embedPdf(srcDoc, [i]);
+    const { width: origW, height: origH } = embedded;
+
+    const page = newDoc.addPage([targetW, targetH]);
+
+    // Scale to fit target dimensions while preserving aspect ratio
+    const scale = Math.min((targetW - 40) / origW, (targetH - 40) / origH);
+    const drawW = origW * scale;
+    const drawH = origH * scale;
+
+    const drawX = (targetW - drawW) / 2;
+    const drawY = (targetH - drawH) / 2;
+
+    page.drawPage(embedded, {
+      x: drawX,
+      y: drawY,
+      width: drawW,
+      height: drawH,
+    });
+  }
+
+  const bytes = await newDoc.save();
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Convert PDF to N-Up Pages Per Sheet (2-on-1 or 4-on-1)
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {number} mode - 2 | 4
+ */
+export async function convertPagesPerSheet(pdfArrayBuffer, mode = 2) {
+  const srcDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+  const newDoc = await PDFDocument.create();
+  const pageCount = srcDoc.getPageCount();
+
+  if (mode === 2) {
+    // 2-on-1: A4 Landscape sheet with 2 portrait pages side-by-side
+    const sheetW = PAGE_SIZES.A4.height; // 841.89
+    const sheetH = PAGE_SIZES.A4.width;  // 595.28
+    const halfW = sheetW / 2;
+
+    for (let i = 0; i < pageCount; i += 2) {
+      const sheet = newDoc.addPage([sheetW, sheetH]);
+      const [p1] = await newDoc.embedPdf(srcDoc, [i]);
+      const scale1 = Math.min((halfW - 30) / p1.width, (sheetH - 40) / p1.height);
+      const w1 = p1.width * scale1;
+      const h1 = p1.height * scale1;
+      sheet.drawPage(p1, {
+        x: (halfW - w1) / 2 + 10,
+        y: (sheetH - h1) / 2,
+        width: w1,
+        height: h1,
+      });
+
+      if (i + 1 < pageCount) {
+        const [p2] = await newDoc.embedPdf(srcDoc, [i + 1]);
+        const scale2 = Math.min((halfW - 30) / p2.width, (sheetH - 40) / p2.height);
+        const w2 = p2.width * scale2;
+        const h2 = p2.height * scale2;
+        sheet.drawPage(p2, {
+          x: halfW + (halfW - w2) / 2 - 10,
+          y: (sheetH - h2) / 2,
+          width: w2,
+          height: h2,
+        });
+      }
+    }
+  } else {
+    // 4-on-1: A4 Portrait sheet with 2x2 grid
+    const sheetW = PAGE_SIZES.A4.width;  // 595.28
+    const sheetH = PAGE_SIZES.A4.height; // 841.89
+    const cellW = sheetW / 2;
+    const cellH = sheetH / 2;
+
+    for (let i = 0; i < pageCount; i += 4) {
+      const sheet = newDoc.addPage([sheetW, sheetH]);
+
+      for (let j = 0; j < 4 && i + j < pageCount; j++) {
+        const [p] = await newDoc.embedPdf(srcDoc, [i + j]);
+        const scale = Math.min((cellW - 24) / p.width, (cellH - 24) / p.height);
+        const w = p.width * scale;
+        const h = p.height * scale;
+
+        const col = j % 2;
+        const row = Math.floor(j / 2); // 0 = top, 1 = bottom
+
+        const posX = col * cellW + (cellW - w) / 2;
+        const posY = (1 - row) * cellH + (cellH - h) / 2;
+
+        sheet.drawPage(p, {
+          x: posX,
+          y: posY,
+          width: w,
+          height: h,
+        });
+      }
+    }
+  }
+
+  const bytes = await newDoc.save();
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Extract plain text content from all pages of a PDF using PDF.js
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {Function} onProgress
+ */
+export async function extractTextFromPdfDocument(pdfArrayBuffer, onProgress = null) {
+  const loadingTask = pdfjsLib.getDocument({
+    data: new Uint8Array(pdfArrayBuffer),
+    useSystemFonts: true,
+  });
+
+  const pdf = await loadingTask.promise;
+  const numPages = pdf.numPages;
+  const pageTexts = [];
+
+  for (let i = 1; i <= numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    const strings = content.items.map((item) => item.str);
+    const text = strings.join(" ");
+
+    pageTexts.push({
+      pageNumber: i,
+      text,
+    });
+
+    if (onProgress) {
+      onProgress(i, numPages);
+    }
+  }
+
+  const fullText = pageTexts
+    .map((p) => `--- PAGE ${p.pageNumber} ---\n\n${p.text}\n`)
+    .join("\n\n");
+
+  return { fullText, pageTexts, totalPages: numPages };
+}
+
+/**
+ * Repair and rebuild corrupted or malformed PDF streams
+ * @param {ArrayBuffer} pdfArrayBuffer
+ */
+export async function repairPdfDocument(pdfArrayBuffer) {
+  const srcDoc = await PDFDocument.load(pdfArrayBuffer, {
+    ignoreEncryption: true,
+    parseSpeed: 0,
+  });
+
+  const cleanDoc = await PDFDocument.create();
+  const count = srcDoc.getPageCount();
+  const indices = Array.from({ length: count }, (_, i) => i);
+
+  const copied = await cleanDoc.copyPages(srcDoc, indices);
+  copied.forEach((p) => cleanDoc.addPage(p));
+
+  const bytes = await cleanDoc.save({ useObjectStreams: true });
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Generate a visual professional invoice PDF directly in-browser
+ * @param {Object} data
+ */
+export async function generateInvoicePdf(data = {}) {
+  const {
+    companyName = "My Business Ltd",
+    companyEmail = "contact@business.com",
+    clientName = "Client Name",
+    clientEmail = "client@example.com",
+    invoiceNumber = "INV-001",
+    invoiceDate = new Date().toISOString().split("T")[0],
+    dueDate = "",
+    currency = "$",
+    items = [{ description: "Service / Product Item", qty: 1, rate: 100 }],
+    taxPercent = 10,
+    notes = "Thank you for your business!",
+  } = data;
+
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage([PAGE_SIZES.A4.width, PAGE_SIZES.A4.height]);
+  const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  const { width, height } = page.getSize();
+
+  // Top Header Banner
+  page.drawRectangle({
+    x: 0,
+    y: height - 120,
+    width,
+    height: 120,
+    color: rgb(0.08, 0, 0.76), // Bluebonnet #1400C3
+  });
+
+  page.drawText("INVOICE", {
+    x: 50,
+    y: height - 60,
+    size: 28,
+    font: fontBold,
+    color: rgb(1, 1, 1),
+  });
+
+  page.drawText(`#${invoiceNumber}`, {
+    x: 50,
+    y: height - 85,
+    size: 13,
+    font: fontRegular,
+    color: rgb(1, 0.7, 0.5),
+  });
+
+  // Company lockup (right aligned)
+  page.drawText(companyName, {
+    x: width - 240,
+    y: height - 55,
+    size: 14,
+    font: fontBold,
+    color: rgb(1, 1, 1),
+  });
+  page.drawText(companyEmail, {
+    x: width - 240,
+    y: height - 75,
+    size: 10,
+    font: fontRegular,
+    color: rgb(0.9, 0.9, 1),
+  });
+
+  // Client Details & Dates Row
+  page.drawText("BILLED TO:", {
+    x: 50,
+    y: height - 160,
+    size: 10,
+    font: fontBold,
+    color: rgb(1, 0.31, 0.01), // Blaze Orange
+  });
+  page.drawText(clientName, {
+    x: 50,
+    y: height - 180,
+    size: 13,
+    font: fontBold,
+    color: rgb(0.08, 0, 0.76),
+  });
+  page.drawText(clientEmail, {
+    x: 50,
+    y: height - 198,
+    size: 10,
+    font: fontRegular,
+    color: rgb(0.3, 0.3, 0.4),
+  });
+
+  page.drawText(`Issue Date: ${invoiceDate}`, {
+    x: width - 200,
+    y: height - 175,
+    size: 10,
+    font: fontRegular,
+    color: rgb(0.2, 0.2, 0.3),
+  });
+  if (dueDate) {
+    page.drawText(`Due Date: ${dueDate}`, {
+      x: width - 200,
+      y: height - 195,
+      size: 10,
+      font: fontBold,
+      color: rgb(1, 0.31, 0.01),
+    });
+  }
+
+  // Items Table Header
+  const tableY = height - 240;
+  page.drawRectangle({
+    x: 45,
+    y: tableY - 5,
+    width: width - 90,
+    height: 25,
+    color: rgb(0.96, 0.94, 0.82), // Soft cream
+  });
+
+  page.drawText("ITEM DESCRIPTION", { x: 55, y: tableY + 3, size: 9, font: fontBold, color: rgb(0.08, 0, 0.76) });
+  page.drawText("QTY", { x: width - 240, y: tableY + 3, size: 9, font: fontBold, color: rgb(0.08, 0, 0.76) });
+  page.drawText("RATE", { x: width - 170, y: tableY + 3, size: 9, font: fontBold, color: rgb(0.08, 0, 0.76) });
+  page.drawText("AMOUNT", { x: width - 100, y: tableY + 3, size: 9, font: fontBold, color: rgb(0.08, 0, 0.76) });
+
+  let rowY = tableY - 30;
+  let subtotal = 0;
+
+  items.forEach((item) => {
+    const qty = Number(item.qty) || 1;
+    const rate = Number(item.rate) || 0;
+    const lineTotal = qty * rate;
+    subtotal += lineTotal;
+
+    page.drawText(String(item.description || "Item"), { x: 55, y: rowY, size: 10, font: fontRegular, color: rgb(0.1, 0.1, 0.2) });
+    page.drawText(String(qty), { x: width - 235, y: rowY, size: 10, font: fontRegular, color: rgb(0.1, 0.1, 0.2) });
+    page.drawText(`${currency}${rate.toFixed(2)}`, { x: width - 175, y: rowY, size: 10, font: fontRegular, color: rgb(0.1, 0.1, 0.2) });
+    page.drawText(`${currency}${lineTotal.toFixed(2)}`, { x: width - 105, y: rowY, size: 10, font: fontBold, color: rgb(0.08, 0, 0.76) });
+
+    rowY -= 24;
+  });
+
+  const taxAmount = (subtotal * (Number(taxPercent) || 0)) / 100;
+  const grandTotal = subtotal + taxAmount;
+
+  // Divider Line
+  rowY -= 10;
+  page.drawLine({
+    start: { x: width - 240, y: rowY + 15 },
+    end: { x: width - 50, y: rowY + 15 },
+    thickness: 1,
+    color: rgb(0.8, 0.8, 0.8),
+  });
+
+  page.drawText(`Subtotal:`, { x: width - 200, y: rowY, size: 10, font: fontRegular, color: rgb(0.3, 0.3, 0.4) });
+  page.drawText(`${currency}${subtotal.toFixed(2)}`, { x: width - 105, y: rowY, size: 10, font: fontRegular, color: rgb(0.1, 0.1, 0.2) });
+
+  rowY -= 20;
+  page.drawText(`Tax (${taxPercent}%):`, { x: width - 200, y: rowY, size: 10, font: fontRegular, color: rgb(0.3, 0.3, 0.4) });
+  page.drawText(`${currency}${taxAmount.toFixed(2)}`, { x: width - 105, y: rowY, size: 10, font: fontRegular, color: rgb(0.1, 0.1, 0.2) });
+
+  rowY -= 25;
+  page.drawRectangle({
+    x: width - 220,
+    y: rowY - 6,
+    width: 170,
+    height: 28,
+    color: rgb(1, 0.31, 0.01), // Blaze Orange Total Badge
+  });
+  page.drawText(`TOTAL:`, { x: width - 210, y: rowY + 3, size: 11, font: fontBold, color: rgb(1, 1, 1) });
+  page.drawText(`${currency}${grandTotal.toFixed(2)}`, { x: width - 110, y: rowY + 3, size: 12, font: fontBold, color: rgb(1, 1, 1) });
+
+  // Bottom Notes
+  if (notes) {
+    page.drawText("NOTES / PAYMENT INSTRUCTIONS", { x: 50, y: 100, size: 9, font: fontBold, color: rgb(0.08, 0, 0.76) });
+    page.drawText(notes, { x: 50, y: 82, size: 9, font: fontRegular, color: rgb(0.3, 0.3, 0.4) });
+  }
+
+  // Footer Tagline
+  page.drawText("Generated with DocuPix by TAGX Labs™ • 100% Client-Side", {
+    x: 50,
+    y: 35,
+    size: 8,
+    font: fontRegular,
+    color: rgb(0.6, 0.6, 0.6),
+  });
+
+  const bytes = await pdfDoc.save();
   return new Blob([bytes], { type: "application/pdf" });
 }

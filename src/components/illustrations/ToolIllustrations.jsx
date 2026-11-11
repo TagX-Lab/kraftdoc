@@ -490,3 +490,134 @@ export function ComparePdfIllustration() {
     </svg>
   );
 }
+
+export function MetadataIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="42" y="16" width="76" height="88" rx="12" fill="#EAF2FD" stroke="#1400C3" strokeWidth="2.5" />
+      {/* Code / Tag brackets */}
+      <circle cx="60" cy="36" r="8" fill="#FF4E02" />
+      <path d="M58 36L62 36" stroke="#FFF" strokeWidth="2" strokeLinecap="round" />
+      <rect x="74" y="32" width="36" height="8" rx="4" fill="#1400C3" />
+      <rect x="54" y="52" width="54" height="6" rx="3" fill="#D6CA9E" />
+      <rect x="54" y="66" width="46" height="6" rx="3" fill="#D6CA9E" />
+      {/* Tag badge */}
+      <rect x="54" y="80" width="32" height="14" rx="7" fill="#1400C3" />
+      <text x="70" y="90" fill="#FFF" fontSize="8" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">META</text>
+    </svg>
+  );
+}
+
+export function ResizePdfIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      {/* Outer A3 boundary */}
+      <rect x="28" y="14" width="104" height="92" rx="12" fill="#FFF" stroke="#E5DCB8" strokeWidth="2" strokeDasharray="3 3" />
+      {/* Inner A4 / A5 box */}
+      <rect x="44" y="24" width="72" height="72" rx="10" fill="#FFEBE5" stroke="#FF4E02" strokeWidth="2.5" />
+      <path d="M56 40H104M56 52H92" stroke="#1400C3" strokeWidth="2" strokeLinecap="round" />
+      {/* Scaler Arrows */}
+      <path d="M36 22L46 32M46 22H36V32" stroke="#1400C3" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M124 98L114 88M114 98H124V88" stroke="#1400C3" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function PagesPerSheetIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      {/* Big Landscape Sheet */}
+      <rect x="26" y="20" width="108" height="80" rx="12" fill="#FFF8E0" stroke="#1400C3" strokeWidth="2.5" />
+      {/* Subpage 1 */}
+      <rect x="36" y="30" width="40" height="60" rx="6" fill="#FFF" stroke="#FF4E02" strokeWidth="1.5" />
+      <text x="56" y="64" fill="#FF4E02" fontSize="16" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">1</text>
+      {/* Subpage 2 */}
+      <rect x="84" y="30" width="40" height="60" rx="6" fill="#FFF" stroke="#1400C3" strokeWidth="1.5" />
+      <text x="104" y="64" fill="#1400C3" fontSize="16" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">2</text>
+    </svg>
+  );
+}
+
+export function ExtractTextIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="42" y="16" width="76" height="88" rx="12" fill="#EBF8EE" stroke="#1400C3" strokeWidth="2.5" />
+      {/* Text Cursor and Selection Highlight */}
+      <rect x="52" y="32" width="56" height="12" rx="3" fill="#1400C3" fillOpacity="0.2" />
+      <path d="M54 38H104M54 52H96M54 66H88M54 80H100" stroke="#1400C3" strokeWidth="2" strokeLinecap="round" />
+      {/* .TXT file badge */}
+      <circle cx="106" cy="78" r="14" fill="#10B981" />
+      <text x="106" y="82" fill="#FFF" fontSize="8" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">TXT</text>
+    </svg>
+  );
+}
+
+export function CameraScanIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      {/* Scanner Screen */}
+      <rect x="36" y="20" width="88" height="80" rx="14" fill="#1400C3" stroke="#1400C3" strokeWidth="2" />
+      <rect x="44" y="28" width="72" height="64" rx="8" fill="#FFF" />
+      {/* Paper inside camera */}
+      <rect x="54" y="36" width="52" height="48" rx="4" fill="#FFF8E0" stroke="#E5DCB8" />
+      <path d="M60 48H98M60 58H90" stroke="#FF4E02" strokeWidth="2" strokeLinecap="round" />
+      {/* Red Laser Scan Bar */}
+      <line x1="48" y1="60" x2="112" y2="60" stroke="#FF4E02" strokeWidth="2.5" strokeDasharray="3 2" />
+      {/* Camera lens indicator */}
+      <circle cx="80" cy="24" r="2.5" fill="#FFF" />
+    </svg>
+  );
+}
+
+export function ScreenCaptureIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      {/* Desktop Monitor Screen */}
+      <rect x="30" y="18" width="100" height="70" rx="10" fill="#EAF2FD" stroke="#1400C3" strokeWidth="2.5" />
+      <rect x="36" y="24" width="88" height="52" rx="6" fill="#FFF" />
+      {/* Stand */}
+      <path d="M72 88H88V98H72V88Z" fill="#1400C3" />
+      <rect x="60" y="98" width="40" height="6" rx="3" fill="#1400C3" />
+      {/* Window Controls */}
+      <circle cx="44" cy="32" r="2.5" fill="#FF4E02" />
+      <circle cx="51" cy="32" r="2.5" fill="#10B981" />
+      {/* Capture Flash Icon */}
+      <circle cx="80" cy="50" r="10" fill="#FF4E02" />
+      <path d="M80 44V56M74 50H86" stroke="#FFF" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function RepairPdfIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="42" y="16" width="76" height="88" rx="12" fill="#FFEAE3" stroke="#FF4E02" strokeWidth="2.5" />
+      {/* Broken stream lightning crack */}
+      <path d="M72 26L68 50L84 56L78 82" stroke="#FF4E02" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Golden Wrench Tool */}
+      <g transform="translate(90, 60) rotate(-35)">
+        <rect x="0" y="0" width="8" height="28" rx="4" fill="#1400C3" />
+        <circle cx="4" cy="2" r="7" fill="#1400C3" />
+        <rect x="2" y="-3" width="4" height="6" fill="#FFF" />
+      </g>
+    </svg>
+  );
+}
+
+export function InvoiceIllustration() {
+  return (
+    <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
+      <rect x="42" y="14" width="76" height="92" rx="12" fill="#FFF" stroke="#1400C3" strokeWidth="2.5" />
+      {/* Top Banner Header */}
+      <path d="M42 26C42 19.3726 47.3726 14 54 14H106C112.627 14 118 19.3726 118 26V32H42V26Z" fill="#1400C3" />
+      <text x="80" y="26" fill="#FFF" fontSize="8" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">BILLING</text>
+      {/* Line Items */}
+      <rect x="50" y="42" width="60" height="6" rx="3" fill="#E5DCB8" />
+      <rect x="50" y="54" width="60" height="6" rx="3" fill="#E5DCB8" />
+      <rect x="50" y="66" width="60" height="6" rx="3" fill="#E5DCB8" />
+      {/* Total Badge */}
+      <rect x="64" y="80" width="46" height="14" rx="7" fill="#FF4E02" />
+      <text x="87" y="90" fill="#FFF" fontSize="8" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">$ TOTAL</text>
+    </svg>
+  );
+}
