@@ -9,7 +9,6 @@ import {
   ArrowRight,
   ShieldCheck,
   Zap,
-  Sparkles,
   HelpCircle,
   ExternalLink,
   Award,
@@ -19,6 +18,15 @@ import {
 import { siteConfig } from "../config/siteConfig";
 import AdBanner from "../components/ads/AdBanner";
 import ScrollReveal from "../components/common/ScrollReveal";
+import {
+  HeroShowcaseIllustration,
+  PhotoResizerIllustration,
+  CompressorIllustration,
+  ImagesToPdfIllustration,
+  MergeSplitIllustration,
+  ConverterIllustration,
+  OrganizerIllustration,
+} from "../components/illustrations/ToolIllustrations";
 
 function DoodleRays({ className = "" }) {
   return (
@@ -83,6 +91,7 @@ export default function HomePage({ onNavigate }) {
       badge: "Custom Px & KB",
       accentColor: "#FF4E02",
       icon: UserCheck,
+      illustration: PhotoResizerIllustration,
       pillPrice: "Free Forever",
     },
     {
@@ -95,6 +104,7 @@ export default function HomePage({ onNavigate }) {
       badge: "-85% KB Savings",
       accentColor: "#1400C3",
       icon: Minimize2,
+      illustration: CompressorIllustration,
       pillPrice: "Free Forever",
     },
     {
@@ -107,6 +117,7 @@ export default function HomePage({ onNavigate }) {
       badge: "Instant A4 Merge",
       accentColor: "#FF4E02",
       icon: FileText,
+      illustration: ImagesToPdfIllustration,
       pillPrice: "Free Forever",
     },
     {
@@ -119,6 +130,7 @@ export default function HomePage({ onNavigate }) {
       badge: "Multi-Doc Engine",
       accentColor: "#1400C3",
       icon: Layers,
+      illustration: MergeSplitIllustration,
       pillPrice: "Free Forever",
     },
     {
@@ -131,6 +143,7 @@ export default function HomePage({ onNavigate }) {
       badge: "WebP / PNG / JPG",
       accentColor: "#1400C3",
       icon: RefreshCw,
+      illustration: ConverterIllustration,
       pillPrice: "Free Forever",
     },
     {
@@ -143,6 +156,7 @@ export default function HomePage({ onNavigate }) {
       badge: "Rotate & Delete",
       accentColor: "#FF4E02",
       icon: RotateCw,
+      illustration: OrganizerIllustration,
       pillPrice: "Free Forever",
     },
   ];
@@ -239,43 +253,9 @@ export default function HomePage({ onNavigate }) {
                   <DoodleRays className="absolute -top-6 -left-4 text-[#FF4E02] animate-bounce" />
                   <DoodleRays className="absolute -bottom-6 -right-4 text-[#1400C3] rotate-180" />
 
-                  {/* Main Hero Product Bag / Package Card */}
-                  <div className="relative bg-[#FFDF6D] border-3 border-[#1400C3] rounded-[32px] p-6 sm:p-8 shadow-2xl shadow-[#1400C3]/15 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#1400C3] text-white">
-                        DOCUPIX SUITE
-                      </span>
-                      <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#FF4E02] text-white">
-                        V2.0 STABLE
-                      </span>
-                    </div>
-
-                    <div className="space-y-1 text-center py-4">
-                      <h3 className="font-display text-4xl sm:text-5xl text-[#1400C3] tracking-tight uppercase">
-                        DOCUPIX
-                      </h3>
-                      <p className="text-xs font-extrabold text-[#3B3355] tracking-widest uppercase">
-                        In-Browser Utility Engine
-                      </p>
-                    </div>
-
-                    {/* Central Badge Emblem */}
-                    <div className="my-4 p-4 rounded-2xl bg-white border-2 border-[#1400C3] text-center space-y-2 shadow-inner">
-                      <div className="w-10 h-10 rounded-full bg-[#FF4E02] text-white mx-auto flex items-center justify-center font-black shadow-sm">
-                        <Sparkles className="w-5 h-5 text-white" />
-                      </div>
-                      <div className="text-xs font-black text-[#1400C3] uppercase tracking-wide">
-                        100% In-Browser Privacy
-                      </div>
-                      <p className="text-[11px] text-[#6B627F] font-semibold">
-                        Images &bull; PDFs &bull; Files &bull; Fast &amp; Private
-                      </p>
-                    </div>
-
-                    <div className="flex items-center justify-between text-xs font-black text-[#1400C3] pt-2">
-                      <span>Zero Uploads</span>
-                      <span className="text-[#FF4E02]">Unlimited Free</span>
-                    </div>
+                  {/* Main Hero Product Bag / Package Card - Bespoke 3D Vector Illustration */}
+                  <div className="transform hover:-translate-y-1 transition-transform duration-300">
+                    <HeroShowcaseIllustration />
                   </div>
                 </div>
               </div>
@@ -349,7 +329,7 @@ export default function HomePage({ onNavigate }) {
             {/* Grid of 6 Distinct Color-Blocked Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {toolCards.map((tool) => {
-                const Icon = tool.icon;
+                const Illustration = tool.illustration;
 
                 return (
                   <div
@@ -370,14 +350,11 @@ export default function HomePage({ onNavigate }) {
                         </span>
                       </div>
 
-                      {/* Tool Graphic Showcase Box */}
-                      <div className="my-5 p-6 rounded-2xl bg-white/90 border border-black/5 flex flex-col items-center justify-center text-center space-y-2 shadow-inner min-h-[140px] group">
-                        <div className="w-14 h-14 rounded-2xl bg-[#1400C3] text-white flex items-center justify-center shadow-md shadow-[#1400C3]/20 group-hover:scale-110 group-hover:bg-[#FF4E02] transition-all duration-300">
-                          <Icon className="w-7 h-7 stroke-[2.2]" />
+                      {/* Tool Graphic Showcase Box with Bespoke 3D Vector Illustration */}
+                      <div className="my-4 h-36 rounded-2xl bg-white border border-black/5 flex items-center justify-center p-3 overflow-hidden shadow-inner group">
+                        <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <Illustration />
                         </div>
-                        <span className="text-xs font-black text-[#1400C3] tracking-tight pt-1">
-                          In-Browser Processing
-                        </span>
                       </div>
 
                       {/* Title & Description */}
