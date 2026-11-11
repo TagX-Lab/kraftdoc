@@ -25,7 +25,7 @@ export default function Navbar({ currentRoute, onNavigate }) {
 
   const navItems = [
     { id: "home", label: "All Tools" },
-    { id: "exam-resizer", label: "Exam Resizer", icon: FileCheck2 },
+    { id: "exam-resizer", label: "Photo Resizer", icon: FileCheck2 },
     { id: "compress-image", label: "Compress Image", icon: Minimize2 },
     { id: "images-to-pdf", label: "Images to PDF", icon: FileText },
     { id: "pdf-merge-split", label: "PDF Tools", icon: Layers },

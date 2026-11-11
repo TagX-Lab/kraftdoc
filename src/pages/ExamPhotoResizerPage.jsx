@@ -170,8 +170,8 @@ export default function ExamPhotoResizerPage({ onBack }) {
 
   return (
     <ToolLayout
-      title="Govt Exam Photo & Signature Resizer"
-      description="Resize & compress photos to exact pixel dimensions and maximum KB requirements for TNPSC, SSC, UPSC, and IBPS."
+      title="Photo & Signature Resizer"
+      description="Resize and compress photos to exact pixel dimensions and maximum KB requirements with preset specifications or custom sizing."
       onBack={onBack}
     >
       <div className="space-y-8">

@@ -116,7 +116,7 @@ export default function Footer({ onNavigate }) {
                   onClick={() => onNavigate("exam-resizer")}
                   className="hover:text-[#FF4E02] transition-colors cursor-pointer"
                 >
-                  Govt Exam Photo Resizer
+                  Photo &amp; Signature Resizer
                 </button>
               </li>
               <li>

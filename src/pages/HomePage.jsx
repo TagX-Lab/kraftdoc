@@ -46,8 +46,8 @@ export default function HomePage({ onNavigate }) {
     },
     {
       icon: UserCheck,
-      title: "Govt Exam Ready",
-      subtitle: "TNPSC & UPSC Presets",
+      title: "Photo Resizer",
+      subtitle: "Custom Px & KB",
     },
     {
       icon: Minimize2,
@@ -75,12 +75,12 @@ export default function HomePage({ onNavigate }) {
   const toolCards = [
     {
       id: "exam-resizer",
-      tag: "Bestseller",
+      tag: "Popular",
       tagColor: "bg-[#FF4E02] text-white",
       bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Govt Exam Resizer",
-      desc: "Exact pixel dimensions & maximum KB compressor for TNPSC, SSC, UPSC, and IBPS applications.",
-      badge: "TNPSC / UPSC 200x230",
+      title: "Photo & Image Resizer",
+      desc: "Resize image dimensions, crop freely, and set exact KB limits for any upload requirement.",
+      badge: "Custom Px & KB",
       accentColor: "#FF4E02",
       icon: UserCheck,
       pillPrice: "Free Forever",
@@ -195,7 +195,7 @@ export default function HomePage({ onNavigate }) {
 
                 {/* Friendly Subtitle */}
                 <p className="text-sm sm:text-base lg:text-lg text-[#3B3355] font-semibold max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  Plant-based privacy with big performance and clean code. Compress photos, resize for government exams (TNPSC, UPSC, SSC), and merge PDFs without uploading a single byte to cloud servers.
+                  Fast, private in-browser image and document tools. Compress photos, resize dimensions, convert formats, and merge or split PDFs without uploading a single byte to cloud servers.
                 </p>
 
                 {/* CTA Buttons in Pill Form */}
@@ -205,7 +205,7 @@ export default function HomePage({ onNavigate }) {
                     onClick={() => onNavigate("exam-resizer")}
                     className="px-8 py-4 rounded-full font-black bg-[#1400C3] hover:bg-[#0E008F] text-white shadow-xl shadow-[#1400C3]/25 flex items-center gap-2.5 transition-all transform hover:-translate-y-1 cursor-pointer active:scale-95 text-sm sm:text-base group"
                   >
-                    <span>Govt Exam Resizer</span>
+                    <span>Photo Resizer</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
                   </button>
 
@@ -265,34 +265,16 @@ export default function HomePage({ onNavigate }) {
                         <Sparkles className="w-5 h-5 text-white" />
                       </div>
                       <div className="text-xs font-black text-[#1400C3] uppercase tracking-wide">
-                        100% Device Execution
+                        100% In-Browser Privacy
                       </div>
                       <p className="text-[11px] text-[#6B627F] font-semibold">
-                        TNPSC &bull; UPSC &bull; SSC &bull; WebP &bull; PDF
+                        Images &bull; PDFs &bull; Files &bull; Fast &amp; Private
                       </p>
                     </div>
 
                     <div className="flex items-center justify-between text-xs font-black text-[#1400C3] pt-2">
                       <span>Zero Uploads</span>
                       <span className="text-[#FF4E02]">Unlimited Free</span>
-                    </div>
-                  </div>
-
-                  {/* Floating Sticker 1: Saved 88% */}
-                  <div className="absolute -top-3 -right-3 sm:-right-6 bg-white border-2 border-[#1400C3] rounded-2xl p-2.5 shadow-xl transform rotate-6 animate-pulse">
-                    <div className="text-[10px] font-black uppercase tracking-wider text-[#6B627F]">
-                      Compression
-                    </div>
-                    <div className="text-sm font-black text-[#FF4E02]">
-                      Saved 88% KB
-                    </div>
-                  </div>
-
-                  {/* Floating Sticker 2: TNPSC Approved */}
-                  <div className="absolute -bottom-4 -left-3 sm:-left-6 bg-white border-2 border-[#1400C3] rounded-2xl p-2.5 shadow-xl transform -rotate-6">
-                    <div className="flex items-center gap-1.5 text-xs font-black text-[#1400C3]">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                      <span>TNPSC 200x230 Ready</span>
                     </div>
                   </div>
                 </div>
@@ -527,13 +509,13 @@ export default function HomePage({ onNavigate }) {
                 <div className="relative p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#1400C3] shadow-xl max-w-sm w-full text-center space-y-3">
                   <DoodleRays className="absolute -top-4 -right-4 text-[#FF4E02]" />
                   <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-[#1400C3] text-white">
-                    TNPSC &bull; UPSC &bull; SSC
+                    Images &bull; PDFs &bull; WebP
                   </span>
                   <h4 className="font-display text-3xl text-[#1400C3] uppercase">
-                    GOVT EXAM SUITE
+                    TOOL SUITE
                   </h4>
                   <p className="text-xs text-[#3B3355] font-semibold">
-                    1-Click Auto Crop, Pixel Resize, and Strict KB Binary Compression.
+                    1-Click Crop, Pixel Resize, and Strict KB Binary Compression.
                   </p>
                   <div className="pt-2">
                     <span className="inline-block px-4 py-1.5 rounded-full bg-[#FF4E02] text-white text-xs font-black">
