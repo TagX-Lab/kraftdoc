@@ -326,23 +326,13 @@ export default function HomePage({ onNavigate }) {
         <ScrollReveal animation="fade-up">
           <div className="rounded-[32px] sm:rounded-[40px] bg-[#F7EDBE] border-2 border-[#E6D799] p-5 sm:p-7 lg:p-8 shadow-sm">
             {/* Section Header */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 mb-6">
-              <div>
-                <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
-                  OUR FAVORITES
-                </span>
-                <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
-                  TOOLS YOU&apos;LL LOVE
-                </h2>
-              </div>
-              <button
-                type="button"
-                onClick={() => onNavigate("exam-resizer")}
-                className="text-xs sm:text-sm font-black text-[#1400C3] hover:text-[#FF4E02] flex items-center gap-1.5 transition-colors cursor-pointer group"
-              >
-                <span>View all tools</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
-              </button>
+            <div className="mb-6">
+              <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
+                OUR FAVORITES
+              </span>
+              <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
+                TOOLS YOU&apos;LL LOVE
+              </h2>
             </div>
 
             {/* Grid of All 6 Modules in a Single Desktop View (No Scrolling Required) */}
