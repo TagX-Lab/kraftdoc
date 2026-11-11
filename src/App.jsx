@@ -21,6 +21,13 @@ const ImageConverterPage = lazy(() => import("./pages/ImageConverterPage"));
 const PdfOrganizerPage = lazy(() => import("./pages/PdfOrganizerPage"));
 const WatermarkPdfPage = lazy(() => import("./pages/WatermarkPdfPage"));
 const PageNumbersPdfPage = lazy(() => import("./pages/PageNumbersPdfPage"));
+const CompressPdfPage = lazy(() => import("./pages/CompressPdfPage"));
+const SignPdfPage = lazy(() => import("./pages/SignPdfPage"));
+const CropPdfPage = lazy(() => import("./pages/CropPdfPage"));
+const FlattenPdfPage = lazy(() => import("./pages/FlattenPdfPage"));
+const BlackenPdfPage = lazy(() => import("./pages/BlackenPdfPage"));
+const ComparePdfPage = lazy(() => import("./pages/ComparePdfPage"));
+const AllToolsPage = lazy(() => import("./pages/AllToolsPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
@@ -81,6 +88,20 @@ export default function App() {
         return <WatermarkPdfPage onBack={() => navigateTo("home")} />;
       case "pdf-page-numbers":
         return <PageNumbersPdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-compress":
+        return <CompressPdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-sign":
+        return <SignPdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-crop":
+        return <CropPdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-flatten":
+        return <FlattenPdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-blacken":
+        return <BlackenPdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-compare":
+        return <ComparePdfPage onBack={() => navigateTo("home")} />;
+      case "all-tools":
+        return <AllToolsPage onNavigate={navigateTo} />;
       case "about":
         return <AboutPage onBack={() => navigateTo("home")} />;
       case "privacy-policy":

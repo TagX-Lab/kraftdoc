@@ -174,6 +174,33 @@ export default function Footer({ onNavigate }) {
                     Page Numbers
                   </button>
                 </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate("pdf-compress")}
+                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
+                  >
+                    Compress PDF
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate("pdf-sign")}
+                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
+                  >
+                    Sign PDF
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate("all-tools")}
+                    className="text-[#FF4E02] font-black hover:underline transition-colors cursor-pointer text-left flex items-center gap-1 pt-1"
+                  >
+                    <span>View all 15+ tools &rarr;</span>
+                  </button>
+                </li>
               </ul>
             </div>
 

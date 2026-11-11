@@ -16,6 +16,11 @@ import {
   RotateCw,
   Stamp,
   Hash,
+  PenTool,
+  Crop,
+  Lock,
+  Square,
+  GitCompare,
 } from "lucide-react";
 import { siteConfig } from "../../config/siteConfig";
 
@@ -71,23 +76,30 @@ export default function Navbar({ currentRoute, onNavigate }) {
 
   const pdfTools = [
     {
+      id: "pdf-compress",
+      title: "Compress PDF",
+      desc: "Downscale PDF size with 3 presets",
+      icon: Minimize2,
+      iconBg: "bg-[#FFEBE5] text-[#FF4E02] border-[#F8C8BD]",
+    },
+    {
       id: "images-to-pdf",
       title: "Images to PDF",
-      desc: "Merge photos into clean A4 or Letter PDFs",
+      desc: "Merge photos into clean A4/Letter PDFs",
       icon: FileText,
-      iconBg: "bg-[#FFEBE5] text-[#FF4E02] border-[#F8C8BD]",
+      iconBg: "bg-[#FFF0D9] text-[#FF4E02] border-[#F7D8A8]",
     },
     {
       id: "pdf-to-images",
       title: "PDF to Images",
       desc: "Extract pages to high-res PNG/JPG or ZIP",
       icon: FileImage,
-      iconBg: "bg-[#FFF0D9] text-[#FF4E02] border-[#F7D8A8]",
+      iconBg: "bg-[#EAF2FD] text-[#1400C3] border-[#C2D8FA]",
     },
     {
       id: "pdf-merge-split",
       title: "PDF Merge & Split",
-      desc: "Combine docs or extract custom page ranges",
+      desc: "Combine docs or extract custom ranges",
       icon: Layers,
       iconBg: "bg-[#EAF2FD] text-[#1400C3] border-[#C2D8FA]",
     },
@@ -97,6 +109,13 @@ export default function Navbar({ currentRoute, onNavigate }) {
       desc: "Rotate pages 90°/180° & delete pages",
       icon: RotateCw,
       iconBg: "bg-[#FFF0D9] text-[#FF4E02] border-[#F7D8A8]",
+    },
+    {
+      id: "pdf-sign",
+      title: "Sign PDF",
+      desc: "Draw/upload signature & stamp coordinates",
+      icon: PenTool,
+      iconBg: "bg-[#FFEBE5] text-[#FF4E02] border-[#F8C8BD]",
     },
     {
       id: "pdf-watermark",
@@ -112,27 +131,40 @@ export default function Navbar({ currentRoute, onNavigate }) {
       icon: Hash,
       iconBg: "bg-[#EBF7ED] text-[#1400C3] border-[#C2E7C9]",
     },
+    {
+      id: "pdf-crop",
+      title: "Crop PDF Pages",
+      desc: "Trim margins & borders cleanly",
+      icon: Crop,
+      iconBg: "bg-[#F3ECFB] text-[#1400C3] border-[#D8C4F4]",
+    },
+    {
+      id: "pdf-flatten",
+      title: "Flatten PDF",
+      desc: "Lock interactive forms & prevent edits",
+      icon: Lock,
+      iconBg: "bg-[#FFF4D4] text-[#FF4E02] border-[#F2DE9F]",
+    },
+    {
+      id: "pdf-blacken",
+      title: "Blacken & Redact",
+      desc: "Censor sensitive data with black boxes",
+      icon: Square,
+      iconBg: "bg-[#FFEBE5] text-[#FF4E02] border-[#F8C8BD]",
+    },
+    {
+      id: "pdf-compare",
+      title: "Compare PDFs",
+      desc: "Side-by-side visual difference audit",
+      icon: GitCompare,
+      iconBg: "bg-[#EAF2FD] text-[#1400C3] border-[#C2D8FA]",
+    },
   ];
 
   const handleNavClick = (id) => {
     onNavigate(id);
     setMobileMenuOpen(false);
     setToolsDropdownOpen(false);
-  };
-
-  const scrollToSection = (sectionId) => {
-    setMobileMenuOpen(false);
-    setToolsDropdownOpen(false);
-    if (currentRoute !== "home") {
-      onNavigate("home");
-      setTimeout(() => {
-        const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    } else {
-      const el = document.getElementById(sectionId);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }
   };
 
   return (
@@ -194,8 +226,8 @@ export default function Navbar({ currentRoute, onNavigate }) {
 
               {/* Tools Dropdown Card */}
               {toolsDropdownOpen && (
-                <div className="absolute top-full left-0 pt-2 w-[520px] z-50">
-                  <div className="rounded-3xl bg-white border-2 border-[#1400C3] p-5 shadow-2xl animate-fade-in">
+                <div className="absolute top-full left-0 pt-2 w-[640px] z-50">
+                  <div className="rounded-3xl bg-white border-2 border-[#1400C3] p-5 shadow-2xl animate-fade-in max-h-[82vh] overflow-y-auto">
                     <div className="grid grid-cols-2 gap-4">
                       {/* Column 1: Image Tools */}
                       <div>
@@ -234,7 +266,7 @@ export default function Navbar({ currentRoute, onNavigate }) {
                       {/* Column 2: PDF Tools */}
                       <div>
                         <span className="text-[10px] font-black uppercase tracking-wider text-[#1400C3] block mb-2 px-2">
-                          PDF TOOLS
+                          PDF TOOLS ({pdfTools.length})
                         </span>
                         <div className="space-y-1">
                           {pdfTools.map((tool) => {
@@ -244,18 +276,18 @@ export default function Navbar({ currentRoute, onNavigate }) {
                                 key={tool.id}
                                 type="button"
                                 onClick={() => handleNavClick(tool.id)}
-                                className="w-full text-left p-2.5 rounded-2xl hover:bg-[#F8F2D8] transition-all flex items-start gap-3 cursor-pointer group"
+                                className="w-full text-left p-2 rounded-2xl hover:bg-[#F8F2D8] transition-all flex items-start gap-2.5 cursor-pointer group"
                               >
                                 <div
-                                  className={`w-9 h-9 rounded-xl border flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform ${tool.iconBg}`}
+                                  className={`w-8 h-8 rounded-xl border flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform ${tool.iconBg}`}
                                 >
-                                  <Icon className="w-4 h-4" />
+                                  <Icon className="w-3.5 h-3.5" />
                                 </div>
                                 <div className="min-w-0">
                                   <div className="font-bold text-xs text-[#1400C3] group-hover:text-[#FF4E02] transition-colors leading-snug">
                                     {tool.title}
                                   </div>
-                                  <p className="text-[11px] text-[#6B627F] font-semibold leading-tight mt-0.5 truncate">
+                                  <p className="text-[10px] text-[#6B627F] font-semibold leading-tight mt-0.5 truncate">
                                     {tool.desc}
                                   </p>
                                 </div>
@@ -274,10 +306,10 @@ export default function Navbar({ currentRoute, onNavigate }) {
                       </span>
                       <button
                         type="button"
-                        onClick={() => scrollToSection("tools-section")}
+                        onClick={() => handleNavClick("all-tools")}
                         className="text-[#FF4E02] hover:underline font-black cursor-pointer"
                       >
-                        View all on shelf &rarr;
+                        Explore all tools directory &rarr;
                       </button>
                     </div>
                   </div>
@@ -285,11 +317,15 @@ export default function Navbar({ currentRoute, onNavigate }) {
               )}
             </div>
 
-            {/* Zero Cloud / Privacy Link */}
+            {/* All Tools Page Link */}
             <button
               type="button"
-              onClick={() => scrollToSection("tools-section")}
-              className="px-3.5 py-2 rounded-full text-sm font-bold text-[#3B3355] hover:text-[#1400C3] hover:bg-white/60 transition-all cursor-pointer"
+              onClick={() => handleNavClick("all-tools")}
+              className={`px-3.5 py-2 rounded-full text-sm font-bold transition-all cursor-pointer ${
+                currentRoute === "all-tools"
+                  ? "text-[#1400C3] bg-white border border-[#E5DCB8] shadow-xs"
+                  : "text-[#3B3355] hover:text-[#1400C3] hover:bg-white/60"
+              }`}
             >
               All Tools
             </button>
@@ -374,7 +410,17 @@ export default function Navbar({ currentRoute, onNavigate }) {
               onClick={() => handleNavClick("home")}
               className="text-left px-3 py-2 rounded-lg text-sm font-bold text-[#3B3355] hover:text-[#1400C3] hover:bg-white"
             >
-              Home / All Tools
+              Home
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavClick("all-tools")}
+              className="text-left px-3 py-2 rounded-lg text-sm font-bold text-[#3B3355] hover:text-[#1400C3] hover:bg-white flex items-center justify-between"
+            >
+              <span>All Tools Directory</span>
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#FF4E02] text-white">
+                15+
+              </span>
             </button>
             <button
               type="button"

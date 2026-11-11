@@ -411,3 +411,161 @@ export async function packageImagesAsZip(images, baseName = "page", ext = "png")
     compressionOptions: { level: 6 },
   });
 }
+
+/**
+ * Stamp signature onto a specific page of a PDF
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {Object} options
+ */
+export async function signPdf(pdfArrayBuffer, options = {}) {
+  const {
+    signatureDataUrl,
+    pageNumber = 1,
+    xPercent = 50,
+    yPercent = 20,
+    widthPercent = 30,
+  } = options;
+
+  if (!signatureDataUrl) {
+    throw new Error("No signature provided.");
+  }
+
+  const pdfDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+  const total = pdfDoc.getPageCount();
+  const pageIdx = Math.max(0, Math.min(pageNumber - 1, total - 1));
+  const page = pdfDoc.getPage(pageIdx);
+  const { width: pWidth, height: pHeight } = page.getSize();
+
+  // Convert dataUrl to png bytes
+  const base64Data = signatureDataUrl.split(",")[1];
+  const binaryString = atob(base64Data);
+  const sigBytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    sigBytes[i] = binaryString.charCodeAt(i);
+  }
+
+  const embeddedSig = await pdfDoc.embedPng(sigBytes);
+  const sigDims = embeddedSig.scale(1);
+
+  // Compute dimensions preserving aspect ratio
+  const targetWidth = (pWidth * widthPercent) / 100;
+  const targetHeight = (sigDims.height / sigDims.width) * targetWidth;
+
+  const targetX = (pWidth * xPercent) / 100 - targetWidth / 2;
+  const targetY = (pHeight * yPercent) / 100 - targetHeight / 2;
+
+  page.drawImage(embeddedSig, {
+    x: Math.max(0, Math.min(targetX, pWidth - targetWidth)),
+    y: Math.max(0, Math.min(targetY, pHeight - targetHeight)),
+    width: targetWidth,
+    height: targetHeight,
+  });
+
+  const bytes = await pdfDoc.save();
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Crop PDF pages by margins in points
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {Object} margins
+ */
+export async function cropPdfPages(pdfArrayBuffer, margins = {}) {
+  const { top = 20, bottom = 20, left = 20, right = 20 } = margins;
+
+  const pdfDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+  const pages = pdfDoc.getPages();
+
+  for (const page of pages) {
+    const { width, height } = page.getSize();
+    const newX = left;
+    const newY = bottom;
+    const newW = Math.max(50, width - left - right);
+    const newH = Math.max(50, height - top - bottom);
+
+    page.setCropBox(newX, newY, newW, newH);
+  }
+
+  const bytes = await pdfDoc.save();
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Flatten all form fields and annotations in a PDF
+ * @param {ArrayBuffer} pdfArrayBuffer
+ */
+export async function flattenPdf(pdfArrayBuffer) {
+  const pdfDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+
+  try {
+    const form = pdfDoc.getForm();
+    form.flatten();
+  } catch {
+    // Form may not exist or already flat
+  }
+
+  const bytes = await pdfDoc.save();
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Permanently blackout / redact sensitive rectangular areas on PDF pages
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {Array<{ pageIndex: number, xPercent: number, yPercent: number, widthPercent: number, heightPercent: number }>} redactions
+ */
+export async function redactPdf(pdfArrayBuffer, redactions = []) {
+  const pdfDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+  const pages = pdfDoc.getPages();
+
+  for (const item of redactions) {
+    const page = pages[item.pageIndex];
+    if (!page) continue;
+
+    const { width, height } = page.getSize();
+    const rX = (item.xPercent * width) / 100;
+    const rY = height - (item.yPercent * height) / 100 - (item.heightPercent * height) / 100;
+    const rW = (item.widthPercent * width) / 100;
+    const rH = (item.heightPercent * height) / 100;
+
+    page.drawRectangle({
+      x: rX,
+      y: rY,
+      width: rW,
+      height: rH,
+      color: rgb(0, 0, 0),
+    });
+  }
+
+  const bytes = await pdfDoc.save();
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Compress PDF by downscaling embedded pages into optimized canvas JPEG streams
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {number} quality (0.5 to 0.85)
+ */
+export async function compressPdfDocument(pdfArrayBuffer, quality = 0.75, onProgress = null) {
+  const renderedPages = await convertPdfPagesToImages(pdfArrayBuffer, {
+    format: "image/jpeg",
+    scale: 1.5,
+    quality,
+    onProgress,
+  });
+
+  const newDoc = await PDFDocument.create();
+
+  for (const p of renderedPages) {
+    const embeddedImg = await newDoc.embedJpg(await p.blob.arrayBuffer());
+    const page = newDoc.addPage([p.width, p.height]);
+    page.drawImage(embeddedImg, {
+      x: 0,
+      y: 0,
+      width: p.width,
+      height: p.height,
+    });
+  }
+
+  const bytes = await newDoc.save({ useObjectStreams: true });
+  return new Blob([bytes], { type: "application/pdf" });
+}
