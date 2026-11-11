@@ -1,4 +1,4 @@
-import { PDFDocument, degrees } from "pdf-lib";
+import { PDFDocument, degrees, rgb, StandardFonts } from "pdf-lib";
 import { canvasToBlob, loadImage, renderResizedCanvas } from "./imageService";
 
 /**
@@ -211,5 +211,113 @@ export async function organizePdfPages(pdfArrayBuffer, rotations = {}, excludedP
   });
 
   const bytes = await newDoc.save();
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Add text watermark across all pages of a PDF
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {Object} options
+ */
+export async function watermarkPdf(pdfArrayBuffer, options = {}) {
+  const {
+    text = "CONFIDENTIAL",
+    fontSize = 48,
+    opacity = 0.25,
+    rotation = 45,
+    color = "#FF4E02",
+  } = options;
+
+  const pdfDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+  const helveticaFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const pages = pdfDoc.getPages();
+
+  const hex = color.replace("#", "");
+  const r = parseInt(hex.substring(0, 2), 16) / 255 || 0.8;
+  const g = parseInt(hex.substring(2, 4), 16) / 255 || 0.2;
+  const b = parseInt(hex.substring(4, 6), 16) / 255 || 0.1;
+
+  for (const page of pages) {
+    const { width, height } = page.getSize();
+    const textWidth = helveticaFont.widthOfTextAtSize(text, fontSize);
+    const textHeight = helveticaFont.heightAtSize(fontSize);
+
+    const rad = (rotation * Math.PI) / 180;
+    const x = width / 2 - (textWidth / 2) * Math.cos(rad) + (textHeight / 2) * Math.sin(rad);
+    const y = height / 2 - (textWidth / 2) * Math.sin(rad) - (textHeight / 2) * Math.cos(rad);
+
+    page.drawText(text, {
+      x,
+      y,
+      size: fontSize,
+      font: helveticaFont,
+      color: rgb(r, g, b),
+      opacity,
+      rotate: degrees(rotation),
+    });
+  }
+
+  const bytes = await pdfDoc.save();
+  return new Blob([bytes], { type: "application/pdf" });
+}
+
+/**
+ * Add Page Numbers to all pages of a PDF
+ * @param {ArrayBuffer} pdfArrayBuffer
+ * @param {Object} options
+ */
+export async function addPageNumbersToPdf(pdfArrayBuffer, options = {}) {
+  const {
+    format = "Page {n} of {total}",
+    position = "bottom-center",
+    fontSize = 10,
+    marginPt = 25,
+    startNumber = 1,
+  } = options;
+
+  const pdfDoc = await PDFDocument.load(pdfArrayBuffer, { ignoreEncryption: true });
+  const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const pages = pdfDoc.getPages();
+  const total = pages.length;
+
+  pages.forEach((page, index) => {
+    const currentNum = startNumber + index;
+    const label = format
+      .replace("{n}", String(currentNum))
+      .replace("{total}", String(total));
+
+    const { width, height } = page.getSize();
+    const textWidth = helveticaFont.widthOfTextAtSize(label, fontSize);
+
+    let x = marginPt;
+    let y = marginPt;
+
+    if (position === "bottom-center") {
+      x = (width - textWidth) / 2;
+      y = marginPt;
+    } else if (position === "bottom-right") {
+      x = width - textWidth - marginPt;
+      y = marginPt;
+    } else if (position === "bottom-left") {
+      x = marginPt;
+      y = marginPt;
+    } else if (position === "top-center") {
+      x = (width - textWidth) / 2;
+      y = height - marginPt - fontSize;
+    } else if (position === "top-right") {
+      x = width - textWidth - marginPt;
+      y = height - marginPt - fontSize;
+    }
+
+    page.drawText(label, {
+      x,
+      y,
+      size: fontSize,
+      font: helveticaFont,
+      color: rgb(0.15, 0.15, 0.2),
+    });
+  });
+
+  const bytes = await pdfDoc.save();
   return new Blob([bytes], { type: "application/pdf" });
 }

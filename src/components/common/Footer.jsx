@@ -147,6 +147,24 @@ export default function Footer({ onNavigate }) {
                     PDF Organizer
                   </button>
                 </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate("pdf-watermark")}
+                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
+                  >
+                    Watermark PDF
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate("pdf-page-numbers")}
+                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
+                  >
+                    Page Numbers
+                  </button>
+                </li>
               </ul>
             </div>
 

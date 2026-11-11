@@ -13,6 +13,8 @@ import {
   Layers,
   RefreshCw,
   RotateCw,
+  Stamp,
+  Hash,
 } from "lucide-react";
 import { siteConfig } from "../../config/siteConfig";
 
@@ -87,6 +89,20 @@ export default function Navbar({ currentRoute, onNavigate }) {
       desc: "Rotate pages 90°/180° & delete pages",
       icon: RotateCw,
       iconBg: "bg-[#FFF0D9] text-[#FF4E02] border-[#F7D8A8]",
+    },
+    {
+      id: "pdf-watermark",
+      title: "Watermark PDF",
+      desc: "Stamp text watermarks across pages",
+      icon: Stamp,
+      iconBg: "bg-[#FFF4D4] text-[#FF4E02] border-[#F2DE9F]",
+    },
+    {
+      id: "pdf-page-numbers",
+      title: "Page Numbers",
+      desc: "Add header/footer page numbers",
+      icon: Hash,
+      iconBg: "bg-[#EBF7ED] text-[#1400C3] border-[#C2E7C9]",
     },
   ];
 

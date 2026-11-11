@@ -18,6 +18,8 @@ const ImagesToPdfPage = lazy(() => import("./pages/ImagesToPdfPage"));
 const PdfMergeSplitPage = lazy(() => import("./pages/PdfMergeSplitPage"));
 const ImageConverterPage = lazy(() => import("./pages/ImageConverterPage"));
 const PdfOrganizerPage = lazy(() => import("./pages/PdfOrganizerPage"));
+const WatermarkPdfPage = lazy(() => import("./pages/WatermarkPdfPage"));
+const PageNumbersPdfPage = lazy(() => import("./pages/PageNumbersPdfPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
@@ -72,6 +74,10 @@ export default function App() {
         return <ImageConverterPage onBack={() => navigateTo("home")} />;
       case "pdf-organizer":
         return <PdfOrganizerPage onBack={() => navigateTo("home")} />;
+      case "pdf-watermark":
+        return <WatermarkPdfPage onBack={() => navigateTo("home")} />;
+      case "pdf-page-numbers":
+        return <PageNumbersPdfPage onBack={() => navigateTo("home")} />;
       case "about":
         return <AboutPage onBack={() => navigateTo("home")} />;
       case "privacy-policy":
