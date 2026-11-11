@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   UserCheck,
   Minimize2,
@@ -8,6 +8,9 @@ import {
   RotateCw,
   ArrowRight,
   ArrowDown,
+  ShieldCheck,
+  Sparkles,
+  Image as ImageIcon,
 } from "lucide-react";
 import { siteConfig } from "../config/siteConfig";
 import AdBanner from "../components/ads/AdBanner";
@@ -56,10 +59,54 @@ function DoodleRays({ className = "" }) {
 }
 
 export default function HomePage({ onNavigate }) {
-  // All 15 Handcrafted Tool Cards
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const categories = [
+    {
+      id: "all",
+      label: "All Modules (23)",
+      badge: "Complete Suite",
+    },
+    {
+      id: "image",
+      label: "Image Studio (3)",
+      title: "Image Studio",
+      desc: "Crop, resize px, shrink KB, and instant format conversions",
+      badge: "High-Speed Canvas",
+      icon: ImageIcon,
+    },
+    {
+      id: "organize-edit",
+      label: "Organize & Edit PDF (7)",
+      title: "Organize & Edit PDF",
+      desc: "Merge, split, rotate, crop margins, scale page size & N-up sheets",
+      badge: "Vector Modification",
+      icon: Layers,
+    },
+    {
+      id: "security-privacy",
+      label: "Security & Privacy (5)",
+      title: "Security & Redaction",
+      desc: "Digital sign, form flatten, redact black boxes, watermark & sanitize",
+      badge: "100% In-Browser Privacy",
+      icon: ShieldCheck,
+    },
+    {
+      id: "convert-create",
+      label: "Convert & Create (8)",
+      title: "Convert, Create & Optimize",
+      desc: "Compress, images to PDF, plain text, live webcam scan & invoice maker",
+      badge: "Productivity Engine",
+      icon: Sparkles,
+    },
+  ];
+
+  // All 23 Handcrafted Tool Cards Categorized
   const toolCards = [
+    // 1. IMAGE SUITE
     {
       id: "exam-resizer",
+      category: "image",
       tag: "Popular",
       tagColor: "bg-[#FF4E02] text-white",
       bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
@@ -72,6 +119,7 @@ export default function HomePage({ onNavigate }) {
     },
     {
       id: "compress-image",
+      category: "image",
       tag: "Popular",
       tagColor: "bg-[#1400C3] text-white",
       bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
@@ -83,19 +131,23 @@ export default function HomePage({ onNavigate }) {
       pillPrice: "Free",
     },
     {
-      id: "images-to-pdf",
-      tag: "Essential",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
-      title: "Images to PDF",
-      desc: "Merge photos into clean A4 or Letter PDFs.",
-      accentColor: "#FF4E02",
-      icon: FileText,
-      illustration: ImagesToPdfIllustration,
+      id: "image-converter",
+      category: "image",
+      tag: "New",
+      tagColor: "bg-emerald-600 text-white",
+      bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
+      title: "Format Convert",
+      desc: "Bulk convert across WebP, PNG & JPG.",
+      accentColor: "#1400C3",
+      icon: RefreshCw,
+      illustration: ConverterIllustration,
       pillPrice: "Free",
     },
+
+    // 2. ORGANIZE & EDIT PDF
     {
       id: "pdf-merge-split",
+      category: "organize-edit",
       tag: "Top Tool",
       tagColor: "bg-[#1400C3] text-white",
       bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
@@ -107,19 +159,8 @@ export default function HomePage({ onNavigate }) {
       pillPrice: "Free",
     },
     {
-      id: "image-converter",
-      tag: "New",
-      tagColor: "bg-emerald-600 text-white",
-      bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
-      title: "Format Convert",
-      desc: "Bulk convert across WebP, PNG & JPG.",
-      accentColor: "#1400C3",
-      icon: RefreshCw,
-      illustration: ConverterIllustration,
-      pillPrice: "Free",
-    },
-    {
       id: "pdf-organizer",
+      category: "organize-edit",
       tag: "Organize",
       tagColor: "bg-[#FF4E02] text-white",
       bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
@@ -131,67 +172,8 @@ export default function HomePage({ onNavigate }) {
       pillPrice: "Free",
     },
     {
-      id: "pdf-compress",
-      tag: "Essential",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
-      title: "Compress PDF",
-      desc: "Shrink PDF filesize with 3 smart strength presets.",
-      accentColor: "#FF4E02",
-      icon: Minimize2,
-      illustration: CompressPdfIllustration,
-      pillPrice: "Free",
-    },
-    {
-      id: "pdf-sign",
-      tag: "Security",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Sign PDF",
-      desc: "Draw or upload signature & stamp onto any page.",
-      accentColor: "#1400C3",
-      icon: FileText,
-      illustration: SignPdfIllustration,
-      pillPrice: "Free",
-    },
-    {
-      id: "pdf-to-images",
-      tag: "Extract",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
-      title: "PDF to Images",
-      desc: "Extract pages to high-res PNG/JPG & batch ZIP.",
-      accentColor: "#1400C3",
-      icon: FileText,
-      illustration: PdfToImagesIllustration,
-      pillPrice: "Free",
-    },
-    {
-      id: "pdf-watermark",
-      tag: "Security",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
-      title: "Watermark PDF",
-      desc: "Stamp text watermarks across every page cleanly.",
-      accentColor: "#FF4E02",
-      icon: FileText,
-      illustration: WatermarkIllustration,
-      pillPrice: "Free",
-    },
-    {
-      id: "pdf-page-numbers",
-      tag: "Utility",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
-      title: "Page Numbers",
-      desc: "Insert header or footer page numbers accurately.",
-      accentColor: "#1400C3",
-      icon: FileText,
-      illustration: PageNumbersIllustration,
-      pillPrice: "Free",
-    },
-    {
       id: "pdf-crop",
+      category: "organize-edit",
       tag: "Utility",
       tagColor: "bg-emerald-600 text-white",
       bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
@@ -203,55 +185,8 @@ export default function HomePage({ onNavigate }) {
       pillPrice: "Free",
     },
     {
-      id: "pdf-flatten",
-      tag: "Lock",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Flatten PDF",
-      desc: "Lock interactive forms & prevent future tampering.",
-      accentColor: "#FF4E02",
-      icon: FileText,
-      illustration: FlattenPdfIllustration,
-      pillPrice: "Free",
-    },
-    {
-      id: "pdf-blacken",
-      tag: "Privacy",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
-      title: "Blacken & Redact",
-      desc: "Censor sensitive data with solid black boxes.",
-      accentColor: "#1400C3",
-      icon: FileText,
-      illustration: BlackenIllustration,
-      pillPrice: "Free",
-    },
-    {
-      id: "pdf-compare",
-      tag: "Audit",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
-      title: "Compare PDFs",
-      desc: "Side-by-side visual difference audit comparison.",
-      accentColor: "#1400C3",
-      icon: FileText,
-      illustration: ComparePdfIllustration,
-      pillPrice: "Free",
-    },
-    {
-      id: "pdf-metadata",
-      tag: "Security",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Edit Metadata",
-      desc: "Change author, title & sanitize tracking info.",
-      accentColor: "#1400C3",
-      icon: FileText,
-      illustration: MetadataIllustration,
-      pillPrice: "Free",
-    },
-    {
       id: "pdf-page-size",
+      category: "organize-edit",
       tag: "Utility",
       tagColor: "bg-[#1400C3] text-white",
       bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
@@ -264,6 +199,7 @@ export default function HomePage({ onNavigate }) {
     },
     {
       id: "pdf-pages-per-sheet",
+      category: "organize-edit",
       tag: "Paper Saver",
       tagColor: "bg-emerald-600 text-white",
       bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
@@ -275,7 +211,142 @@ export default function HomePage({ onNavigate }) {
       pillPrice: "Free",
     },
     {
+      id: "pdf-page-numbers",
+      category: "organize-edit",
+      tag: "Utility",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
+      title: "Page Numbers",
+      desc: "Insert header or footer page numbers accurately.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: PageNumbersIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-compare",
+      category: "organize-edit",
+      tag: "Audit",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
+      title: "Compare PDFs",
+      desc: "Side-by-side visual difference audit comparison.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: ComparePdfIllustration,
+      pillPrice: "Free",
+    },
+
+    // 3. SECURITY & PRIVACY
+    {
+      id: "pdf-sign",
+      category: "security-privacy",
+      tag: "Security",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
+      title: "Sign PDF",
+      desc: "Draw or upload signature & stamp onto any page.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: SignPdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-flatten",
+      category: "security-privacy",
+      tag: "Lock",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
+      title: "Flatten PDF",
+      desc: "Lock interactive forms & prevent future tampering.",
+      accentColor: "#FF4E02",
+      icon: FileText,
+      illustration: FlattenPdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-blacken",
+      category: "security-privacy",
+      tag: "Privacy",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
+      title: "Blacken & Redact",
+      desc: "Censor sensitive data with solid black boxes.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: BlackenIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-watermark",
+      category: "security-privacy",
+      tag: "Security",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
+      title: "Watermark PDF",
+      desc: "Stamp text watermarks across every page cleanly.",
+      accentColor: "#FF4E02",
+      icon: FileText,
+      illustration: WatermarkIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-metadata",
+      category: "security-privacy",
+      tag: "Security",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
+      title: "Edit Metadata",
+      desc: "Change author, title & sanitize tracking info.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: MetadataIllustration,
+      pillPrice: "Free",
+    },
+
+    // 4. CONVERT, CREATE & OPTIMIZE
+    {
+      id: "pdf-compress",
+      category: "convert-create",
+      tag: "Essential",
+      tagColor: "bg-[#FF4E02] text-white",
+      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
+      title: "Compress PDF",
+      desc: "Shrink PDF filesize with 3 smart strength presets.",
+      accentColor: "#FF4E02",
+      icon: Minimize2,
+      illustration: CompressPdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "images-to-pdf",
+      category: "convert-create",
+      tag: "Essential",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
+      title: "Images to PDF",
+      desc: "Merge photos into clean A4 or Letter PDFs.",
+      accentColor: "#FF4E02",
+      icon: FileText,
+      illustration: ImagesToPdfIllustration,
+      pillPrice: "Free",
+    },
+    {
+      id: "pdf-to-images",
+      category: "convert-create",
+      tag: "Extract",
+      tagColor: "bg-[#1400C3] text-white",
+      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
+      title: "PDF to Images",
+      desc: "Extract pages to high-res PNG/JPG & batch ZIP.",
+      accentColor: "#1400C3",
+      icon: FileText,
+      illustration: PdfToImagesIllustration,
+      pillPrice: "Free",
+    },
+    {
       id: "pdf-extract-text",
+      category: "convert-create",
       tag: "Extract",
       tagColor: "bg-[#1400C3] text-white",
       bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
@@ -288,6 +359,7 @@ export default function HomePage({ onNavigate }) {
     },
     {
       id: "camera-to-pdf",
+      category: "convert-create",
       tag: "Live Scan",
       tagColor: "bg-[#FF4E02] text-white",
       bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
@@ -300,6 +372,7 @@ export default function HomePage({ onNavigate }) {
     },
     {
       id: "screen-to-pdf",
+      category: "convert-create",
       tag: "Capture",
       tagColor: "bg-[#1400C3] text-white",
       bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
@@ -312,6 +385,7 @@ export default function HomePage({ onNavigate }) {
     },
     {
       id: "pdf-repair",
+      category: "convert-create",
       tag: "Fix",
       tagColor: "bg-[#FF4E02] text-white",
       bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
@@ -324,6 +398,7 @@ export default function HomePage({ onNavigate }) {
     },
     {
       id: "create-invoice",
+      category: "convert-create",
       tag: "Finance",
       tagColor: "bg-[#1400C3] text-white",
       bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
@@ -447,14 +522,17 @@ export default function HomePage({ onNavigate }) {
       {/* ========================================================================= */}
       {/* "OUR FAVORITES / TOOLS YOU'LL LOVE" COLOR-BLOCK CARDS SECTION             */}
       {/* ========================================================================= */}
+      {/* ========================================================================= */}
+      {/* "OUR FAVORITES / TOOLS YOU'LL LOVE" CATEGORIZED COLOR-BLOCK CARDS SECTION */}
+      {/* ========================================================================= */}
       <section id="tools-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-up">
-          <div className="rounded-[32px] sm:rounded-[40px] bg-[#F7EDBE] border-2 border-[#E6D799] p-5 sm:p-7 lg:p-8 shadow-sm">
-            {/* Section Header */}
-            <div className="mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+          <div className="rounded-[32px] sm:rounded-[44px] bg-[#F7EDBE] border-2 border-[#E6D799] p-5 sm:p-8 lg:p-10 shadow-sm space-y-8">
+            {/* Main Section Header */}
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#E6D799] pb-6">
               <div>
                 <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
-                  OUR FAVORITES • 23 POWER TOOLS
+                  CATEGORIZED UTILITY ENGINE • 23 POWER TOOLS
                 </span>
                 <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
                   TOOLS YOU&apos;LL LOVE
@@ -465,59 +543,119 @@ export default function HomePage({ onNavigate }) {
               </span>
             </div>
 
-            {/* Grid of All 23 Modules */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-              {toolCards.map((tool) => {
-                const Illustration = tool.illustration;
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
+                    selectedCategory === cat.id
+                      ? "bg-[#1400C3] text-white shadow-md shadow-[#1400C3]/20 scale-105"
+                      : "bg-white/80 hover:bg-white text-[#3B3355] hover:text-[#1400C3] border border-[#E6D799]"
+                  }`}
+                >
+                  <span>{cat.label}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Render Category Sections */}
+            <div className="space-y-10">
+              {(selectedCategory === "all"
+                ? categories.filter((c) => c.id !== "all")
+                : categories.filter((c) => c.id === selectedCategory)
+              ).map((cat, catIdx, arr) => {
+                const CatIcon = cat.icon;
+                const catTools = toolCards.filter((t) => t.category === cat.id);
+                if (catTools.length === 0) return null;
 
                 return (
-                  <div
-                    key={tool.id}
-                    onClick={() => onNavigate(tool.id)}
-                    className={`human-card rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 border-2 transition-all cursor-pointer flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 ${tool.bgClass}`}
-                  >
-                    <div>
-                      {/* Top Tag */}
-                      <div className="flex items-center mb-2">
-                        <span
-                          className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-xs truncate ${tool.tagColor}`}
-                        >
-                          {tool.tag}
-                        </span>
-                      </div>
-
-                      {/* Tool Graphic Showcase Box with Bespoke 3D Vector Illustration */}
-                      <div className="my-1.5 h-24 sm:h-28 rounded-xl bg-white border border-black/5 flex items-center justify-center p-2 overflow-hidden shadow-inner group">
-                        <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <Illustration />
+                  <div key={cat.id} className="space-y-4">
+                    {/* Category Header Row */}
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-[#1400C3] text-white flex items-center justify-center shadow-xs">
+                          <CatIcon className="w-4 h-4 text-[#F8F2D8]" />
+                        </div>
+                        <div>
+                          <h3 className="font-display text-lg sm:text-xl text-[#1400C3] tracking-tight uppercase flex items-center gap-2">
+                            <span>{cat.title}</span>
+                            <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#FF4E02] text-white tracking-wider">
+                              {catTools.length} TOOLS
+                            </span>
+                          </h3>
+                          <p className="text-xs text-[#6B627F] font-semibold">{cat.desc}</p>
                         </div>
                       </div>
-
-                      {/* Title & Description */}
-                      <h3
-                        className="font-display text-sm sm:text-base text-[#1400C3] tracking-tight leading-tight mt-1.5 truncate"
-                        title={tool.title}
-                      >
-                        {tool.title}
-                      </h3>
-                      <p className="text-[10px] sm:text-[11px] text-[#3B3355] font-semibold leading-snug line-clamp-2 mt-1 min-h-[28px]">
-                        {tool.desc}
-                      </p>
-                    </div>
-
-                    {/* Bottom Action Pill */}
-                    <div className="mt-3 pt-2.5 border-t border-black/10 flex items-center justify-between">
-                      <span className="text-[11px] font-black text-[#1400C3]">
-                        {tool.pillPrice}
+                      <span className="hidden sm:inline-block text-[11px] font-black uppercase tracking-wider text-[#1400C3] bg-white px-3 py-1 rounded-full border border-[#E6D799]">
+                        {cat.badge}
                       </span>
-                      <button
-                        type="button"
-                        className="px-2.5 py-1 rounded-full font-black text-[10px] sm:text-[11px] bg-[#1400C3] hover:bg-[#FF4E02] text-white transition-all shadow-xs flex items-center gap-1 cursor-pointer active:scale-95"
-                      >
-                        <span>open</span>
-                        <span className="text-xs font-bold">+</span>
-                      </button>
                     </div>
+
+                    {/* Category Cards Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+                      {catTools.map((tool) => {
+                        const Illustration = tool.illustration;
+
+                        return (
+                          <div
+                            key={tool.id}
+                            onClick={() => onNavigate(tool.id)}
+                            className={`human-card rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 border-2 transition-all cursor-pointer flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 ${tool.bgClass}`}
+                          >
+                            <div>
+                              {/* Top Tag */}
+                              <div className="flex items-center mb-2">
+                                <span
+                                  className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-xs truncate ${tool.tagColor}`}
+                                >
+                                  {tool.tag}
+                                </span>
+                              </div>
+
+                              {/* Tool Graphic Showcase Box with Bespoke 3D Vector Illustration */}
+                              <div className="my-1.5 h-24 sm:h-28 rounded-xl bg-white border border-black/5 flex items-center justify-center p-2 overflow-hidden shadow-inner group">
+                                <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                  <Illustration />
+                                </div>
+                              </div>
+
+                              {/* Title & Description */}
+                              <h4
+                                className="font-display text-sm sm:text-base text-[#1400C3] tracking-tight leading-tight mt-1.5 truncate"
+                                title={tool.title}
+                              >
+                                {tool.title}
+                              </h4>
+                              <p className="text-[10px] sm:text-[11px] text-[#3B3355] font-semibold leading-snug line-clamp-2 mt-1 min-h-[28px]">
+                                {tool.desc}
+                              </p>
+                            </div>
+
+                            {/* Bottom Action Pill */}
+                            <div className="mt-3 pt-2.5 border-t border-black/10 flex items-center justify-between">
+                              <span className="text-[11px] font-black text-[#1400C3]">
+                                {tool.pillPrice}
+                              </span>
+                              <button
+                                type="button"
+                                className="px-2.5 py-1 rounded-full font-black text-[10px] sm:text-[11px] bg-[#1400C3] hover:bg-[#FF4E02] text-white transition-all shadow-xs flex items-center gap-1 cursor-pointer active:scale-95"
+                              >
+                                <span>open</span>
+                                <span className="text-xs font-bold">+</span>
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Divider between categories when viewing all */}
+                    {selectedCategory === "all" && catIdx < arr.length - 1 && (
+                      <div className="pt-6 border-b-2 border-dashed border-[#E6D799]" />
+                    )}
                   </div>
                 );
               })}
