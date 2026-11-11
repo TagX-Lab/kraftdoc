@@ -1,5 +1,5 @@
 import React from "react";
-import { Sparkles, Shield, Heart, ExternalLink, Globe } from "lucide-react";
+import { Sparkles, Heart, ExternalLink, Globe } from "lucide-react";
 import { siteConfig } from "../../config/siteConfig";
 
 function InstagramIcon(props) {
@@ -99,10 +99,7 @@ export default function Footer({ onNavigate }) {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-[#1400C3] bg-white border border-[#D6CA9E] px-3.5 py-1.5 rounded-xl w-fit font-bold shadow-sm">
-              <Shield className="w-4 h-4 text-[#FF4E02] shrink-0" />
-              <span>Zero server upload policy: files stay on your device.</span>
-            </div>
+
           </div>
 
           {/* Quick Tools */}
