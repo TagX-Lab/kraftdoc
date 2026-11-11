@@ -41,8 +41,8 @@ export default function Navbar({ currentRoute, onNavigate }) {
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled
-          ? "border-b border-slate-800/90 bg-slate-950/85 backdrop-blur-xl shadow-xl shadow-black/40 py-0"
-          : "border-b border-transparent bg-transparent backdrop-blur-none py-1"
+          ? "border-b border-[#E5DCB8] bg-[#F8F2D8]/95 backdrop-blur-xl shadow-lg shadow-[#1400C3]/5 py-0"
+          : "border-b border-transparent bg-transparent backdrop-blur-none py-1.5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,19 +53,17 @@ export default function Navbar({ currentRoute, onNavigate }) {
               onClick={() => handleNavClick("home")}
               className="flex items-center gap-2.5 cursor-pointer group"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 p-0.5 shadow-md shadow-indigo-500/20 group-hover:scale-105 group-hover:shadow-indigo-500/40 transition-all">
-                <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-indigo-400 group-hover:rotate-12 transition-transform" />
-                </div>
+              <div className="w-10 h-10 rounded-xl bg-[#1400C3] p-0.5 shadow-md shadow-[#1400C3]/20 group-hover:scale-105 group-hover:shadow-[#1400C3]/40 transition-all flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-[#F8F2D8] group-hover:rotate-12 transition-transform" />
               </div>
               <div>
-                <span className="text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
+                <span className="text-xl font-black tracking-tight text-[#1400C3] flex items-center gap-1.5">
                   {siteConfig.name}
-                  <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                  <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-[#FF4E02] text-white">
                     FREE
                   </span>
                 </span>
-                <p className="text-[10px] text-slate-400 -mt-1 hidden sm:block">
+                <p className="text-[10px] text-[#6B627F] font-semibold -mt-1 hidden sm:block">
                   In-Browser Privacy
                 </p>
               </div>
@@ -76,19 +74,19 @@ export default function Navbar({ currentRoute, onNavigate }) {
               href={siteConfig.company.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 text-[11px] font-semibold text-sky-300 transition-all hover:scale-105 group"
+              className="hidden sm:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1400C3]/10 hover:bg-[#1400C3]/15 border border-[#1400C3]/25 text-[11px] font-bold text-[#1400C3] transition-all hover:scale-105 group"
               title="Visit TAGX Labs Studio"
             >
-              <span className="text-slate-400 font-normal">by</span>
-              <span className="font-bold text-white group-hover:text-sky-300 transition-colors">
+              <span className="text-[#6B627F] font-normal">by</span>
+              <span className="font-extrabold text-[#1400C3] group-hover:text-[#FF4E02] transition-colors">
                 {siteConfig.company.name}
               </span>
-              <span className="text-sky-400 text-[10px]">↗</span>
+              <span className="text-[#FF4E02] text-[10px] font-bold">↗</span>
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1.5">
             {navItems.map((item) => {
               const isActive = currentRoute === item.id;
               const Icon = item.icon;
@@ -98,13 +96,13 @@ export default function Navbar({ currentRoute, onNavigate }) {
                   key={item.id}
                   type="button"
                   onClick={() => handleNavClick(item.id)}
-                  className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
                     isActive
-                      ? "text-white bg-slate-800 border border-slate-700/80 shadow-inner"
-                      : "text-slate-400 hover:text-white hover:bg-slate-800/40"
+                      ? "text-[#1400C3] bg-white border border-[#E5DCB8] shadow-sm font-bold"
+                      : "text-[#3B3355] hover:text-[#1400C3] hover:bg-white/60"
                   }`}
                 >
-                  {Icon && <Icon className="w-4 h-4 opacity-70" />}
+                  {Icon && <Icon className="w-4 h-4 opacity-80" />}
                   {item.label}
                 </button>
               );
@@ -115,7 +113,7 @@ export default function Navbar({ currentRoute, onNavigate }) {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+            className="md:hidden p-2 text-[#1400C3] hover:bg-white/60 rounded-lg transition-colors cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -124,16 +122,16 @@ export default function Navbar({ currentRoute, onNavigate }) {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-800 bg-slate-900/95 px-4 pt-2 pb-4 space-y-1 backdrop-blur-xl animate-fade-in shadow-2xl">
+        <div className="md:hidden border-b border-[#E5DCB8] bg-[#F8F2D8]/98 px-4 pt-2 pb-4 space-y-1 backdrop-blur-xl animate-fade-in shadow-xl">
           {navItems.map((item) => (
             <button
               key={item.id}
               type="button"
               onClick={() => handleNavClick(item.id)}
-              className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+              className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 currentRoute === item.id
-                  ? "text-white bg-slate-800 border border-slate-700"
-                  : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                  ? "text-[#1400C3] bg-white border border-[#E5DCB8]"
+                  : "text-[#3B3355] hover:text-[#1400C3] hover:bg-white/60"
               }`}
             >
               {item.label}

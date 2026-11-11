@@ -17,7 +17,7 @@ export default function AdSidebar({ slotId = adConfig.slots.sidebarSticky, class
   if (adConfig.enabled) {
     return (
       <div className={`hidden lg:block w-72 shrink-0 ${className}`}>
-        <div className="sticky top-24 rounded-2xl bg-slate-800/40 border border-slate-700/60 p-2 overflow-hidden">
+        <div className="sticky top-24 rounded-3xl bg-white border border-[#D6CA9E] p-2 overflow-hidden shadow-sm">
           <ins
             className="adsbygoogle"
             style={{ display: "block", minWidth: "250px", minHeight: "600px" }}
@@ -36,14 +36,14 @@ export default function AdSidebar({ slotId = adConfig.slots.sidebarSticky, class
 
   return (
     <div className={`hidden lg:block w-72 shrink-0 ${className}`}>
-      <div className="sticky top-24 rounded-2xl border border-dashed border-slate-700/60 bg-slate-800/20 p-6 flex flex-col items-center justify-center text-center min-h-[500px]">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-700/40 text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-3">
+      <div className="sticky top-24 rounded-3xl border border-dashed border-[#D6CA9E] bg-white/70 p-6 flex flex-col items-center justify-center text-center min-h-[500px] shadow-sm">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1400C3]/10 text-[11px] font-black tracking-wider text-[#1400C3] uppercase mb-3">
           Sidebar Ad Slot
         </div>
-        <p className="text-xs text-slate-300 font-medium">
+        <p className="text-sm text-[#1400C3] font-bold">
           High CTR Skyscraper Ad
         </p>
-        <p className="text-[11px] text-slate-400 mt-2">
+        <p className="text-xs text-[#6B627F] font-medium mt-2">
           300x600 &bull; 160x600 &bull; Sticky Placement
         </p>
       </div>

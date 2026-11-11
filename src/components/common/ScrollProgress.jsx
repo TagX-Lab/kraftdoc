@@ -29,23 +29,23 @@ export default function ScrollProgress() {
 
   return (
     <>
-      {/* Top Gradient Scroll Bar */}
-      <div className="fixed top-0 left-0 right-0 h-[3px] z-50 bg-slate-900/40 pointer-events-none">
+      {/* Top Gradient Scroll Bar (Bluebonnet to Blaze Orange) */}
+      <div className="fixed top-0 left-0 right-0 h-[3.5px] z-50 bg-[#E5DCB8]/50 pointer-events-none">
         <div
-          className="h-full bg-gradient-to-r from-indigo-500 via-sky-400 to-emerald-400 transition-all duration-150 ease-out shadow-[0_0_12px_rgba(99,102,241,0.8)]"
+          className="h-full bg-gradient-to-r from-[#1400C3] via-[#7B00C3] to-[#FF4E02] transition-all duration-150 ease-out shadow-[0_0_10px_rgba(255,78,2,0.8)]"
           style={{ width: `${scrollPercentage}%` }}
         />
       </div>
 
-      {/* Floating Scroll To Top Pill */}
+      {/* Floating Scroll To Top in Blaze Orange */}
       {showScrollTop && (
         <button
           type="button"
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="fixed bottom-6 right-6 z-40 p-3 rounded-2xl bg-indigo-600/90 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/30 backdrop-blur-md border border-indigo-400/30 transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer animate-fade-in"
+          className="fixed bottom-6 right-6 z-40 p-3.5 rounded-2xl bg-[#FF4E02] hover:bg-[#E04200] text-white shadow-2xl shadow-[#FF4E02]/40 border-2 border-white transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer animate-fade-in"
         >
-          <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
+          <ArrowUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform stroke-[2.5]" />
         </button>
       )}
     </>

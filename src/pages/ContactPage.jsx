@@ -38,43 +38,43 @@ export default function ContactPage({ onBack }) {
         <button
           type="button"
           onClick={onBack}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-indigo-400 transition-colors mb-4 cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-xs font-black text-[#1400C3] hover:text-[#FF4E02] transition-colors mb-4 cursor-pointer"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4 stroke-[2.5]" />
           <span>Back to Home</span>
         </button>
 
-        <h1 className="text-3xl font-extrabold text-white">Contact & Support</h1>
-        <p className="mt-2 text-sm text-slate-400">
-          Have a suggestion, noticed an updated exam notification specification, or want to report a bug? Reach out to us.
+        <h1 className="text-4xl font-black text-[#1400C3]">Contact &amp; Support</h1>
+        <p className="mt-2 text-sm text-[#3B3355] font-semibold">
+          Have a suggestion, noticed an updated exam notification specification, or want to report a bug? Reach out to {siteConfig.company.name}.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
         {/* Support Card */}
-        <div className="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/60 space-y-4">
-          <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
-            <Mail className="w-5 h-5" />
+        <div className="p-6 rounded-3xl bg-white border-2 border-[#E5DCB8] space-y-4 shadow-sm">
+          <div className="w-12 h-12 rounded-2xl bg-[#FF4E02]/15 text-[#FF4E02] flex items-center justify-center">
+            <Mail className="w-6 h-6 stroke-[2.2]" />
           </div>
           <div>
-            <h3 className="font-bold text-white text-sm">Direct Support</h3>
-            <p className="text-xs text-slate-400 mt-1">
+            <h3 className="font-black text-[#1400C3] text-base">Direct Support</h3>
+            <p className="text-xs text-[#6B627F] font-semibold mt-1">
               You can write directly to our developer team:
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between gap-2">
-            <span className="text-xs text-slate-300 font-mono truncate">
+          <div className="p-3.5 rounded-xl bg-[#F8F2D8] border border-[#E5DCB8] flex items-center justify-between gap-2 shadow-inner">
+            <span className="text-xs text-[#1400C3] font-mono font-bold truncate">
               {siteConfig.supportEmail}
             </span>
             <button
               type="button"
               onClick={handleCopyEmail}
-              className="p-1.5 text-slate-400 hover:text-indigo-400 transition-colors shrink-0"
+              className="p-1.5 text-[#1400C3] hover:text-[#FF4E02] transition-colors shrink-0 cursor-pointer"
               title="Copy Email"
             >
               {copied ? (
-                <Check className="w-4 h-4 text-emerald-400" />
+                <Check className="w-4 h-4 text-[#FF4E02]" />
               ) : (
                 <Copy className="w-4 h-4" />
               )}
@@ -83,15 +83,15 @@ export default function ContactPage({ onBack }) {
         </div>
 
         {/* Contact Form */}
-        <div className="md:col-span-2 p-6 rounded-2xl bg-slate-800/50 border border-slate-700/60">
+        <div className="md:col-span-2 p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#E5DCB8] shadow-sm">
           {isSubmitted ? (
             <div className="text-center py-8 space-y-3">
-              <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
-                <Check className="w-6 h-6" />
+              <div className="w-14 h-14 rounded-full bg-[#FF4E02]/15 text-[#FF4E02] flex items-center justify-center mx-auto">
+                <Check className="w-7 h-7 stroke-[2.5]" />
               </div>
-              <h3 className="font-bold text-white text-lg">Thank You!</h3>
-              <p className="text-xs text-slate-400 max-w-sm mx-auto">
-                Your message has been received. Our support team will get back to you shortly.
+              <h3 className="font-black text-[#1400C3] text-xl">Thank You!</h3>
+              <p className="text-xs text-[#3B3355] font-semibold max-w-sm mx-auto">
+                Your message has been received. Our support team at {siteConfig.company.name} will get back to you shortly.
               </p>
               <Button
                 onClick={() => {
@@ -111,7 +111,7 @@ export default function ContactPage({ onBack }) {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-black text-[#1400C3] mb-1.5">
                     Your Name *
                   </label>
                   <input
@@ -119,13 +119,13 @@ export default function ContactPage({ onBack }) {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                    className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#1400C3]"
                     placeholder="e.g. Ramesh"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-black text-[#1400C3] mb-1.5">
                     Email Address *
                   </label>
                   <input
@@ -133,27 +133,27 @@ export default function ContactPage({ onBack }) {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                    className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#1400C3]"
                     placeholder="ramesh@example.com"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-black text-[#1400C3] mb-1.5">
                   Subject
                 </label>
                 <input
                   type="text"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#1400C3]"
                   placeholder="e.g. TNPSC Specification Update"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-black text-[#1400C3] mb-1.5">
                   Message *
                 </label>
                 <textarea
@@ -161,14 +161,14 @@ export default function ContactPage({ onBack }) {
                   rows="4"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#1400C3]"
                   placeholder="Describe your issue or suggestion..."
                 ></textarea>
               </div>
 
               <Button
                 type="submit"
-                variant="primary"
+                variant="orange"
                 size="md"
                 icon={Send}
                 className="w-full sm:w-auto"

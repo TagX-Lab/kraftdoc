@@ -84,7 +84,7 @@ export default function App() {
 
   return (
     <ToastProvider>
-      <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white">
+      <div className="min-h-screen flex flex-col bg-[#F8F2D8] text-[#1400C3] selection:bg-[#FF4E02] selection:text-white">
         <ScrollProgress />
         <Navbar currentRoute={currentRoute} onNavigate={navigateTo} />
 

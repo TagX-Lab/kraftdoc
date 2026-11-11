@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   UserCheck,
   CheckCircle2,
@@ -158,114 +158,117 @@ export default function ExamPhotoResizerPage({ onBack }) {
     <ToolLayout
       title="Govt Exam Photo & Signature Resizer"
       description="Resize & compress photos to exact pixel dimensions and maximum KB requirements for TNPSC, SSC, UPSC, and IBPS."
-      badgeText="TNPSC / SSC / UPSC Ready"
-      badgeColor="emerald"
       onBack={onBack}
     >
       <div className="space-y-8">
         {/* Step 1: Preset Selection */}
-        <div className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/60">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center">
+        <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#E5DCB8] shadow-sm">
+          <div className="flex items-center gap-2.5 mb-5">
+            <span className="w-7 h-7 rounded-xl bg-[#1400C3] text-white text-xs font-black flex items-center justify-center">
               1
             </span>
-            <h3 className="font-bold text-white text-base">
+            <h3 className="font-black text-[#1400C3] text-lg">
               Select Exam Specification Preset
             </h3>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
-            {EXAM_PRESETS.map((preset) => (
-              <button
-                key={preset.id}
-                type="button"
-                onClick={() => handlePresetSelect(preset.id)}
-                className={`p-3 rounded-xl border text-left transition-all ${
-                  selectedPresetId === preset.id && !isCustomMode
-                    ? "bg-emerald-500/10 border-emerald-500/80 text-white shadow-md shadow-emerald-500/10"
-                    : "bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-800/40"
-                }`}
-              >
-                <div className="flex items-center justify-between text-xs font-semibold mb-1">
-                  <span>{preset.category}</span>
-                  <span className="text-[10px] text-emerald-400 font-normal">
-                    &lt;{preset.maxKb}KB
-                  </span>
-                </div>
-                <div className="text-xs font-medium text-slate-200 truncate">
-                  {preset.label}
-                </div>
-                <div className="text-[11px] text-slate-400 mt-1">
-                  {preset.width}x{preset.height} px
-                </div>
-              </button>
-            ))}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {EXAM_PRESETS.map((preset) => {
+              const isSelected = selectedPresetId === preset.id && !isCustomMode;
+              return (
+                <button
+                  key={preset.id}
+                  type="button"
+                  onClick={() => handlePresetSelect(preset.id)}
+                  className={`p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer ${
+                    isSelected
+                      ? "bg-[#1400C3] border-[#1400C3] text-white shadow-lg shadow-[#1400C3]/20"
+                      : "bg-[#F8F2D8]/40 border-[#E5DCB8] text-[#1400C3] hover:border-[#1400C3] hover:bg-white"
+                  }`}
+                >
+                  <div className="flex items-center justify-between text-xs font-black mb-1">
+                    <span>{preset.category}</span>
+                    <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded ${
+                      isSelected ? "bg-white/20 text-white" : "bg-[#FF4E02]/15 text-[#D93E00]"
+                    }`}>
+                      &lt;{preset.maxKb}KB
+                    </span>
+                  </div>
+                  <div className={`text-xs font-bold truncate ${isSelected ? "text-white" : "text-[#3B3355]"}`}>
+                    {preset.label}
+                  </div>
+                  <div className={`text-[11px] mt-1 font-semibold ${isSelected ? "text-white/80" : "text-[#6B627F]"}`}>
+                    {preset.width}&times;{preset.height} px
+                  </div>
+                </button>
+              );
+            })}
 
             {/* Custom Specs button */}
             <button
               type="button"
               onClick={() => handlePresetSelect("custom")}
-              className={`p-3 rounded-xl border text-left transition-all ${
+              className={`p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer ${
                 isCustomMode
-                  ? "bg-indigo-500/10 border-indigo-500/80 text-white shadow-md shadow-indigo-500/10"
-                  : "bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-800/40"
+                  ? "bg-[#FF4E02] border-[#FF4E02] text-white shadow-lg shadow-[#FF4E02]/25"
+                  : "bg-[#F8F2D8]/40 border-[#E5DCB8] text-[#1400C3] hover:border-[#FF4E02] hover:bg-white"
               }`}
             >
-              <div className="flex items-center gap-1.5 text-xs font-semibold text-indigo-400 mb-1">
+              <div className="flex items-center gap-1.5 text-xs font-black mb-1">
                 <Sliders className="w-3.5 h-3.5" />
                 <span>Custom</span>
               </div>
-              <div className="text-xs font-medium text-slate-200">
+              <div className={`text-xs font-bold ${isCustomMode ? "text-white" : "text-[#3B3355]"}`}>
                 Custom Size
               </div>
-              <div className="text-[11px] text-slate-400 mt-1">
-                Set custom px & KB
+              <div className={`text-[11px] mt-1 font-semibold ${isCustomMode ? "text-white/80" : "text-[#6B627F]"}`}>
+                Set custom px &amp; KB
               </div>
             </button>
           </div>
 
           {/* Custom Settings Drawer if active */}
           {isCustomMode && (
-            <div className="mt-5 pt-5 border-t border-slate-700/60 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="mt-6 pt-6 border-t border-[#E5DCB8] grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-[#1400C3] mb-1.5">
                   Target Width (pixels)
                 </label>
                 <input
                   type="number"
                   value={customWidth}
                   onChange={(e) => setCustomWidth(Math.max(10, parseInt(e.target.value) || 100))}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#1400C3]"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-[#1400C3] mb-1.5">
                   Target Height (pixels)
                 </label>
                 <input
                   type="number"
                   value={customHeight}
                   onChange={(e) => setCustomHeight(Math.max(10, parseInt(e.target.value) || 100))}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#1400C3]"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-[#1400C3] mb-1.5">
                   Max File Size (KB)
                 </label>
                 <input
                   type="number"
                   value={customMaxKb}
                   onChange={(e) => setCustomMaxKb(Math.max(5, parseInt(e.target.value) || 50))}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#FF4E02]"
                 />
               </div>
             </div>
           )}
 
           {/* Fit Mode selector */}
-          <div className="mt-4 flex items-center gap-4 text-xs text-slate-400">
-            <span className="font-medium text-slate-300">Crop Mode:</span>
+          <div className="mt-5 pt-4 border-t border-[#E5DCB8] flex items-center gap-5 text-xs text-[#3B3355] font-bold">
+            <span className="text-[#1400C3]">Crop Mode:</span>
             <label className="flex items-center gap-1.5 cursor-pointer">
               <input
                 type="radio"
@@ -273,7 +276,7 @@ export default function ExamPhotoResizerPage({ onBack }) {
                 value="cover"
                 checked={fitMode === "cover"}
                 onChange={() => setFitMode("cover")}
-                className="text-indigo-600 focus:ring-0"
+                className="text-[#1400C3] focus:ring-0 accent-[#1400C3]"
               />
               <span>Smart Crop (Fill)</span>
             </label>
@@ -284,7 +287,7 @@ export default function ExamPhotoResizerPage({ onBack }) {
                 value="contain"
                 checked={fitMode === "contain"}
                 onChange={() => setFitMode("contain")}
-                className="text-indigo-600 focus:ring-0"
+                className="text-[#1400C3] focus:ring-0 accent-[#1400C3]"
               />
               <span>Fit with White Border</span>
             </label>
@@ -292,13 +295,13 @@ export default function ExamPhotoResizerPage({ onBack }) {
         </div>
 
         {/* Step 2: Upload or View Source */}
-        <div className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/60">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center">
+        <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#E5DCB8] shadow-sm">
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-2.5">
+              <span className="w-7 h-7 rounded-xl bg-[#1400C3] text-white text-xs font-black flex items-center justify-center">
                 2
               </span>
-              <h3 className="font-bold text-white text-base">
+              <h3 className="font-black text-[#1400C3] text-lg">
                 Upload Photo / Signature
               </h3>
             </div>
@@ -311,7 +314,7 @@ export default function ExamPhotoResizerPage({ onBack }) {
                   setResultBlob(null);
                   setResultPreviewUrl(null);
                 }}
-                className="text-xs text-rose-400 hover:text-rose-300 cursor-pointer"
+                className="text-xs text-rose-600 hover:text-rose-700 font-bold cursor-pointer"
               >
                 Clear Photo
               </button>
@@ -328,21 +331,21 @@ export default function ExamPhotoResizerPage({ onBack }) {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
               {/* Original preview card */}
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 flex flex-col items-center">
-                <span className="text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">
+              <div className="p-5 rounded-2xl bg-[#F8F2D8]/50 border-2 border-[#E5DCB8] flex flex-col items-center">
+                <span className="text-xs font-black text-[#6B627F] mb-3 uppercase tracking-wider">
                   Original Image
                 </span>
-                <div className="max-h-56 max-w-full overflow-hidden rounded-lg border border-slate-700 bg-slate-950 flex items-center justify-center p-1">
+                <div className="max-h-56 max-w-full overflow-hidden rounded-xl border border-[#D6CA9E] bg-white flex items-center justify-center p-2 shadow-sm">
                   <img
                     src={sourcePreviewUrl}
                     alt="Original"
-                    className="max-h-52 object-contain"
+                    className="max-h-52 object-contain rounded"
                   />
                 </div>
-                <div className="mt-3 flex items-center gap-3 text-xs text-slate-300">
+                <div className="mt-3 flex items-center gap-3 text-xs text-[#3B3355] font-bold">
                   <span>{sourceMeta?.width} &times; {sourceMeta?.height} px</span>
                   <span>&bull;</span>
-                  <span className="font-bold text-amber-400">
+                  <span className="text-[#FF4E02] font-black">
                     {formatBytes(sourceMeta?.size)}
                   </span>
                 </div>
@@ -350,22 +353,22 @@ export default function ExamPhotoResizerPage({ onBack }) {
 
               {/* Action Column */}
               <div className="flex flex-col items-center justify-center text-center space-y-4">
-                <div className="p-4 rounded-xl bg-slate-900/40 border border-slate-800 text-xs text-slate-400 text-left w-full space-y-1.5">
-                  <p className="font-semibold text-white">Target Output Requirements:</p>
+                <div className="p-5 rounded-2xl bg-[#F8F2D8]/60 border border-[#E5DCB8] text-xs text-[#3B3355] text-left w-full space-y-1.5 font-semibold">
+                  <p className="font-black text-[#1400C3] text-sm">Target Output Requirements:</p>
                   <p>&bull; Width: {isCustomMode ? customWidth : selectedPreset.width} px</p>
                   <p>&bull; Height: {isCustomMode ? customHeight : selectedPreset.height} px</p>
-                  <p>&bull; Max Size: Under {isCustomMode ? customMaxKb : selectedPreset.maxKb} KB</p>
+                  <p>&bull; Max Size: Strictly Under {isCustomMode ? customMaxKb : selectedPreset.maxKb} KB</p>
                 </div>
 
                 <Button
                   onClick={handleProcessImage}
                   loading={isProcessing}
-                  variant="emerald"
+                  variant="orange"
                   size="lg"
                   icon={Sparkles}
                   className="w-full"
                 >
-                  Resize & Compress Now
+                  Resize &amp; Compress Now
                 </Button>
               </div>
             </div>
@@ -374,20 +377,20 @@ export default function ExamPhotoResizerPage({ onBack }) {
 
         {/* Step 3: Processed Result & Download */}
         {resultBlob && (
-          <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/40 animate-slide-up">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FF4E02] shadow-xl animate-slide-up">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                <h3 className="font-bold text-white text-base">
+                <CheckCircle2 className="w-6 h-6 text-[#FF4E02]" />
+                <h3 className="font-black text-[#1400C3] text-lg">
                   Resized Result Ready
                 </h3>
               </div>
-              <Badge color="emerald">Compliant for Exam</Badge>
+              <Badge color="orange">Compliant for Exam</Badge>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-6">
               {/* Preview */}
-              <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center">
+              <div className="p-3 rounded-2xl bg-[#F8F2D8] border border-[#E5DCB8] flex items-center justify-center shadow-inner">
                 <img
                   src={resultPreviewUrl}
                   alt="Resized Exam Ready"
@@ -395,31 +398,31 @@ export default function ExamPhotoResizerPage({ onBack }) {
                     maxWidth: "200px",
                     maxHeight: "230px",
                   }}
-                  className="rounded object-contain shadow"
+                  className="rounded-lg object-contain shadow"
                 />
               </div>
 
               {/* Stats & Download */}
               <div className="flex-1 space-y-4 text-center sm:text-left">
                 <div className="space-y-1">
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <span className="font-semibold text-white">Final File Size:</span>
-                    <span className="text-emerald-400 font-bold text-base">
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="font-bold text-[#3B3355]">Final File Size:</span>
+                    <span className="text-[#FF4E02] font-black text-lg">
                       {formatBytes(resultMeta?.sizeBytes)}
                     </span>
-                    <span className="text-xs text-slate-400">
+                    <span className="text-xs text-[#6B627F] font-semibold">
                       (Limit: {resultMeta?.targetMaxKb} KB)
                     </span>
                   </div>
 
-                  <div className="text-xs text-slate-400">
+                  <div className="text-xs text-[#6B627F] font-semibold">
                     Resolution: {resultMeta?.width} &times; {resultMeta?.height} px &bull; Format: JPG
                   </div>
                 </div>
 
                 <Button
                   onClick={handleDownloadClick}
-                  variant="emerald"
+                  variant="orange"
                   size="lg"
                   icon={Download}
                 >

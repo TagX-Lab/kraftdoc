@@ -153,21 +153,19 @@ export default function ImageCompressorPage({ onBack }) {
     <ToolLayout
       title="Smart Image Compressor"
       description="Reduce image size up to 90% without losing visible quality. Convert to modern WebP, JPG, or PNG."
-      badgeText="Client-Side"
-      badgeColor="blue"
       onBack={onBack}
     >
       <div className="space-y-8">
         {/* Settings Panel */}
-        <div className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/60 space-y-6">
+        <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#E5DCB8] shadow-sm space-y-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Sliders className="w-5 h-5 text-indigo-400" />
-              <h3 className="font-bold text-white text-base">
+            <div className="flex items-center gap-2.5">
+              <Sliders className="w-5 h-5 text-[#FF4E02]" />
+              <h3 className="font-black text-[#1400C3] text-lg">
                 Compression Settings
               </h3>
             </div>
-            <span className="text-xs text-slate-400">
+            <span className="text-xs text-[#6B627F] font-bold">
               Balanced presets recommended
             </span>
           </div>
@@ -175,9 +173,9 @@ export default function ImageCompressorPage({ onBack }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Quality Slider */}
             <div className="space-y-2">
-              <div className="flex justify-between text-xs font-semibold">
-                <span className="text-slate-300">Image Quality</span>
-                <span className="text-indigo-400 font-bold">{quality}%</span>
+              <div className="flex justify-between text-xs font-black">
+                <span className="text-[#3B3355]">Image Quality</span>
+                <span className="text-[#FF4E02] font-black text-sm">{quality}%</span>
               </div>
               <input
                 type="range"
@@ -185,9 +183,9 @@ export default function ImageCompressorPage({ onBack }) {
                 max="100"
                 value={quality}
                 onChange={(e) => setQuality(Number(e.target.value))}
-                className="w-full accent-indigo-500 cursor-pointer"
+                className="w-full accent-[#FF4E02] cursor-pointer"
               />
-              <div className="flex justify-between text-[11px] text-slate-500">
+              <div className="flex justify-between text-[11px] text-[#6B627F] font-semibold">
                 <span>Smaller size (10%)</span>
                 <span>Best quality (100%)</span>
               </div>
@@ -195,9 +193,9 @@ export default function ImageCompressorPage({ onBack }) {
 
             {/* Resolution Scaling */}
             <div className="space-y-2">
-              <div className="flex justify-between text-xs font-semibold">
-                <span className="text-slate-300">Scale Resolution</span>
-                <span className="text-indigo-400 font-bold">{Math.round(scale * 100)}%</span>
+              <div className="flex justify-between text-xs font-black">
+                <span className="text-[#3B3355]">Scale Resolution</span>
+                <span className="text-[#1400C3] font-black text-sm">{Math.round(scale * 100)}%</span>
               </div>
               <input
                 type="range"
@@ -206,9 +204,9 @@ export default function ImageCompressorPage({ onBack }) {
                 step="25"
                 value={Math.round(scale * 100)}
                 onChange={(e) => setScale(Number(e.target.value) / 100)}
-                className="w-full accent-indigo-500 cursor-pointer"
+                className="w-full accent-[#1400C3] cursor-pointer"
               />
-              <div className="flex justify-between text-[11px] text-slate-500">
+              <div className="flex justify-between text-[11px] text-[#6B627F] font-semibold">
                 <span>25%</span>
                 <span>50%</span>
                 <span>75%</span>
@@ -218,19 +216,19 @@ export default function ImageCompressorPage({ onBack }) {
 
             {/* Output Format */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-slate-300">
+              <label className="block text-xs font-black text-[#3B3355]">
                 Output Format
               </label>
               <select
                 value={format}
                 onChange={(e) => setFormat(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#1400C3]"
               >
                 <option value="image/webp">WebP (Recommended - Smallest)</option>
                 <option value="image/jpeg">JPEG / JPG (Universal)</option>
                 <option value="image/png">PNG (Lossless)</option>
               </select>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-[#6B627F] font-medium">
                 WebP gives 30% smaller files than JPEG at equal quality.
               </p>
             </div>
@@ -250,16 +248,16 @@ export default function ImageCompressorPage({ onBack }) {
         {files.length > 0 && (
           <div className="space-y-4">
             {/* Header / Actions */}
-            <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl bg-slate-800/40 border border-slate-700/60">
+            <div className="flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl bg-white border border-[#E5DCB8] shadow-sm">
               <div className="flex items-center gap-3">
-                <span className="font-bold text-white text-sm">
+                <span className="font-black text-[#1400C3] text-base">
                   {files.length} Image{files.length > 1 ? "s" : ""}
                 </span>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-[#6B627F] font-semibold">
                   Total Original: {formatBytes(totalOriginalSize)}
                 </span>
                 {anyDone && overallSavings > 0 && (
-                  <Badge color="emerald">
+                  <Badge color="orange">
                     Saved {overallSavings}% ({formatBytes(totalOriginalSize - totalCompressedSize)})
                   </Badge>
                 )}
@@ -278,7 +276,7 @@ export default function ImageCompressorPage({ onBack }) {
                 <Button
                   onClick={handleCompressAll}
                   loading={isCompressing}
-                  variant="primary"
+                  variant="orange"
                   size="md"
                   icon={Sparkles}
                 >
@@ -288,7 +286,7 @@ export default function ImageCompressorPage({ onBack }) {
                 {anyDone && (
                   <Button
                     onClick={initiateZipDownload}
-                    variant="emerald"
+                    variant="primary"
                     size="md"
                     icon={Archive}
                   >
@@ -303,27 +301,27 @@ export default function ImageCompressorPage({ onBack }) {
               {files.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center justify-between gap-4 p-3.5 rounded-xl bg-slate-800/30 border border-slate-700/50 hover:border-slate-600 transition-all"
+                  className="flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#E5DCB8] hover:border-[#1400C3] transition-all shadow-sm"
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <img
                       src={item.preview}
                       alt="Thumbnail"
-                      className="w-12 h-12 rounded-lg object-cover bg-slate-900 border border-slate-700 shrink-0"
+                      className="w-14 h-14 rounded-xl object-cover bg-[#F8F2D8] border border-[#E5DCB8] shrink-0"
                     />
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-white truncate max-w-xs sm:max-w-md">
+                      <p className="text-sm font-black text-[#1400C3] truncate max-w-xs sm:max-w-md">
                         {item.file.name}
                       </p>
-                      <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
+                      <div className="flex items-center gap-2 text-xs text-[#6B627F] mt-0.5 font-semibold">
                         <span>Original: {formatBytes(item.originalSize)}</span>
                         {item.compressedSize && (
                           <>
                             <span>&rarr;</span>
-                            <span className="text-emerald-400 font-bold">
+                            <span className="text-[#FF4E02] font-black text-sm">
                               {formatBytes(item.compressedSize)}
                             </span>
-                            <Badge color="emerald" className="text-[10px] py-0">
+                            <Badge color="orange" className="text-[10px] py-0">
                               -{item.savings}%
                             </Badge>
                           </>
@@ -337,13 +335,13 @@ export default function ImageCompressorPage({ onBack }) {
                       <button
                         type="button"
                         onClick={() => initiateSingleDownload(item)}
-                        className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer shadow-sm transition-colors"
+                        className="px-3.5 py-2 rounded-xl bg-[#FF4E02] hover:bg-[#E04200] text-white text-xs font-black flex items-center gap-1.5 cursor-pointer shadow-md shadow-[#FF4E02]/25 transition-colors"
                       >
-                        <Download className="w-3.5 h-3.5" />
+                        <Download className="w-3.5 h-3.5 stroke-[2.5]" />
                         <span>Download</span>
                       </button>
                     ) : (
-                      <span className="text-xs text-slate-500 font-medium px-2 py-1">
+                      <span className="text-xs text-[#6B627F] font-bold px-2 py-1">
                         {item.status === "processing" ? "Compressing..." : "Ready"}
                       </span>
                     )}
@@ -351,7 +349,7 @@ export default function ImageCompressorPage({ onBack }) {
                     <button
                       type="button"
                       onClick={() => removeFile(item.id)}
-                      className="p-1.5 text-slate-500 hover:text-rose-400 transition-colors"
+                      className="p-1.5 text-[#6B627F] hover:text-rose-600 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

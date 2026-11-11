@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import { adConfig } from "../../config/adConfig";
 
-/**
- * Responsive Google AdSense Banner Component
- * Automatically switches between live Google AdSense and development placeholder.
- */
 export default function AdBanner({ slotId = adConfig.slots.topBanner, format = "auto", className = "" }) {
   useEffect(() => {
     if (adConfig.enabled) {
@@ -13,7 +9,7 @@ export default function AdBanner({ slotId = adConfig.slots.topBanner, format = "
           (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
       } catch (err) {
-        // Suppress adsbygoogle duplicate push errors
+        // Suppress
       }
     }
   }, []);
@@ -39,13 +35,13 @@ export default function AdBanner({ slotId = adConfig.slots.topBanner, format = "
 
   return (
     <div
-      className={`w-full my-4 p-4 rounded-xl border border-dashed border-slate-700/60 bg-slate-800/30 flex flex-col items-center justify-center text-center transition-all ${className}`}
+      className={`w-full my-4 p-4 rounded-2xl border border-dashed border-[#D6CA9E] bg-white/60 flex flex-col items-center justify-center text-center transition-all shadow-sm ${className}`}
     >
-      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
-        <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1400C3]">
+        <span className="inline-block w-2 h-2 rounded-full bg-[#FF4E02]"></span>
         Google AdSense Ready
       </div>
-      <p className="text-xs text-slate-400 mt-1">
+      <p className="text-xs text-[#6B627F] font-medium mt-1">
         Banner Slot #{slotId} &bull; Responsive 728x90 / 320x50
       </p>
     </div>

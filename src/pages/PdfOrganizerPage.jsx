@@ -117,8 +117,6 @@ export default function PdfOrganizerPage({ onBack }) {
     <ToolLayout
       title="PDF Page Organizer & Rotator"
       description="Rotate upside-down pages, reorient scanned files, and remove unnecessary pages from your PDF."
-      badgeText="Page Manager"
-      badgeColor="rose"
       onBack={onBack}
     >
       <div className="space-y-8">
@@ -133,12 +131,12 @@ export default function PdfOrganizerPage({ onBack }) {
         ) : (
           <div className="space-y-6">
             {/* Action Bar */}
-            <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/60 flex flex-wrap items-center justify-between gap-4">
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border-2 border-[#E5DCB8] flex flex-wrap items-center justify-between gap-4 shadow-sm">
               <div>
-                <h4 className="font-bold text-white text-sm">
+                <h4 className="font-black text-[#1400C3] text-base">
                   {pdfData.file.name}
                 </h4>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-[#3B3355] font-semibold">
                   {remainingPagesCount} of {pdfData.pageCount} pages will be kept &bull; {formatBytes(pdfData.file.size)}
                 </p>
               </div>
@@ -156,7 +154,7 @@ export default function PdfOrganizerPage({ onBack }) {
                 <Button
                   onClick={handleOrganizePdf}
                   loading={isProcessing}
-                  variant="primary"
+                  variant="orange"
                   size="md"
                   icon={Sparkles}
                 >
@@ -166,7 +164,7 @@ export default function PdfOrganizerPage({ onBack }) {
                 <button
                   type="button"
                   onClick={() => setPdfData(null)}
-                  className="text-xs text-slate-400 hover:text-rose-400 px-2 py-1"
+                  className="text-xs text-rose-600 hover:text-rose-700 font-bold px-2 py-1 cursor-pointer"
                 >
                   Change PDF
                 </button>
@@ -182,66 +180,66 @@ export default function PdfOrganizerPage({ onBack }) {
                 return (
                   <div
                     key={idx}
-                    className={`relative rounded-xl border p-3 flex flex-col justify-between transition-all ${
+                    className={`relative rounded-2xl border-2 p-3 flex flex-col justify-between transition-all ${
                       isExcluded
-                        ? "bg-slate-900/40 border-slate-800 opacity-40 line-through"
-                        : "bg-slate-900 border-slate-700/80 shadow-md"
+                        ? "bg-[#F8F2D8]/40 border-[#E5DCB8] opacity-40 line-through"
+                        : "bg-white border-[#E5DCB8] hover:border-[#1400C3] shadow-sm"
                     }`}
                   >
                     {/* Header */}
                     <div className="flex items-center justify-between text-xs mb-2">
-                      <span className="font-bold text-slate-300">
+                      <span className="font-black text-[#1400C3]">
                         Page {idx + 1}
                       </span>
                       {rotation > 0 && !isExcluded && (
-                        <span className="text-[10px] text-rose-400 font-semibold">
+                        <span className="text-[10px] text-[#FF4E02] font-black">
                           +{rotation}&deg;
                         </span>
                       )}
                     </div>
 
-                    {/* Dummy Visual Representation of Page */}
-                    <div className="aspect-[3/4] bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center p-2 mb-3 overflow-hidden">
+                    {/* Visual Representation of Page */}
+                    <div className="aspect-[3/4] bg-[#F8F2D8] border border-[#E5DCB8] rounded-xl flex items-center justify-center p-2 mb-3 overflow-hidden">
                       <div
                         style={{
                           transform: `rotate(${rotation}deg)`,
                           transition: "transform 0.2s ease-in-out",
                         }}
-                        className="w-full h-full flex flex-col justify-center items-center text-slate-600"
+                        className="w-full h-full flex flex-col justify-center items-center text-[#1400C3]"
                       >
                         <FileText className="w-8 h-8 opacity-40 mb-1" />
-                        <span className="text-[10px] font-mono text-slate-400">
+                        <span className="text-[10px] font-mono text-[#3B3355] font-bold">
                           P.{idx + 1}
                         </span>
                       </div>
                     </div>
 
                     {/* Bottom Page Controls */}
-                    <div className="flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
+                    <div className="flex items-center justify-between pt-2 border-t border-[#E5DCB8] text-xs">
                       <button
                         type="button"
                         onClick={() => rotatePage(idx)}
                         disabled={isExcluded}
-                        className="p-1 rounded text-slate-300 hover:text-indigo-400 hover:bg-slate-800 transition-colors disabled:opacity-30"
+                        className="p-1 rounded text-[#1400C3] hover:text-[#FF4E02] hover:bg-[#F8F2D8] transition-colors disabled:opacity-30 cursor-pointer"
                         title="Rotate 90 degrees clockwise"
                       >
-                        <RotateCw className="w-3.5 h-3.5" />
+                        <RotateCw className="w-4 h-4 stroke-[2.2]" />
                       </button>
 
                       <button
                         type="button"
                         onClick={() => toggleExcludePage(idx)}
-                        className={`p-1 rounded transition-colors ${
+                        className={`p-1 rounded transition-colors cursor-pointer ${
                           isExcluded
-                            ? "text-emerald-400 hover:bg-slate-800"
-                            : "text-slate-500 hover:text-rose-400 hover:bg-slate-800"
+                            ? "text-[#FF4E02] hover:bg-[#F8F2D8]"
+                            : "text-[#6B627F] hover:text-rose-600 hover:bg-[#F8F2D8]"
                         }`}
                         title={isExcluded ? "Keep this page" : "Delete this page"}
                       >
                         {isExcluded ? (
-                          <Undo2 className="w-3.5 h-3.5" />
+                          <Undo2 className="w-4 h-4 stroke-[2.2]" />
                         ) : (
-                          <Trash2 className="w-3.5 h-3.5" />
+                          <Trash2 className="w-4 h-4" />
                         )}
                       </button>
                     </div>
@@ -252,19 +250,19 @@ export default function PdfOrganizerPage({ onBack }) {
 
             {/* Result Download Card */}
             {resultBlob && (
-              <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4 animate-slide-up">
+              <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FF4E02] flex flex-col sm:flex-row items-center justify-between gap-4 animate-slide-up shadow-xl">
                 <div>
-                  <h4 className="font-bold text-white text-base">
+                  <h4 className="font-black text-[#1400C3] text-lg">
                     Organized PDF Ready!
                   </h4>
-                  <p className="text-xs text-slate-300">
+                  <p className="text-xs text-[#3B3355] font-semibold">
                     {remainingPagesCount} pages organized &bull; {formatBytes(resultBlob.size)}
                   </p>
                 </div>
 
                 <Button
                   onClick={() => setShowAdModal(true)}
-                  variant="emerald"
+                  variant="orange"
                   size="lg"
                   icon={Download}
                 >

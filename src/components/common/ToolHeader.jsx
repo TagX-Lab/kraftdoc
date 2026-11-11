@@ -12,7 +12,7 @@ export default function ToolHeader({
         <button
           type="button"
           onClick={onBack}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-indigo-400 transition-colors mb-4 group cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1400C3] hover:text-[#FF4E02] transition-colors mb-4 group cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span>Back to All Tools</span>
@@ -20,12 +20,14 @@ export default function ToolHeader({
       )}
 
       <div className="flex flex-wrap items-center gap-3 mb-2">
-        <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-black text-[#1400C3] tracking-tight">
           {title}
         </h1>
       </div>
 
-      <p className="max-w-2xl text-slate-400 text-sm">{description}</p>
+      <p className="max-w-2xl text-[#3B3355] text-sm font-medium leading-relaxed">
+        {description}
+      </p>
     </div>
   );
 }

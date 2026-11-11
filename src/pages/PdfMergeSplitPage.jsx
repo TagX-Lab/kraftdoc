@@ -199,36 +199,34 @@ export default function PdfMergeSplitPage({ onBack }) {
     <ToolLayout
       title="PDF Merge & Splitter"
       description="Combine multiple PDF files into one clean document, or extract and split pages without sending files over the internet."
-      badgeText="Private & Fast"
-      badgeColor="violet"
       onBack={onBack}
     >
       <div className="space-y-8">
         {/* Tab Switcher */}
-        <div className="flex border-b border-slate-700/60 pb-1 gap-2">
+        <div className="flex border-b-2 border-[#E5DCB8] pb-1 gap-3">
           <button
             type="button"
             onClick={() => setActiveTab("merge")}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all ${
+            className={`px-5 py-3 rounded-2xl font-black text-sm flex items-center gap-2 transition-all cursor-pointer ${
               activeTab === "merge"
-                ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/25"
-                : "text-slate-400 hover:text-white hover:bg-slate-800/40"
+                ? "bg-[#1400C3] text-white shadow-lg shadow-[#1400C3]/25"
+                : "text-[#3B3355] hover:text-[#1400C3] hover:bg-white"
             }`}
           >
-            <Layers className="w-4 h-4" />
+            <Layers className="w-4 h-4 stroke-[2.2]" />
             <span>Merge Multiple PDFs</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("split")}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all ${
+            className={`px-5 py-3 rounded-2xl font-black text-sm flex items-center gap-2 transition-all cursor-pointer ${
               activeTab === "split"
-                ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/25"
-                : "text-slate-400 hover:text-white hover:bg-slate-800/40"
+                ? "bg-[#FF4E02] text-white shadow-lg shadow-[#FF4E02]/25"
+                : "text-[#3B3355] hover:text-[#FF4E02] hover:bg-white"
             }`}
           >
-            <Scissors className="w-4 h-4" />
+            <Scissors className="w-4 h-4 stroke-[2.2]" />
             <span>Split / Extract Pages</span>
           </button>
         </div>
@@ -246,19 +244,19 @@ export default function PdfMergeSplitPage({ onBack }) {
 
             {mergeFiles.length > 0 && (
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 rounded-xl bg-slate-800/40 border border-slate-700/60">
+                <div className="flex items-center justify-between p-5 rounded-2xl bg-white border border-[#E5DCB8] shadow-sm">
                   <div className="flex items-center gap-3">
-                    <span className="font-bold text-white text-sm">
+                    <span className="font-black text-[#1400C3] text-base">
                       {mergeFiles.length} PDF Files
                     </span>
-                    <Badge color="violet">Total {totalMergePages} Pages</Badge>
+                    <Badge color="orange">Total {totalMergePages} Pages</Badge>
                   </div>
 
                   <Button
                     onClick={handleMergeAction}
                     loading={isMerging}
                     disabled={mergeFiles.length < 2}
-                    variant="primary"
+                    variant="orange"
                     size="md"
                     icon={Sparkles}
                   >
@@ -270,17 +268,17 @@ export default function PdfMergeSplitPage({ onBack }) {
                   {mergeFiles.map((item, idx) => (
                     <div
                       key={item.id}
-                      className="flex items-center justify-between gap-4 p-3.5 rounded-xl bg-slate-800/30 border border-slate-700/50"
+                      className="flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#E5DCB8] hover:border-[#1400C3] transition-all shadow-sm"
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-xs shrink-0">
+                        <div className="w-9 h-9 rounded-xl bg-[#1400C3]/10 text-[#1400C3] flex items-center justify-center font-black text-xs shrink-0">
                           #{idx + 1}
                         </div>
                         <div className="min-w-0">
-                          <p className="text-sm font-semibold text-white truncate max-w-sm sm:max-w-md">
+                          <p className="text-sm font-black text-[#1400C3] truncate max-w-sm sm:max-w-md">
                             {item.name}
                           </p>
-                          <p className="text-xs text-slate-400">
+                          <p className="text-xs text-[#6B627F] font-semibold">
                             {item.pages} pages &bull; {formatBytes(item.size)}
                           </p>
                         </div>
@@ -291,24 +289,24 @@ export default function PdfMergeSplitPage({ onBack }) {
                           type="button"
                           onClick={() => moveMergeUp(idx)}
                           disabled={idx === 0}
-                          className="p-1.5 text-slate-400 hover:text-white disabled:opacity-20"
+                          className="p-1.5 text-[#1400C3] hover:text-[#FF4E02] hover:bg-[#F8F2D8] rounded-lg disabled:opacity-20 cursor-pointer"
                           title="Move Up"
                         >
-                          <ArrowUp className="w-4 h-4" />
+                          <ArrowUp className="w-4 h-4 stroke-[2.2]" />
                         </button>
                         <button
                           type="button"
                           onClick={() => moveMergeDown(idx)}
                           disabled={idx === mergeFiles.length - 1}
-                          className="p-1.5 text-slate-400 hover:text-white disabled:opacity-20"
+                          className="p-1.5 text-[#1400C3] hover:text-[#FF4E02] hover:bg-[#F8F2D8] rounded-lg disabled:opacity-20 cursor-pointer"
                           title="Move Down"
                         >
-                          <ArrowDown className="w-4 h-4" />
+                          <ArrowDown className="w-4 h-4 stroke-[2.2]" />
                         </button>
                         <button
                           type="button"
                           onClick={() => removeMergeFile(item.id)}
-                          className="p-1.5 text-slate-500 hover:text-rose-400"
+                          className="p-1.5 text-[#6B627F] hover:text-rose-600 cursor-pointer"
                           title="Remove"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -321,16 +319,16 @@ export default function PdfMergeSplitPage({ onBack }) {
             )}
 
             {mergedBlob && (
-              <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4 animate-slide-up">
+              <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FF4E02] flex flex-col sm:flex-row items-center justify-between gap-4 animate-slide-up shadow-xl">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                    <FileCheck2 className="w-6 h-6" />
+                  <div className="w-12 h-12 rounded-2xl bg-[#FF4E02]/15 text-[#FF4E02] flex items-center justify-center">
+                    <FileCheck2 className="w-6 h-6 stroke-[2.2]" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white text-base">
+                    <h4 className="font-black text-[#1400C3] text-lg">
                       Merged PDF is Ready!
                     </h4>
-                    <p className="text-xs text-slate-300">
+                    <p className="text-xs text-[#3B3355] font-semibold">
                       Consolidated {totalMergePages} pages &bull; {formatBytes(mergedBlob.size)}
                     </p>
                   </div>
@@ -344,7 +342,7 @@ export default function PdfMergeSplitPage({ onBack }) {
                       sizeText: formatBytes(mergedBlob.size),
                     })
                   }
-                  variant="emerald"
+                  variant="orange"
                   size="lg"
                   icon={Download}
                 >
@@ -367,17 +365,17 @@ export default function PdfMergeSplitPage({ onBack }) {
                 subtitle="Select the PDF document you want to extract pages from"
               />
             ) : (
-              <div className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/60 space-y-6">
+              <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#E5DCB8] space-y-6 shadow-sm">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-sm">
+                    <div className="w-10 h-10 rounded-2xl bg-[#1400C3]/10 text-[#1400C3] flex items-center justify-center font-black text-sm">
                       PDF
                     </div>
                     <div>
-                      <h4 className="font-bold text-white text-sm">
+                      <h4 className="font-black text-[#1400C3] text-base">
                         {splitFile.name}
                       </h4>
-                      <p className="text-xs text-slate-400">
+                      <p className="text-xs text-[#6B627F] font-semibold">
                         {splitPageCount} total pages &bull; {formatBytes(splitFile.size)}
                       </p>
                     </div>
@@ -390,7 +388,7 @@ export default function PdfMergeSplitPage({ onBack }) {
                       setSplitResultBlob(null);
                       setSplitZipFiles(null);
                     }}
-                    className="text-xs text-rose-400 hover:text-rose-300"
+                    className="text-xs text-rose-600 hover:text-rose-700 font-bold cursor-pointer"
                   >
                     Change PDF
                   </button>
@@ -398,7 +396,7 @@ export default function PdfMergeSplitPage({ onBack }) {
 
                 {/* Modes */}
                 <div className="space-y-3">
-                  <div className="flex items-center gap-4 text-xs text-slate-300">
+                  <div className="flex items-center gap-5 text-xs text-[#3B3355] font-bold">
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="radio"
@@ -406,7 +404,7 @@ export default function PdfMergeSplitPage({ onBack }) {
                         value="range"
                         checked={splitMode === "range"}
                         onChange={() => setSplitMode("range")}
-                        className="text-indigo-600 focus:ring-0"
+                        className="text-[#FF4E02] focus:ring-0 accent-[#FF4E02]"
                       />
                       <span>Extract Specific Page Range</span>
                     </label>
@@ -418,7 +416,7 @@ export default function PdfMergeSplitPage({ onBack }) {
                         value="all"
                         checked={splitMode === "all"}
                         onChange={() => setSplitMode("all")}
-                        className="text-indigo-600 focus:ring-0"
+                        className="text-[#FF4E02] focus:ring-0 accent-[#FF4E02]"
                       />
                       <span>Split Every Page into Separate Files (ZIP)</span>
                     </label>
@@ -426,7 +424,7 @@ export default function PdfMergeSplitPage({ onBack }) {
 
                   {splitMode === "range" && (
                     <div className="max-w-md pt-2 space-y-1">
-                      <label className="block text-xs font-semibold text-slate-300">
+                      <label className="block text-xs font-black text-[#1400C3]">
                         Page Ranges (e.g., "1-3, 5, 8-10")
                       </label>
                       <input
@@ -434,9 +432,9 @@ export default function PdfMergeSplitPage({ onBack }) {
                         value={pageRangeInput}
                         onChange={(e) => setPageRangeInput(e.target.value)}
                         placeholder={`e.g. 1-${Math.min(splitPageCount, 3)}`}
-                        className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                        className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#FF4E02]"
                       />
-                      <p className="text-[11px] text-slate-400">
+                      <p className="text-[11px] text-[#6B627F] font-semibold">
                         Valid range: 1 to {splitPageCount}
                       </p>
                     </div>
@@ -446,7 +444,7 @@ export default function PdfMergeSplitPage({ onBack }) {
                 <Button
                   onClick={handleSplitAction}
                   loading={isSplitting}
-                  variant="primary"
+                  variant="orange"
                   size="md"
                   icon={Scissors}
                 >
@@ -457,12 +455,12 @@ export default function PdfMergeSplitPage({ onBack }) {
 
             {/* Split Results */}
             {splitResultBlob && (
-              <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4 animate-slide-up">
+              <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FF4E02] flex flex-col sm:flex-row items-center justify-between gap-4 animate-slide-up shadow-xl">
                 <div>
-                  <h4 className="font-bold text-white text-base">
+                  <h4 className="font-black text-[#1400C3] text-lg">
                     Pages Extracted!
                   </h4>
-                  <p className="text-xs text-slate-300">
+                  <p className="text-xs text-[#3B3355] font-semibold">
                     Selected pages saved into new document &bull; {formatBytes(splitResultBlob.size)}
                   </p>
                 </div>
@@ -475,7 +473,7 @@ export default function PdfMergeSplitPage({ onBack }) {
                       sizeText: formatBytes(splitResultBlob.size),
                     })
                   }
-                  variant="emerald"
+                  variant="orange"
                   size="lg"
                   icon={Download}
                 >
@@ -485,12 +483,12 @@ export default function PdfMergeSplitPage({ onBack }) {
             )}
 
             {splitZipFiles && (
-              <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4 animate-slide-up">
+              <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FF4E02] flex flex-col sm:flex-row items-center justify-between gap-4 animate-slide-up shadow-xl">
                 <div>
-                  <h4 className="font-bold text-white text-base">
+                  <h4 className="font-black text-[#1400C3] text-lg">
                     {splitZipFiles.length} Pages Ready in ZIP!
                   </h4>
-                  <p className="text-xs text-slate-300">
+                  <p className="text-xs text-[#3B3355] font-semibold">
                     Each page saved as an individual PDF.
                   </p>
                 </div>
@@ -503,7 +501,7 @@ export default function PdfMergeSplitPage({ onBack }) {
                       sizeText: `${splitZipFiles.length} pages`,
                     })
                   }
-                  variant="emerald"
+                  variant="orange"
                   size="lg"
                   icon={Archive}
                 >

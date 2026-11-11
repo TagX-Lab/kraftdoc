@@ -40,31 +40,31 @@ export default function DownloadAdModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden p-6 text-center animate-scale-up">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-fade-in">
+      <div className="relative w-full max-w-lg bg-[#F8F2D8] border-2 border-[#1400C3]/20 rounded-3xl shadow-2xl overflow-hidden p-6 text-center animate-scale-up">
         {/* Close button */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-100 transition-colors p-1 rounded-lg hover:bg-slate-800"
+          className="absolute top-4 right-4 text-[#3B3355] hover:text-[#1400C3] transition-colors p-1 rounded-lg hover:bg-white/80"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Icon & Title */}
-        <div className="mx-auto w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4">
+        <div className="mx-auto w-14 h-14 rounded-2xl bg-[#FF4E02]/15 border border-[#FF4E02]/30 flex items-center justify-center text-[#FF4E02] mb-4">
           <Sparkles className="w-7 h-7" />
         </div>
 
-        <h3 className="text-xl font-bold text-white mb-1">
+        <h3 className="text-2xl font-black text-[#1400C3] mb-1">
           Your File is Ready!
         </h3>
-        <p className="text-sm text-slate-400 mb-4 truncate px-4">
+        <p className="text-sm text-[#3B3355] font-medium mb-4 truncate px-4">
           {fileName} {fileSizeText ? `(${fileSizeText})` : ""}
         </p>
 
         {/* High-value Interstitial Ad Space */}
-        <div className="my-4 p-4 rounded-xl border border-dashed border-slate-700 bg-slate-800/40 min-h-[140px] flex flex-col items-center justify-center">
+        <div className="my-4 p-5 rounded-2xl border border-dashed border-[#D6CA9E] bg-white min-h-[140px] flex flex-col items-center justify-center shadow-inner">
           {adConfig.enabled ? (
             <ins
               className="adsbygoogle"
@@ -75,40 +75,40 @@ export default function DownloadAdModal({
             />
           ) : (
             <>
-              <span className="text-[11px] font-semibold tracking-wider text-emerald-400 uppercase bg-emerald-500/10 px-2.5 py-0.5 rounded-full mb-2">
+              <span className="text-[11px] font-black tracking-wider text-[#FF4E02] uppercase bg-[#FF4E02]/10 px-3 py-1 rounded-full mb-2">
                 High-Converting Ad Placement
               </span>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs font-bold text-[#1400C3]">
                 Sponsor / Google AdSense Medium Rectangle (300x250)
               </p>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <p className="text-[11px] text-[#6B627F] mt-1 font-medium">
                 Highest CTR location on utility websites
               </p>
             </>
           )}
         </div>
 
-        {/* Action Button */}
+        {/* Action Button in Blaze Orange */}
         <div className="mt-6">
           <button
             type="button"
             onClick={handleDownload}
-            className={`w-full py-3.5 px-6 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg ${
+            className={`w-full py-4 px-6 rounded-2xl font-black text-sm flex items-center justify-center gap-2.5 transition-all shadow-xl cursor-pointer ${
               countdown > 0
-                ? "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
-                : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-600/30"
+                ? "bg-white hover:bg-[#F3ECCE] text-[#1400C3] border border-[#D6CA9E]"
+                : "bg-[#FF4E02] hover:bg-[#E04200] text-white shadow-[#FF4E02]/30 active:scale-95"
             }`}
           >
             {countdown > 0 ? (
               <>
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-700 text-xs font-bold text-indigo-400">
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#1400C3] text-xs font-black text-white">
                   {countdown}
                 </span>
                 <span>Download Ready Soon... (or Click to Skip)</span>
               </>
             ) : (
               <>
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                <CheckCircle2 className="w-5 h-5 text-white" />
                 <span>Download Now</span>
               </>
             )}

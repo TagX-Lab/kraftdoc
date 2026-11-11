@@ -132,32 +132,30 @@ export default function ImageConverterPage({ onBack }) {
     <ToolLayout
       title="Image Format Converter"
       description="Convert JPG, PNG, and WebP images instantly in your browser with zero quality degradation."
-      badgeText="Lightning Fast"
-      badgeColor="amber"
       onBack={onBack}
     >
       <div className="space-y-8">
         {/* Settings Box */}
-        <div className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/60 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#E5DCB8] grid grid-cols-1 md:grid-cols-2 gap-6 shadow-sm">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-black text-[#1400C3] mb-1.5">
               Target Output Format
             </label>
             <select
               value={targetFormat}
               onChange={(e) => setTargetFormat(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+              className="w-full bg-[#F8F2D8]/60 border-2 border-[#E5DCB8] rounded-xl px-3.5 py-2.5 text-sm text-[#1400C3] font-bold focus:outline-none focus:border-[#1400C3]"
             >
               <option value="image/webp">WebP (Modern, Smallest Size)</option>
-              <option value="image/png">PNG (Lossless & Transparent)</option>
+              <option value="image/png">PNG (Lossless &amp; Transparent)</option>
               <option value="image/jpeg">JPG / JPEG (Universal Standard)</option>
             </select>
           </div>
 
           <div>
-            <div className="flex justify-between text-xs font-semibold mb-1.5">
-              <span className="text-slate-300">Conversion Quality</span>
-              <span className="text-indigo-400 font-bold">{quality}%</span>
+            <div className="flex justify-between text-xs font-black mb-1.5">
+              <span className="text-[#3B3355]">Conversion Quality</span>
+              <span className="text-[#FF4E02] font-black text-sm">{quality}%</span>
             </div>
             <input
               type="range"
@@ -166,9 +164,9 @@ export default function ImageConverterPage({ onBack }) {
               value={quality}
               onChange={(e) => setQuality(Number(e.target.value))}
               disabled={targetFormat === "image/png"}
-              className="w-full accent-indigo-500 cursor-pointer disabled:opacity-50"
+              className="w-full accent-[#FF4E02] cursor-pointer disabled:opacity-50"
             />
-            <p className="text-[11px] text-slate-400 mt-1">
+            <p className="text-[11px] text-[#6B627F] font-semibold mt-1">
               {targetFormat === "image/png"
                 ? "PNG is strictly lossless (quality slider disabled)."
                 : "Higher quality preserves finer details."}
@@ -188,8 +186,8 @@ export default function ImageConverterPage({ onBack }) {
         {/* Action Bar & Files */}
         {files.length > 0 && (
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 rounded-xl bg-slate-800/40 border border-slate-700/60">
-              <span className="text-sm font-bold text-white">
+            <div className="flex items-center justify-between p-5 rounded-2xl bg-white border border-[#E5DCB8] shadow-sm">
+              <span className="text-base font-black text-[#1400C3]">
                 {files.length} Image{files.length > 1 ? "s" : ""} Selected
               </span>
 
@@ -197,7 +195,7 @@ export default function ImageConverterPage({ onBack }) {
                 <Button
                   onClick={handleConvertAll}
                   loading={isConverting}
-                  variant="primary"
+                  variant="orange"
                   size="md"
                   icon={Sparkles}
                 >
@@ -207,7 +205,7 @@ export default function ImageConverterPage({ onBack }) {
                 {anyDone && (
                   <Button
                     onClick={initiateZipDownload}
-                    variant="emerald"
+                    variant="primary"
                     size="md"
                     icon={Archive}
                   >
@@ -221,22 +219,22 @@ export default function ImageConverterPage({ onBack }) {
               {files.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center justify-between gap-4 p-3.5 rounded-xl bg-slate-800/30 border border-slate-700/50"
+                  className="flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#E5DCB8] hover:border-[#1400C3] shadow-sm transition-all"
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <img
                       src={item.preview}
                       alt="Thumbnail"
-                      className="w-12 h-12 rounded-lg object-cover bg-slate-900 border border-slate-700 shrink-0"
+                      className="w-14 h-14 rounded-xl object-cover bg-[#F8F2D8] border border-[#E5DCB8] shrink-0"
                     />
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-white truncate max-w-xs sm:max-w-md">
+                      <p className="text-sm font-black text-[#1400C3] truncate max-w-xs sm:max-w-md">
                         {item.file.name}
                       </p>
-                      <div className="flex items-center gap-2 text-xs text-slate-400">
-                        <span className="uppercase">{item.originalExt}</span>
+                      <div className="flex items-center gap-2 text-xs text-[#6B627F] font-semibold">
+                        <span className="uppercase font-bold text-[#1400C3]">{item.originalExt}</span>
                         <span>&rarr;</span>
-                        <span className="text-amber-400 font-bold uppercase">
+                        <span className="text-[#FF4E02] font-black uppercase">
                           {getTargetExt()}
                         </span>
                         <span>&bull;</span>
@@ -250,13 +248,13 @@ export default function ImageConverterPage({ onBack }) {
                       <button
                         type="button"
                         onClick={() => initiateSingleDownload(item)}
-                        className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1.5"
+                        className="px-3.5 py-2 rounded-xl bg-[#FF4E02] hover:bg-[#E04200] text-white text-xs font-black flex items-center gap-1.5 cursor-pointer shadow-md shadow-[#FF4E02]/25"
                       >
-                        <Download className="w-3.5 h-3.5" />
+                        <Download className="w-3.5 h-3.5 stroke-[2.5]" />
                         <span>Download</span>
                       </button>
                     ) : (
-                      <span className="text-xs text-slate-400 px-2 py-1">
+                      <span className="text-xs text-[#6B627F] font-bold px-2 py-1">
                         {item.status === "converting" ? "Converting..." : "Ready"}
                       </span>
                     )}
@@ -264,7 +262,7 @@ export default function ImageConverterPage({ onBack }) {
                     <button
                       type="button"
                       onClick={() => removeFile(item.id)}
-                      className="p-1.5 text-slate-500 hover:text-rose-400"
+                      className="p-1.5 text-[#6B627F] hover:text-rose-600 cursor-pointer"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

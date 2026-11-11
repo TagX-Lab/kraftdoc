@@ -1,30 +1,47 @@
 @import "tailwindcss";
 
+@theme {
+  --color-warm-white: #F8F2D8;
+  --color-warm-cream: #EFE6C4;
+  --color-warm-border: #E5DCB8;
+  --color-warm-surface: #FFFFFF;
+  --color-bluebonnet: #1400C3;
+  --color-bluebonnet-deep: #0D0082;
+  --color-blaze-orange: #FF4E02;
+  --color-blaze-dark: #D93E00;
+  --color-text-main: #1400C3;
+  --color-text-body: #3B3355;
+  --color-text-muted: #6B627F;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-slate-950 text-slate-100 min-h-screen antialiased overflow-x-hidden;
+    background-color: #F8F2D8;
+    color: #1400C3;
+    min-height: 100vh;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar in Warm White & Blaze Orange */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: #F8F2D8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #E0D3A6;
   border-radius: 9999px;
-  border: 2px solid #020617;
+  border: 2px solid #F8F2D8;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #FF4E02;
 }
 
 /* Ambient Floating Glow Animations */
@@ -48,11 +65,11 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    opacity: 0.25;
+    opacity: 0.18;
     filter: blur(80px);
   }
   50% {
-    opacity: 0.45;
+    opacity: 0.35;
     filter: blur(100px);
   }
 }
