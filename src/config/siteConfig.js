@@ -7,7 +7,7 @@ export const siteConfig = {
   name: "DocuPix",
   tagline: "Free In-Browser Image & PDF Suite",
   description:
-    "100% private, client-side tools to compress images, resize govt exam photos, convert images to PDF, and merge or split PDFs without uploading files to any server.",
+    "100% private, client-side tools to compress images, resize photos, convert image formats, and merge or split PDFs without uploading files to any server.",
   domain: "https://docupix.pages.dev",
   author: "TAGX Labs™",
 
@@ -45,10 +45,10 @@ export const siteConfig = {
   features: [
     {
       id: "exam-resizer",
-      title: "Govt Exam Photo & Signature Resizer",
+      title: "Photo & Image Resizer",
       badge: "Most Popular",
       badgeColor: "emerald",
-      shortDesc: "Resize & compress photos to exact KB and dimensions for TNPSC, SSC, UPSC, and IBPS.",
+      shortDesc: "Resize & compress photos to exact KB and pixel dimensions freely in your browser.",
       icon: "UserCheck",
       route: "exam-resizer",
     },
