@@ -32,7 +32,8 @@ export function useNetworkStatus() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-      const response = await fetch(`/favicon.svg?_t=${Date.now()}`, {
+      const baseUrl = import.meta.env.BASE_URL || "/";
+      const response = await fetch(`${baseUrl}favicon.svg?_t=${Date.now()}`, {
         method: "HEAD",
         signal: controller.signal,
         cache: "no-store",
