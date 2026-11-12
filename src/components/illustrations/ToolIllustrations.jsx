@@ -14,36 +14,43 @@ export function HeroShowcaseIllustration({ className = "" }) {
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        {/* Soft Package Gradients */}
+        {/* Voyd Group Inspired Crossroads Gradients */}
         <linearGradient id="pouchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FFF2A8" />
-          <stop offset="50%" stopColor="#FED867" />
-          <stop offset="100%" stopColor="#F5BF38" />
+          <stop offset="0%" stopColor="#007BFF" />
+          <stop offset="45%" stopColor="#2038E2" />
+          <stop offset="100%" stopColor="#121E94" />
+        </linearGradient>
+
+        <linearGradient id="crossroadsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#007BFF" />
+          <stop offset="35%" stopColor="#FFE6D0" />
+          <stop offset="70%" stopColor="#FF5A00" />
+          <stop offset="100%" stopColor="#2038E2" />
         </linearGradient>
 
         <linearGradient id="blueBadge" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#1F00E0" />
-          <stop offset="100%" stopColor="#1400C3" />
+          <stop offset="0%" stopColor="#007BFF" />
+          <stop offset="100%" stopColor="#2038E2" />
         </linearGradient>
 
         <linearGradient id="orangeBadge" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FF6B2B" />
-          <stop offset="100%" stopColor="#FF4E02" />
+          <stop offset="0%" stopColor="#FF7A33" />
+          <stop offset="100%" stopColor="#FF5A00" />
         </linearGradient>
 
         <filter id="softShadow" x="-10%" y="-10%" width="130%" height="130%">
-          <feDropShadow dx="0" dy="12" stdDeviation="10" floodColor="#1400C3" floodOpacity="0.18" />
+          <feDropShadow dx="0" dy="12" stdDeviation="10" floodColor="#1A1A1A" floodOpacity="0.18" />
         </filter>
 
         <filter id="floatShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="3" dy="8" stdDeviation="6" floodColor="#000" floodOpacity="0.15" />
+          <feDropShadow dx="3" dy="8" stdDeviation="6" floodColor="#1A1A1A" floodOpacity="0.18" />
         </filter>
       </defs>
 
       {/* Floating 3D Sparkles in Background */}
-      <path d="M45 50L48 38L51 50L63 53L51 56L48 68L45 56L33 53Z" fill="#FF4E02" />
-      <path d="M335 45L337 35L339 45L349 47L339 49L337 59L335 49L325 47Z" fill="#1400C3" />
-      <path d="M345 270L347 262L349 270L357 272L349 274L347 282L345 274L337 272Z" fill="#FF4E02" />
+      <path d="M45 50L48 38L51 50L63 53L51 56L48 68L45 56L33 53Z" fill="#FF5A00" />
+      <path d="M335 45L337 35L339 45L349 47L339 49L337 59L335 49L325 47Z" fill="#007BFF" />
+      <path d="M345 270L347 262L349 270L357 272L349 274L347 282L345 274L337 272Z" fill="#2038E2" />
 
       {/* Main 3D Pouch / Package Body */}
       <g filter="url(#softShadow)">
@@ -55,29 +62,29 @@ export function HeroShowcaseIllustration({ className = "" }) {
           height="270"
           rx="32"
           fill="url(#pouchGrad)"
-          stroke="#1400C3"
+          stroke="#1A1A1A"
           strokeWidth="3.5"
         />
 
-        {/* Top Crimped Seal / Header */}
+        {/* Top Crimped Seal / Header in Portland Orange */}
         <path
           d="M65 65C65 48.4315 78.4315 35 95 35H285C301.569 35 315 48.4315 315 65V75H65V65Z"
-          fill="#F5BA2A"
-          stroke="#1400C3"
+          fill="#FF5A00"
+          stroke="#1A1A1A"
           strokeWidth="3.5"
         />
 
-        {/* Top Hang Hole */}
-        <rect x="165" y="47" width="50" height="12" rx="6" fill="#F8F2D8" stroke="#1400C3" strokeWidth="2.5" />
+        {/* Top Hang Hole in Beige */}
+        <rect x="165" y="47" width="50" height="12" rx="6" fill="#FFE6D0" stroke="#1A1A1A" strokeWidth="2.5" />
 
-        {/* Brand Tag Top Left */}
-        <rect x="85" y="90" width="82" height="24" rx="12" fill="url(#blueBadge)" />
+        {/* Brand Tag Top Left in Bleu Ciel */}
+        <rect x="85" y="90" width="82" height="24" rx="12" fill="url(#blueBadge)" stroke="#1A1A1A" strokeWidth="1.5" />
         <text x="126" y="106" fill="#FFF" fontSize="11" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
-          DOCUPIX
+          KRAFTDOC
         </text>
 
-        {/* Version Badge Top Right */}
-        <rect x="225" y="90" width="65" height="24" rx="12" fill="url(#orangeBadge)" />
+        {/* Version Badge Top Right in Portland Orange */}
+        <rect x="225" y="90" width="65" height="24" rx="12" fill="url(#orangeBadge)" stroke="#1A1A1A" strokeWidth="1.5" />
         <text x="257" y="106" fill="#FFF" fontSize="10" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">
           SUITE V2
         </text>
@@ -86,19 +93,19 @@ export function HeroShowcaseIllustration({ className = "" }) {
         <text
           x="190"
           y="155"
-          fill="#1400C3"
+          fill="#FFFFFF"
           fontSize="36"
           fontWeight="900"
           letterSpacing="-1"
           textAnchor="middle"
           fontFamily="Lilita One, Impact, sans-serif"
         >
-          DOCUPIX
+          KRAFTDOC
         </text>
         <text
           x="190"
           y="175"
-          fill="#3B3355"
+          fill="#FFE6D0"
           fontSize="10"
           fontWeight="800"
           letterSpacing="2.5"
@@ -115,51 +122,51 @@ export function HeroShowcaseIllustration({ className = "" }) {
           width="204"
           height="82"
           rx="20"
-          fill="#FFF"
-          stroke="#1400C3"
+          fill="#FFFFFF"
+          stroke="#1A1A1A"
           strokeWidth="2.5"
         />
 
-        {/* Center Shield Icon in Blaze Orange */}
-        <circle cx="130" cy="231" r="22" fill="#FF4E02" />
+        {/* Center Shield Icon in Portland Orange */}
+        <circle cx="130" cy="231" r="22" fill="#FF5A00" />
         <path d="M124 231L128 235L137 226" stroke="#FFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
 
         {/* Plaque Description */}
-        <text x="162" y="225" fill="#1400C3" fontSize="13" fontWeight="900" fontFamily="sans-serif">
+        <text x="162" y="225" fill="#1A1A1A" fontSize="13" fontWeight="900" fontFamily="sans-serif">
           100% Client-Side
         </text>
-        <text x="162" y="242" fill="#6B627F" fontSize="11" fontWeight="700" fontFamily="sans-serif">
+        <text x="162" y="242" fill="#5A5450" fontSize="11" fontWeight="700" fontFamily="sans-serif">
           No Cloud Storage
         </text>
 
         {/* Bottom Bar Info */}
-        <text x="95" y="292" fill="#1400C3" fontSize="11" fontWeight="900" fontFamily="sans-serif">
+        <text x="95" y="292" fill="#FFE6D0" fontSize="11" fontWeight="900" fontFamily="sans-serif">
           ★ High-Speed RAM
         </text>
-        <text x="285" y="292" fill="#FF4E02" fontSize="11" fontWeight="900" textAnchor="end" fontFamily="sans-serif">
+        <text x="285" y="292" fill="#FF5A00" fontSize="11" fontWeight="900" textAnchor="end" fontFamily="sans-serif">
           Free Forever
         </text>
       </g>
 
       {/* Floating 3D Polaroid Photo Sticker (Top Right) */}
       <g filter="url(#floatShadow)" transform="rotate(8 290 85)">
-        <rect x="270" y="60" width="75" height="90" rx="12" fill="#FFF" stroke="#1400C3" strokeWidth="2.5" />
-        <rect x="277" y="67" width="61" height="60" rx="8" fill="#E8F4FD" />
-        <circle cx="307" cy="88" r="14" fill="#FF4E02" />
-        <path d="M288 120C293 108 303 106 312 114L322 104L335 120H288Z" fill="#1400C3" />
-        <text x="307" y="142" fill="#1400C3" fontSize="9" fontWeight="800" textAnchor="middle" fontFamily="sans-serif">
+        <rect x="270" y="60" width="75" height="90" rx="12" fill="#FFF" stroke="#1A1A1A" strokeWidth="2.5" />
+        <rect x="277" y="67" width="61" height="60" rx="8" fill="#FFE6D0" />
+        <circle cx="307" cy="88" r="14" fill="#FF5A00" />
+        <path d="M288 120C293 108 303 106 312 114L322 104L335 120H288Z" fill="#2038E2" />
+        <text x="307" y="142" fill="#1A1A1A" fontSize="9" fontWeight="800" textAnchor="middle" fontFamily="sans-serif">
           PHOTO
         </text>
       </g>
 
       {/* Floating 3D Document Stamp (Bottom Left) */}
       <g filter="url(#floatShadow)" transform="rotate(-6 55 240)">
-        <rect x="25" y="210" width="75" height="90" rx="12" fill="#FFF" stroke="#1400C3" strokeWidth="2.5" />
-        <rect x="32" y="218" width="61" height="60" rx="8" fill="#FFEAE3" />
-        <path d="M44 235H81M44 245H75M44 255H68" stroke="#FF4E02" strokeWidth="2.5" strokeLinecap="round" />
-        <circle cx="70" cy="265" r="10" fill="#1400C3" />
+        <rect x="25" y="210" width="75" height="90" rx="12" fill="#FFF" stroke="#1A1A1A" strokeWidth="2.5" />
+        <rect x="32" y="218" width="61" height="60" rx="8" fill="#FFE6D0" />
+        <path d="M44 235H81M44 245H75M44 255H68" stroke="#FF5A00" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="70" cy="265" r="10" fill="#007BFF" />
         <text x="70" y="269" fill="#FFF" fontSize="10" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">✓</text>
-        <text x="62" y="292" fill="#FF4E02" fontSize="9" fontWeight="800" textAnchor="middle" fontFamily="sans-serif">
+        <text x="62" y="292" fill="#FF5A00" fontSize="9" fontWeight="800" textAnchor="middle" fontFamily="sans-serif">
           PDF DOC
         </text>
       </g>
@@ -274,7 +281,7 @@ export function ConverterIllustration() {
   return (
     <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
       {/* Central Rotating Rings */}
-      <circle cx="80" cy="60" r="36" stroke="#E5DCB8" strokeWidth="3" strokeDasharray="4 4" />
+      <circle cx="80" cy="60" r="36" stroke="#1400C3" strokeOpacity="0.25" strokeWidth="3" strokeDasharray="4 4" />
       <circle cx="80" cy="60" r="18" fill="#FFF" stroke="#1400C3" strokeWidth="2" />
       <path d="M74 60L78 56V64L86 60" stroke="#FF4E02" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
 
@@ -309,7 +316,7 @@ export function OrganizerIllustration() {
   return (
     <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
       {/* Background Page */}
-      <rect x="36" y="28" width="52" height="68" rx="10" fill="#FFF" stroke="#E5DCB8" strokeWidth="2" transform="rotate(-14 36 28)" />
+      <rect x="36" y="28" width="52" height="68" rx="10" fill="#FFF" stroke="#1400C3" strokeOpacity="0.25" strokeWidth="2" transform="rotate(-14 36 28)" />
       {/* Center Rotating Page */}
       <rect x="54" y="20" width="56" height="74" rx="12" fill="#FFF" stroke="#1400C3" strokeWidth="2.5" />
       <path d="M64 36H98M64 46H90M64 56H84" stroke="#1400C3" strokeWidth="2.5" strokeLinecap="round" />
@@ -406,7 +413,7 @@ export function CropPdfIllustration() {
       {/* Outer original page */}
       <rect x="36" y="14" width="88" height="92" rx="12" fill="#FFF" stroke="#E5DCB8" strokeWidth="2" strokeDasharray="4 4" />
       {/* Active Crop Box */}
-      <rect x="48" y="24" width="64" height="72" rx="8" fill="#F3ECFB" stroke="#1400C3" strokeWidth="2.5" />
+      <rect x="48" y="24" width="64" height="72" rx="8" fill="#F8F2D8" stroke="#1400C3" strokeWidth="2.5" />
       <path d="M58 40H102M58 52H92M58 64H98" stroke="#1400C3" strokeWidth="2" strokeLinecap="round" />
       {/* Crop Corner Handles */}
       <path d="M42 30V20H52" stroke="#FF4E02" strokeWidth="3" strokeLinecap="round" />
@@ -494,13 +501,13 @@ export function ComparePdfIllustration() {
 export function MetadataIllustration() {
   return (
     <svg viewBox="0 0 160 120" className="w-full h-full max-h-28 object-contain" fill="none">
-      <rect x="42" y="16" width="76" height="88" rx="12" fill="#EAF2FD" stroke="#1400C3" strokeWidth="2.5" />
+      <rect x="42" y="16" width="76" height="88" rx="12" fill="#F8F2D8" stroke="#1400C3" strokeWidth="2.5" />
       {/* Code / Tag brackets */}
       <circle cx="60" cy="36" r="8" fill="#FF4E02" />
       <path d="M58 36L62 36" stroke="#FFF" strokeWidth="2" strokeLinecap="round" />
       <rect x="74" y="32" width="36" height="8" rx="4" fill="#1400C3" />
-      <rect x="54" y="52" width="54" height="6" rx="3" fill="#D6CA9E" />
-      <rect x="54" y="66" width="46" height="6" rx="3" fill="#D6CA9E" />
+      <rect x="54" y="52" width="54" height="6" rx="3" fill="#1400C3" opacity="0.25" />
+      <rect x="54" y="66" width="46" height="6" rx="3" fill="#1400C3" opacity="0.25" />
       {/* Tag badge */}
       <rect x="54" y="80" width="32" height="14" rx="7" fill="#1400C3" />
       <text x="70" y="90" fill="#FFF" fontSize="8" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">META</text>

@@ -4,11 +4,11 @@
  */
 
 export const siteConfig = {
-  name: "DocuPix",
+  name: "KraftDoc",
   tagline: "Free In-Browser Image & PDF Suite",
   description:
     "100% private, client-side tools to compress images, resize photos, convert image formats, and merge or split PDFs without uploading files to any server.",
-  domain: "https://docupix.pages.dev",
+  domain: "https://kraftdoc.pages.dev",
   author: "TAGX Labs™",
 
   // Company Information
@@ -29,7 +29,7 @@ export const siteConfig = {
 
   keywords: [
     "TAGX Labs",
-    "DocuPix",
+    "KraftDoc",
     "image compressor",
     "govt exam photo resizer",
     "tnpsc photo compressor",
@@ -42,6 +42,12 @@ export const siteConfig = {
     "webp converter",
   ],
   supportEmail: "tagxlabs@gmail.com",
+  donate: {
+    upiId: "",
+    upiPayeeName: "TAGX Labs",
+    buyMeACoffeeUrl: "",
+    githubUrl: "https://github.com/tagx-lab",
+  },
   features: [
     {
       id: "exam-resizer",

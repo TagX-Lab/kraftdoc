@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow:
 
-Sitemap: https://docupix.pages.dev/sitemap.xml
+Sitemap: https://kraftdoc.pages.dev/sitemap.xml

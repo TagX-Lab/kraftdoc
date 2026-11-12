@@ -13,7 +13,7 @@ export default function Button({
   className = "",
 }) {
   const baseClasses =
-    "inline-flex items-center justify-center font-bold rounded-xl transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1400C3]";
+    "inline-flex items-center justify-center font-bold rounded-xl transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF3E18]";
 
   const sizeClasses = {
     sm: "px-3 py-1.5 text-xs gap-1.5",
@@ -23,19 +23,19 @@ export default function Button({
 
   const variantClasses = {
     primary:
-      "bg-[#1400C3] hover:bg-[#0D0094] text-white shadow-lg shadow-[#1400C3]/25 active:scale-95",
+      "bg-[#FF3E18] hover:bg-[#E03410] text-white shadow-lg shadow-[#FF3E18]/25 active:scale-95",
     orange:
-      "bg-[#FF4E02] hover:bg-[#E04200] text-white shadow-lg shadow-[#FF4E02]/30 active:scale-95",
+      "bg-[#FF3E18] hover:bg-[#E03410] text-white shadow-lg shadow-[#FF3E18]/25 active:scale-95",
     emerald:
-      "bg-[#FF4E02] hover:bg-[#E04200] text-white shadow-lg shadow-[#FF4E02]/30 active:scale-95", // Keep CTA orange
+      "bg-[#FF3E18] hover:bg-[#E03410] text-white shadow-lg shadow-[#FF3E18]/25 active:scale-95",
     secondary:
-      "bg-white hover:bg-[#EFE6C4] text-[#1400C3] border border-[#E5DCB8] shadow-sm active:scale-95",
+      "bg-[#141414] hover:bg-white hover:text-black text-white border border-white/20 shadow-sm active:scale-95",
     danger:
       "bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/25 active:scale-95",
     outline:
-      "border-2 border-[#1400C3] hover:bg-[#1400C3] text-[#1400C3] hover:text-white bg-transparent active:scale-95",
+      "border-2 border-[#FF3E18] hover:bg-[#FF3E18] text-[#FF3E18] hover:text-white bg-transparent active:scale-95",
     ghost:
-      "text-[#1400C3] hover:text-[#0D0094] hover:bg-white/60 active:scale-95",
+      "text-gray-300 hover:text-white hover:bg-white/10 active:scale-95",
   };
 
   return (

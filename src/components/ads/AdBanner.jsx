@@ -46,12 +46,12 @@ export default function AdBanner({ slotId = adConfig.slots.topBanner, format = "
     <aside
       role="complementary"
       aria-label="Advertisement Placeholder"
-      className={`w-full max-w-4xl mx-auto my-3 p-3.5 rounded-2xl border border-dashed border-[#D6CA9E] bg-white/50 flex flex-col items-center justify-center text-center transition-all shadow-xs ${className}`}
+      className={`w-full max-w-4xl mx-auto my-3 p-3.5 rounded-2xl border border-dashed border-[#1A1A1A]/20 bg-white/70 flex flex-col items-center justify-center text-center transition-all shadow-xs ${className}`}
     >
-      <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#1400C3]">
-        <span className="inline-block w-2 h-2 rounded-full bg-[#FF4E02]"></span>
+      <div className="flex flex-wrap items-center justify-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#1A1A1A]">
+        <span className="inline-block w-2 h-2 rounded-full bg-[#FF5A00]"></span>
         <span>Google AdSense Slot #{slotId}</span>
-        <span className="text-[#6B627F] font-normal">&bull; Non-Intrusive Responsive Banner</span>
+        <span className="text-[#5A5450] font-normal">&bull; Non-Intrusive Responsive Banner</span>
       </div>
     </aside>
   );

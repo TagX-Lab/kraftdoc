@@ -54,25 +54,25 @@ export default function OfflineBanner() {
   return (
     <div
       role="alert"
-      className="bg-[#1400C3] text-white border-b-2 border-[#FF4E02] px-4 py-3 shadow-xl relative z-50 animate-slide-down"
+      className="bg-[#141414] text-white border-b-2 border-[#FF3E18] px-4 py-3 shadow-2xl relative z-50 animate-slide-down"
     >
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-[#FF4E02] text-white flex items-center justify-center shrink-0 shadow-sm">
+          <div className="w-8 h-8 rounded-xl bg-[#FF3E18] text-white flex items-center justify-center shrink-0 shadow-sm">
             <WifiOff className="w-4 h-4 stroke-[2.5]" />
           </div>
           <div>
             <div className="flex items-center justify-center sm:justify-start gap-2">
-              <span className="text-xs sm:text-sm font-black tracking-tight text-white uppercase">
-                You Are Currently Offline
+              <span className="font-comic text-base tracking-wider text-white uppercase">
+                YOU ARE CURRENTLY OFFLINE
               </span>
               <span className="hidden md:inline-flex items-center gap-1 text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                 <ShieldCheck className="w-3 h-3 text-emerald-300" />
                 100% In-Browser Privacy
               </span>
             </div>
-            <p className="text-xs text-[#F8F2D8]/90 font-medium">
-              Don&apos;t worry! DocuPix runs locally on your device. You can keep resizing photos, compressing images, and merging PDFs without internet.
+            <p className="text-xs text-gray-300 font-medium">
+              Don&apos;t worry! KraftDoc runs locally on your device. You can keep resizing photos, compressing images, and merging PDFs without internet.
             </p>
           </div>
         </div>

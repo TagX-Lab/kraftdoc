@@ -1,6 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <rect width="100" height="100" rx="24" fill="#4f46e5"/>
-  <path d="M30 25h40a6 6 0 0 1 6 6v38a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6V31a6 6 0 0 1 6-6z" fill="#0f172a" stroke="#818cf8" stroke-width="4"/>
-  <circle cx="42" cy="42" r="7" fill="#38bdf8"/>
-  <path d="M28 65l16-16 12 12 10-10 10 14" stroke="#34d399" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- KraftDoc 3D Isometric Cube Favicon -->
+  <rect width="100" height="100" rx="22" fill="#0C0C0C" />
+  
+  <!-- Outer Hexagonal Silhouette -->
+  <polygon points="50,6 92,30 92,72 50,96 8,72 8,30" fill="#0C0C0C" stroke="#FF3E18" stroke-width="2" />
+
+  <!-- Top Diamond Facet -->
+  <polygon points="50,9 88,31 50,52 12,31" fill="#FFFFFF" />
+  <polygon points="50,19 74,33 50,46 26,33" fill="#0C0C0C" />
+  <polygon points="50,24 64,32 50,40 36,32" fill="#FF3E18" />
+
+  <!-- Left Face -> The 'K' -->
+  <polygon points="14,37 23,42 23,83 14,77" fill="#FFFFFF" />
+  <polygon points="24,62 39,49 46,53 28,68" fill="#FFFFFF" />
+  <polygon points="28,67 46,87 38,91 24,73" fill="#FFFFFF" />
+  <polygon points="24,63 28,67 24,71" fill="#FF3E18" />
+
+  <!-- Right Face -> The 'D' -->
+  <path d="M55,56 L73,45 C82,40 88,44 88,52 L88,62 C88,71 82,78 73,83 L55,93 Z" fill="#FFFFFF" />
+  <path d="M62,63 L71,58 C75,55 79,57 79,62 L79,67 C79,72 75,76 71,78 L62,83 Z" fill="#0C0C0C" />
+  <path d="M63,65 L70,61 C72,59 74,61 74,63 L74,66 C74,69 72,71 70,72 L63,76 Z" fill="#FF3E18" />
+
+  <!-- Center Crease -->
+  <line x1="50" y1="52" x2="50" y2="95" stroke="#FF3E18" stroke-width="2.5" stroke-linecap="round" />
 </svg>

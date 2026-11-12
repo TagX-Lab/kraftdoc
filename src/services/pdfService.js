@@ -979,7 +979,7 @@ export async function generateInvoicePdf(data = {}) {
   }
 
   // Footer Tagline
-  page.drawText("Generated with DocuPix by TAGX Labs™ • 100% Client-Side", {
+  page.drawText("Generated with KraftDoc by TAGX Labs™ • 100% Client-Side", {
     x: 50,
     y: 35,
     size: 8,

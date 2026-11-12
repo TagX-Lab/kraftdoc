@@ -6,7 +6,7 @@ import { sanitizeFilename } from "./fileHelpers";
  */
 export function downloadBlob(blob, filename) {
   if (!blob) return;
-  const safeName = sanitizeFilename(filename, "docupix_download");
+  const safeName = sanitizeFilename(filename, "kraftdoc_download");
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
@@ -23,7 +23,7 @@ export function downloadBlob(blob, filename) {
  */
 export function downloadDataUrl(dataUrl, filename) {
   if (!dataUrl) return;
-  const safeName = sanitizeFilename(filename, "docupix_download.jpg");
+  const safeName = sanitizeFilename(filename, "kraftdoc_download.jpg");
   const link = document.createElement("a");
   link.href = dataUrl;
   link.download = safeName;
@@ -38,7 +38,7 @@ export function downloadDataUrl(dataUrl, filename) {
  * @param {Array<{ name: string, blob: Blob }>} files
  * @param {string} zipFilename
  */
-export async function downloadMultipleAsZip(files, zipFilename = "docupix_files.zip") {
+export async function downloadMultipleAsZip(files, zipFilename = "kraftdoc_files.zip") {
   if (!files || files.length === 0) return;
   const zip = new JSZip();
 
@@ -54,5 +54,5 @@ export async function downloadMultipleAsZip(files, zipFilename = "docupix_files.
     compressionOptions: { level: 6 },
   });
 
-  downloadBlob(content, sanitizeFilename(zipFilename, "docupix_archive.zip"));
+  downloadBlob(content, sanitizeFilename(zipFilename, "kraftdoc_archive.zip"));
 }

@@ -1,6 +1,7 @@
 import React from "react";
-import { Sparkles, ExternalLink, Globe } from "lucide-react";
+import { ExternalLink, Globe } from "lucide-react";
 import { siteConfig } from "../../config/siteConfig";
+import { KraftDocCubeIcon } from "./KraftDocLogo";
 
 function InstagramIcon(props) {
   return (
@@ -24,276 +25,142 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer({ onNavigate }) {
   return (
-    <footer className="border-t border-[#D6CA9E] bg-[#EFE6C4] mt-12 sm:mt-16 text-[#3B3355] text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <footer className="relative bg-[#0C0C0C] text-white border-t-2 border-white/15 text-xs font-sans mt-0">
+      {/* Halftone dot pattern overlay */}
+      <div className="absolute inset-0 bg-halftone-white opacity-5 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Brand & Studio Lockup */}
-          <div className="lg:col-span-5 space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-[#1400C3] flex items-center justify-center text-white shadow-xs">
-                <Sparkles className="w-4 h-4 text-[#F8F2D8]" />
-              </div>
-              <span className="font-display text-xl text-[#1400C3] tracking-tight">
+          <div className="lg:col-span-6 space-y-4">
+            <div className="flex items-center gap-3">
+              <KraftDocCubeIcon className="w-10 h-10 drop-shadow-[0_4px_12px_rgba(255,62,24,0.35)]" />
+              <span className="font-comic text-3xl sm:text-4xl text-white tracking-wider uppercase leading-none">
                 {siteConfig.name}
               </span>
               <a
                 href={siteConfig.company.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#FF4E02] text-white hover:bg-[#1400C3] transition-colors"
+                className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#FF3E18] text-white hover:bg-white hover:text-black transition-colors shadow-sm"
               >
-                by {siteConfig.company.name} ↗
+                BY {siteConfig.company.name} ↗
               </a>
             </div>
 
-            <p className="text-[#3B3355] text-xs max-w-sm leading-relaxed font-semibold">
+            <p className="text-gray-400 text-xs sm:text-sm max-w-md leading-relaxed font-medium">
               100% private, client-side tools to compress images, resize photos, and manipulate PDFs directly in your browser. Zero cloud uploads.
             </p>
 
             {/* Studio Socials Inline Row */}
-            <div className="flex items-center gap-2 pt-1 text-[#1400C3]">
+            <div className="flex items-center gap-2.5 pt-2">
               <a
                 href={siteConfig.company.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 rounded-lg bg-white/90 hover:bg-[#1400C3] text-[#1400C3] hover:text-white border border-[#D6CA9E] transition-all shadow-xs cursor-pointer"
+                className="p-2 rounded-lg bg-[#141414] hover:bg-[#FF3E18] text-gray-300 hover:text-white border border-white/20 transition-all shadow-md cursor-pointer"
                 title="TAGX Labs Official Website"
               >
-                <Globe className="w-3.5 h-3.5" />
+                <Globe className="w-4 h-4" />
               </a>
               <a
                 href={siteConfig.company.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 rounded-lg bg-white/90 hover:bg-[#FF4E02] text-[#1400C3] hover:text-white border border-[#D6CA9E] transition-all shadow-xs cursor-pointer"
+                className="p-2 rounded-lg bg-[#141414] hover:bg-[#FF3E18] text-gray-300 hover:text-white border border-white/20 transition-all shadow-md cursor-pointer"
                 title="Instagram (@tagx_lab)"
               >
-                <InstagramIcon className="w-3.5 h-3.5" />
+                <InstagramIcon className="w-4 h-4" />
               </a>
               <a
                 href={siteConfig.company.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 rounded-lg bg-white/90 hover:bg-[#1400C3] text-[#1400C3] hover:text-white border border-[#D6CA9E] transition-all shadow-xs cursor-pointer"
+                className="p-2 rounded-lg bg-[#141414] hover:bg-[#FF3E18] text-gray-300 hover:text-white border border-white/20 transition-all shadow-md cursor-pointer"
                 title="GitHub (@tagx-lab)"
               >
-                <GithubIcon className="w-3.5 h-3.5" />
+                <GithubIcon className="w-4 h-4" />
               </a>
-              <span className="text-[11px] font-bold text-[#6B627F] ml-1">
+              <span className="text-xs font-bold text-gray-500 ml-1">
                 TAGX Labs™ Ecosystem
               </span>
             </div>
           </div>
 
-          {/* Nav Columns: Tools, Ecosystem, Trust & Legal */}
-          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6">
-            {/* Column 1: Popular Tools */}
-            <div>
-              <h4 className="text-[11px] font-black uppercase tracking-wider text-[#1400C3] mb-2.5">
-                Popular Tools
+          {/* Ecosystem & Legal Columns (Popular Tools Removed Completely) */}
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {/* TAGX Labs Ecosystem */}
+            <div className="space-y-3">
+              <h4 className="font-comic text-xl text-white uppercase tracking-wider pb-2 border-b border-white/10 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#FF3E18]" />
+                <span>ECOSYSTEM</span>
               </h4>
-              <ul className="space-y-1.5 font-semibold text-xs text-[#3B3355]">
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("exam-resizer")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Photo Resizer
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("compress-image")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Image Compressor
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("images-to-pdf")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Images to PDF
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("pdf-to-images")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    PDF to Images
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("pdf-merge-split")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    PDF Merge &amp; Split
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("image-converter")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Image Converter
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("pdf-organizer")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    PDF Organizer
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("pdf-watermark")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Watermark PDF
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("pdf-page-numbers")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Page Numbers
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("pdf-compress")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Compress PDF
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("pdf-sign")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Sign PDF
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("all-tools")}
-                    className="text-[#FF4E02] font-black hover:underline transition-colors cursor-pointer text-left flex items-center gap-1 pt-1"
-                  >
-                    <span>View all 23 tools directory &rarr;</span>
-                  </button>
-                </li>
-              </ul>
+              <div className="space-y-2">
+                <a
+                  href={siteConfig.company.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-xl bg-[#141414] border border-white/10 hover:border-[#FF3E18] text-gray-300 hover:text-white transition-all flex items-center justify-between group cursor-pointer"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Globe className="w-4 h-4 text-[#FF3E18]" />
+                    <div>
+                      <div className="text-xs font-bold leading-tight">TAGX Labs Studio</div>
+                      <div className="text-[10px] text-gray-500 font-mono">tagxlab.in</div>
+                    </div>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-gray-500 group-hover:text-[#FF3E18] transition-colors" />
+                </a>
+
+                <a
+                  href={siteConfig.company.otherProducts[0].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-xl bg-[#141414] border border-white/10 hover:border-[#FF3E18] text-gray-300 hover:text-white transition-all flex items-center justify-between group cursor-pointer"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2 h-2 rounded-full bg-[#FF3E18]" />
+                    <div>
+                      <div className="text-xs font-bold leading-tight">MousePilot™ (Win)</div>
+                      <div className="text-[10px] text-gray-500 font-mono">mousepilot.tagxlab.in</div>
+                    </div>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-gray-500 group-hover:text-[#FF3E18] transition-colors" />
+                </a>
+              </div>
             </div>
 
-            {/* Column 2: TAGX Labs Ecosystem */}
-            <div>
-              <h4 className="text-[11px] font-black uppercase tracking-wider text-[#1400C3] mb-2.5">
-                Ecosystem
+            {/* Trust & Legal */}
+            <div className="space-y-3">
+              <h4 className="font-comic text-xl text-white uppercase tracking-wider pb-2 border-b border-white/10 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#FF3E18]" />
+                <span>TRUST &amp; LEGAL</span>
               </h4>
-              <ul className="space-y-2 font-semibold text-xs">
-                <li>
-                  <a
-                    href={siteConfig.company.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#1400C3] hover:text-[#FF4E02] flex items-center gap-1.5 transition-colors"
-                  >
-                    <Globe className="w-3.5 h-3.5 text-[#FF4E02]" />
-                    <span>TAGX Labs Studio</span>
-                    <ExternalLink className="w-3 h-3 text-[#6B627F]" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={siteConfig.company.otherProducts[0].url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#3B3355] hover:text-[#FF4E02] flex items-center gap-1.5 transition-colors"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#1400C3]"></span>
-                    <span>MousePilot™ (Win)</span>
-                    <ExternalLink className="w-3 h-3 text-[#6B627F]" />
-                  </a>
-                </li>
-                <li>
-                  <span className="text-[#6B627F] text-xs flex items-center gap-1.5 font-bold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF4E02]"></span>
-                    <span>DocuPix Suite</span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3: Trust & Legal */}
-            <div>
-              <h4 className="text-[11px] font-black uppercase tracking-wider text-[#1400C3] mb-2.5">
-                Trust &amp; Legal
-              </h4>
-              <ul className="space-y-1.5 font-semibold text-xs text-[#3B3355]">
-                <li>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { id: "about", name: "About Us" },
+                  { id: "privacy-policy", name: "Privacy Policy" },
+                  { id: "terms", name: "Terms of Service" },
+                  { id: "contact", name: "Contact Support" },
+                ].map((item) => (
                   <button
+                    key={item.id}
                     type="button"
-                    onClick={() => onNavigate("about")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
+                    onClick={() => onNavigate(item.id)}
+                    className="p-2 rounded-xl bg-[#141414] border border-white/10 hover:border-[#FF3E18] hover:bg-[#FF3E18] text-gray-300 hover:text-white text-xs font-bold transition-all text-center cursor-pointer truncate"
                   >
-                    About Us &amp; Studio
+                    {item.name}
                   </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("privacy-policy")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Privacy Policy
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("terms")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Terms of Service
-                  </button>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("contact")}
-                    className="hover:text-[#FF4E02] transition-colors cursor-pointer text-left"
-                  >
-                    Contact Support
-                  </button>
-                </li>
-              </ul>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Slim Corporate Bottom Bar */}
-        <div className="border-t border-[#D6CA9E]/70 pt-4 mt-6 text-xs text-[#3B3355] font-semibold text-center flex justify-center items-center">
-          <p className="text-center">
-            &copy; {CURRENT_YEAR} <strong className="text-[#1400C3]">{siteConfig.company.name}</strong>. All rights reserved.
+        {/* Corporate Bottom Bar */}
+        <div className="border-t border-white/10 pt-6 mt-10 text-xs text-gray-400 font-medium text-center">
+          <p>
+            &copy; {CURRENT_YEAR} <strong className="text-white">{siteConfig.company.name}</strong>. All rights reserved.
           </p>
         </div>
       </div>

@@ -2,17 +2,22 @@ import React, { useEffect, useRef, useState } from "react";
 
 /**
  * ScrollReveal Wrapper
- * Animates child elements smoothly when they enter the viewport during scrolling.
+ * Animates child elements smoothly with spring physics when they enter the viewport during scrolling.
  *
- * @param {string} animation - 'fade-up' | 'fade-in' | 'scale-up' | 'slide-left' | 'slide-right'
- * @param {number} delay - delay in milliseconds (e.g. 100, 200, 300 for staggered cards)
- * @param {number} threshold - visibility threshold (0.1 to 1.0)
+ * @param {string} animation - 'fade-up' | 'fade-down' | 'fade-in' | 'scale-up' | 'pop-in' | 'slide-left' | 'slide-right' | 'tilt-in'
+ * @param {number} delay - delay in milliseconds for staggered grid cards (e.g. 0, 80, 160)
+ * @param {number} duration - transition duration in milliseconds (default: 650)
+ * @param {number} threshold - visibility threshold (0.05 to 1.0)
+ * @param {boolean} once - whether to trigger only once (default: true)
+ * @param {string} className - extra classes
  */
 export default function ScrollReveal({
   children,
   animation = "fade-up",
   delay = 0,
-  threshold = 0.12,
+  duration = 650,
+  threshold = 0.08,
+  once = true,
   className = "",
 }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,16 +29,17 @@ export default function ScrollReveal({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
-            // Once revealed, unobserve so it stays visible
-            if (domRef.current) {
+            if (once && domRef.current) {
               observer.unobserve(domRef.current);
             }
+          } else if (!once) {
+            setIsVisible(false);
           }
         });
       },
       {
         threshold,
-        rootMargin: "0px 0px -40px 0px",
+        rootMargin: "0px 0px -30px 0px",
       }
     );
 
@@ -47,29 +53,38 @@ export default function ScrollReveal({
         observer.unobserve(currentRef);
       }
     };
-  }, [threshold]);
+  }, [threshold, once]);
 
   const getAnimationStyles = () => {
     switch (animation) {
+      case "pop-in":
       case "scale-up":
         return isVisible
           ? "opacity-100 scale-100 translate-y-0"
-          : "opacity-0 scale-95 translate-y-6";
+          : "opacity-0 scale-[0.93] translate-y-5";
+      case "tilt-in":
+        return isVisible
+          ? "opacity-100 rotate-0 translate-y-0"
+          : "opacity-0 -rotate-2 translate-y-6";
       case "slide-left":
         return isVisible
           ? "opacity-100 translate-x-0"
-          : "opacity-0 -translate-x-10";
+          : "opacity-0 -translate-x-8";
       case "slide-right":
         return isVisible
           ? "opacity-100 translate-x-0"
-          : "opacity-0 translate-x-10";
+          : "opacity-0 translate-x-8";
+      case "fade-down":
+        return isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-6";
       case "fade-in":
         return isVisible ? "opacity-100" : "opacity-0";
       case "fade-up":
       default:
         return isVisible
           ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-8";
+          : "opacity-0 translate-y-7";
     }
   };
 
@@ -78,9 +93,10 @@ export default function ScrollReveal({
       ref={domRef}
       style={{
         transitionDelay: `${delay}ms`,
-        transitionDuration: "650ms",
+        transitionDuration: `${duration}ms`,
+        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
       }}
-      className={`transition-all ease-out transform ${getAnimationStyles()} ${className}`}
+      className={`transition-all transform will-change-transform ${getAnimationStyles()} ${className}`}
     >
       {children}
     </div>

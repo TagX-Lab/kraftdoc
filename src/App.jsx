@@ -12,34 +12,36 @@ import { Loader2 } from "lucide-react";
 import HomePage from "./pages/HomePage";
 
 // Code-split tool pages on demand to reduce initial bundle size
-const ExamPhotoResizerPage = lazy(() => import("./pages/ExamPhotoResizerPage"));
-const ImageCompressorPage = lazy(() => import("./pages/ImageCompressorPage"));
-const ImagesToPdfPage = lazy(() => import("./pages/ImagesToPdfPage"));
-const PdfToImagesPage = lazy(() => import("./pages/PdfToImagesPage"));
-const PdfMergeSplitPage = lazy(() => import("./pages/PdfMergeSplitPage"));
-const ImageConverterPage = lazy(() => import("./pages/ImageConverterPage"));
-const PdfOrganizerPage = lazy(() => import("./pages/PdfOrganizerPage"));
-const WatermarkPdfPage = lazy(() => import("./pages/WatermarkPdfPage"));
-const PageNumbersPdfPage = lazy(() => import("./pages/PageNumbersPdfPage"));
-const CompressPdfPage = lazy(() => import("./pages/CompressPdfPage"));
-const SignPdfPage = lazy(() => import("./pages/SignPdfPage"));
-const CropPdfPage = lazy(() => import("./pages/CropPdfPage"));
-const FlattenPdfPage = lazy(() => import("./pages/FlattenPdfPage"));
-const BlackenPdfPage = lazy(() => import("./pages/BlackenPdfPage"));
-const ComparePdfPage = lazy(() => import("./pages/ComparePdfPage"));
-const EditPdfMetadataPage = lazy(() => import("./pages/EditPdfMetadataPage"));
-const ResizePdfPage = lazy(() => import("./pages/ResizePdfPage"));
-const PagesPerSheetPage = lazy(() => import("./pages/PagesPerSheetPage"));
-const PdfExtractTextPage = lazy(() => import("./pages/PdfExtractTextPage"));
-const CameraToPdfPage = lazy(() => import("./pages/CameraToPdfPage"));
-const CaptureScreenToPdfPage = lazy(() => import("./pages/CaptureScreenToPdfPage"));
-const RepairPdfPage = lazy(() => import("./pages/RepairPdfPage"));
-const CreateInvoicePage = lazy(() => import("./pages/CreateInvoicePage"));
-const AllToolsPage = lazy(() => import("./pages/AllToolsPage"));
-const AboutPage = lazy(() => import("./pages/AboutPage"));
-const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
-const TermsPage = lazy(() => import("./pages/TermsPage"));
-const ContactPage = lazy(() => import("./pages/ContactPage"));
+const ExamPhotoResizerPage = lazy(() => import("./pages/image/ExamPhotoResizerPage"));
+const ImageCompressorPage = lazy(() => import("./pages/image/ImageCompressorPage"));
+const ImageConverterPage = lazy(() => import("./pages/image/ImageConverterPage"));
+
+const ImagesToPdfPage = lazy(() => import("./pages/pdf/ImagesToPdfPage"));
+const PdfToImagesPage = lazy(() => import("./pages/pdf/PdfToImagesPage"));
+const PdfMergeSplitPage = lazy(() => import("./pages/pdf/PdfMergeSplitPage"));
+const PdfOrganizerPage = lazy(() => import("./pages/pdf/PdfOrganizerPage"));
+const WatermarkPdfPage = lazy(() => import("./pages/pdf/WatermarkPdfPage"));
+const PageNumbersPdfPage = lazy(() => import("./pages/pdf/PageNumbersPdfPage"));
+const CompressPdfPage = lazy(() => import("./pages/pdf/CompressPdfPage"));
+const SignPdfPage = lazy(() => import("./pages/pdf/SignPdfPage"));
+const CropPdfPage = lazy(() => import("./pages/pdf/CropPdfPage"));
+const FlattenPdfPage = lazy(() => import("./pages/pdf/FlattenPdfPage"));
+const BlackenPdfPage = lazy(() => import("./pages/pdf/BlackenPdfPage"));
+const ComparePdfPage = lazy(() => import("./pages/pdf/ComparePdfPage"));
+const EditPdfMetadataPage = lazy(() => import("./pages/pdf/EditPdfMetadataPage"));
+const ResizePdfPage = lazy(() => import("./pages/pdf/ResizePdfPage"));
+const PagesPerSheetPage = lazy(() => import("./pages/pdf/PagesPerSheetPage"));
+const PdfExtractTextPage = lazy(() => import("./pages/pdf/PdfExtractTextPage"));
+const CameraToPdfPage = lazy(() => import("./pages/pdf/CameraToPdfPage"));
+const CaptureScreenToPdfPage = lazy(() => import("./pages/pdf/CaptureScreenToPdfPage"));
+const RepairPdfPage = lazy(() => import("./pages/pdf/RepairPdfPage"));
+const CreateInvoicePage = lazy(() => import("./pages/pdf/CreateInvoicePage"));
+
+const AboutPage = lazy(() => import("./pages/legal/AboutPage"));
+const DonatePage = lazy(() => import("./pages/DonatePage"));
+const PrivacyPolicyPage = lazy(() => import("./pages/legal/PrivacyPolicyPage"));
+const TermsPage = lazy(() => import("./pages/legal/TermsPage"));
+const ContactPage = lazy(() => import("./pages/legal/ContactPage"));
 
 function PageLoadingFallback() {
   return (
@@ -58,22 +60,37 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace("#", "").trim();
-      if (hash) {
+      if (hash && hash !== "all-tools") {
         setCurrentRoute(hash);
       } else {
+        if (hash === "all-tools") {
+          window.history.replaceState(null, "", window.location.pathname);
+        }
         setCurrentRoute("home");
       }
     };
 
     handleHashChange();
     window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    window.addEventListener("popstate", handleHashChange);
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("popstate", handleHashChange);
+    };
   }, []);
 
-  const navigateTo = (route) => {
+  const navigateTo = (route, { skipScrollTop = false } = {}) => {
     setCurrentRoute(route);
-    window.location.hash = route === "home" ? "" : `#${route}`;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (route === "home") {
+      if (window.location.hash) {
+        window.history.pushState(null, "", window.location.pathname);
+      }
+    } else {
+      window.location.hash = `#${route}`;
+    }
+    if (!skipScrollTop) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const renderCurrentPage = () => {
@@ -124,8 +141,8 @@ export default function App() {
         return <RepairPdfPage onBack={() => navigateTo("home")} />;
       case "create-invoice":
         return <CreateInvoicePage onBack={() => navigateTo("home")} />;
-      case "all-tools":
-        return <AllToolsPage onNavigate={navigateTo} />;
+      case "donate":
+        return <DonatePage onBack={() => navigateTo("home")} onNavigate={navigateTo} />;
       case "about":
         return <AboutPage onBack={() => navigateTo("home")} />;
       case "privacy-policy":
@@ -142,7 +159,7 @@ export default function App() {
 
   return (
     <ToastProvider>
-      <div className="min-h-screen flex flex-col bg-[#F8F2D8] text-[#1400C3] selection:bg-[#FF4E02] selection:text-white">
+      <div className="min-h-screen flex flex-col bg-[#0C0C0C] text-white selection:bg-[#FF3E18] selection:text-white">
         <ScrollProgress />
         <OfflineBanner />
         <Navbar currentRoute={currentRoute} onNavigate={navigateTo} />

@@ -1,4 +1,4 @@
-# DocuPix — Free In-Browser Image & PDF Suite
+# KraftDoc — Free In-Browser Image & PDF Suite
 
 > **100% Client-Side Image Compression & PDF Utilities with Google AdSense Monetization.**
 > No backend, ₹0 server bills, 100% privacy (zero files uploaded to any server).
@@ -46,51 +46,40 @@
 ## 📁 Architecture & File Structure
 
 ```
-docupix/
+kraftdoc/
 ├── public/
-│   ├── favicon.svg              # Brand icon
+│   ├── images/
+│   │   └── kraftdoc-logo.jpg    # Official KraftDoc brand logo (OG preview)
+│   ├── favicon.svg              # 3D Isometric Cube brand favicon
 │   └── robots.txt               # SEO Crawler directives
 ├── src/
 │   ├── components/
-│   │   ├── ads/                 # Monetization components
-│   │   │   ├── AdBanner.jsx     # Responsive AdSense banner
-│   │   │   ├── AdSidebar.jsx    # High-CTR sidebar skyscraper
-│   │   │   └── DownloadAdModal.jsx # Interstitial countdown ad modal
-│   │   ├── common/              # Atomic reusable UI components
-│   │   │   ├── Badge.jsx
-│   │   │   ├── Button.jsx
-│   │   │   ├── Dropzone.jsx
-│   │   │   ├── Footer.jsx
-│   │   │   ├── Navbar.jsx
-│   │   │   └── ToolHeader.jsx
+│   │   ├── ads/                 # Monetization components (AdBanner, AdSidebar, DownloadAdModal)
+│   │   ├── comic/               # Editorial brutalist UI accents (TornPaperEdge, ScotchTape)
+│   │   ├── common/              # Atomic UI, Navbar, Footer, ScrollProgress, ScrollReveal, Logo
+│   │   ├── illustrations/       # Custom vector artwork for tool cards
 │   │   └── layout/
 │   │       └── ToolLayout.jsx   # Standard page wrapper with ad slots
 │   ├── config/
 │   │   ├── adConfig.js          # Google AdSense publisher & slot IDs
 │   │   ├── examPresets.js       # Official exam dimension & KB limits
 │   │   └── siteConfig.js        # Brand metadata and tool list
-│   ├── context/
-│   │   └── ToastContext.jsx     # Global toast feedback notifications
-│   ├── pages/                   # Micro-pages (lazy-loaded for speed)
-│   │   ├── AboutPage.jsx
-│   │   ├── ContactPage.jsx
-│   │   ├── ExamPhotoResizerPage.jsx
-│   │   ├── HomePage.jsx
-│   │   ├── ImageCompressorPage.jsx
-│   │   ├── ImageConverterPage.jsx
-│   │   ├── ImagesToPdfPage.jsx
-│   │   ├── PdfMergeSplitPage.jsx
-│   │   ├── PdfOrganizerPage.jsx
-│   │   ├── PrivacyPolicyPage.jsx
-│   │   └── TermsPage.jsx
+│   ├── context/                 # Global toast feedback notifications
+│   ├── hooks/                   # Custom React hooks (useNetworkStatus, useToast)
+│   ├── pages/                   # Route pages (code-split by domain)
+│   │   ├── image/               # Image Studio tools (Resizer, Compressor, Converter)
+│   │   ├── pdf/                 # 20 PDF & Document utility pages
+│   │   ├── legal/               # About, Contact, Privacy Policy & Terms
+│   │   ├── DonatePage.jsx       # Community support, UPI tip & sharing page
+│   │   └── HomePage.jsx         # Editorial comic landing & 23-tool showcase
 │   ├── services/                # Pure client-side processing services
 │   │   ├── imageService.js      # Canvas resize, binary search KB compressor
-│   │   └── pdfService.js        # pdf-lib integration (merge, split, images-to-pdf)
+│   │   └── pdfService.js        # pdf-lib & pdfjs integration
 │   ├── utils/
 │   │   ├── downloadHelpers.js   # Blob downloader & JSZip archiver
 │   │   └── fileHelpers.js       # Byte formatting, extensions, range parsers
-│   ├── App.jsx                  # Main router with code-splitting
-│   ├── index.css                # Tailwind CSS v4 directives
+│   ├── App.jsx                  # Main router with lazy code-splitting
+│   ├── index.css                # Tailwind CSS v4 directives & animations
 │   └── main.jsx                 # React entry point
 ├── index.html                   # SEO & OpenGraph meta tags
 ├── package.json
@@ -142,7 +131,7 @@ Once your Google AdSense account is approved:
 
 ## 🌐 Deploy for ₹0 (Free Hosting Forever)
 
-Because DocuPix is 100% client-side React:
+Because KraftDoc is 100% client-side React:
 - **Cloudflare Pages:** Connect Git repo &rarr; Build command `npm run build` &rarr; Output directory `dist`.
 - **Vercel:** Run `vercel` or connect GitHub &rarr; auto-detected Vite project.
 - **Netlify:** Connect GitHub &rarr; Build command `npm run build` &rarr; Publish directory `dist`.

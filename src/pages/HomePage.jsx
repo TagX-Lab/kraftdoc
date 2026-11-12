@@ -1,22 +1,17 @@
 import React from "react";
 import {
-  UserCheck,
-  Minimize2,
-  FileText,
   Layers,
-  RefreshCw,
-  RotateCw,
   ArrowRight,
-  ArrowDown,
   ShieldCheck,
   Sparkles,
   Image as ImageIcon,
+  CheckCircle2,
 } from "lucide-react";
 import { siteConfig } from "../config/siteConfig";
 import AdBanner from "../components/ads/AdBanner";
+import { TornPaperTop, ScotchTape } from "../components/comic/TornPaperEdge";
 import ScrollReveal from "../components/common/ScrollReveal";
 import {
-  HeroShowcaseIllustration,
   PhotoResizerIllustration,
   CompressorIllustration,
   ImagesToPdfIllustration,
@@ -42,27 +37,12 @@ import {
   InvoiceIllustration,
 } from "../components/illustrations/ToolIllustrations";
 
-function DoodleRays({ className = "" }) {
-  return (
-    <svg
-      viewBox="0 0 32 32"
-      className={`w-6 h-6 stroke-current ${className}`}
-      fill="none"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-    >
-      <path d="M16 4v6" />
-      <path d="M25 7l-4.5 4.5" />
-      <path d="M7 7l4.5 4.5" />
-    </svg>
-  );
-}
-
 export default function HomePage({ onNavigate }) {
   const categories = [
     {
       id: "image",
       title: "Image Studio",
+      shortTitle: "Image Studio",
       desc: "Crop, resize px, shrink KB, and instant format conversions",
       badge: "High-Speed Canvas",
       icon: ImageIcon,
@@ -70,13 +50,15 @@ export default function HomePage({ onNavigate }) {
     {
       id: "organize-edit",
       title: "Organize & Edit PDF",
+      shortTitle: "Organize & Edit",
       desc: "Merge, split, rotate, crop margins, scale page size & N-up sheets",
-      badge: "Vector Modification",
+      badge: "Vector Engine",
       icon: Layers,
     },
     {
       id: "security-privacy",
       title: "Security & Redaction",
+      shortTitle: "Security & Privacy",
       desc: "Digital sign, form flatten, redact black boxes, watermark & sanitize",
       badge: "100% In-Browser Privacy",
       icon: ShieldCheck,
@@ -84,554 +66,832 @@ export default function HomePage({ onNavigate }) {
     {
       id: "convert-create",
       title: "Convert, Create & Optimize",
+      shortTitle: "Convert & Create",
       desc: "Compress, images to PDF, plain text, live webcam scan & invoice maker",
       badge: "Productivity Engine",
       icon: Sparkles,
     },
   ];
 
-  // All 23 Handcrafted Tool Cards Categorized
+  // All 23 Handcrafted Tool Cards styled like authentic comic book issues
   const toolCards = [
-    // 1. IMAGE SUITE
+    // 1. IMAGE SUITE (3 Tools)
     {
       id: "exam-resizer",
       category: "image",
-      tag: "Popular",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Photo Resizer",
-      desc: "Crop, resize px & set exact KB limits freely.",
-      accentColor: "#FF4E02",
-      icon: UserCheck,
+      issueNo: "NO. 01",
+      tag: "POPULAR",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "PHOTO RESIZER",
+      desc: "Crop, resize dimensions & set exact KB limits for portal uploads.",
       illustration: PhotoResizerIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "compress-image",
       category: "image",
-      tag: "Popular",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
-      title: "Compressor",
-      desc: "Bulk shrink JPG, PNG, WebP up to 90%.",
-      accentColor: "#1400C3",
-      icon: Minimize2,
+      issueNo: "NO. 02",
+      tag: "POPULAR",
+      tagBg: "bg-black text-white",
+      title: "BULK COMPRESSOR",
+      desc: "Shrink JPG, PNG, and WebP up to 90% without visible quality loss.",
       illustration: CompressorIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "image-converter",
       category: "image",
-      tag: "New",
-      tagColor: "bg-emerald-600 text-white",
-      bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
-      title: "Format Convert",
-      desc: "Bulk convert across WebP, PNG & JPG.",
-      accentColor: "#1400C3",
-      icon: RefreshCw,
+      issueNo: "NO. 03",
+      tag: "NEW",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "FORMAT CONVERTER",
+      desc: "High-speed batch conversion across WebP, PNG, and JPG formats.",
       illustration: ConverterIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
 
-    // 2. ORGANIZE & EDIT PDF
+    // 2. ORGANIZE & EDIT PDF (7 Tools)
     {
       id: "pdf-merge-split",
       category: "organize-edit",
-      tag: "Top Tool",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
-      title: "Merge & Split",
-      desc: "Combine docs or extract custom page ranges.",
-      accentColor: "#1400C3",
-      icon: Layers,
+      issueNo: "NO. 04",
+      tag: "TOP TOOL",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "MERGE & SPLIT",
+      desc: "Combine separate PDF docs or extract custom page ranges easily.",
       illustration: MergeSplitIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-organizer",
       category: "organize-edit",
-      tag: "Organize",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
-      title: "PDF Organizer",
-      desc: "Rotate pages 90°/180° and delete pages.",
-      accentColor: "#FF4E02",
-      icon: RotateCw,
+      issueNo: "NO. 05",
+      tag: "ORGANIZE",
+      tagBg: "bg-black text-white",
+      title: "PDF ORGANIZER",
+      desc: "Rotate pages 90°/180°, reorder sequence, and delete unwanted pages.",
       illustration: OrganizerIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-crop",
       category: "organize-edit",
-      tag: "Utility",
-      tagColor: "bg-emerald-600 text-white",
-      bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
-      title: "Crop PDF Pages",
-      desc: "Trim margins, headers & footers from all pages.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 06",
+      tag: "UTILITY",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "CROP PDF PAGES",
+      desc: "Trim margins, headers, footers & white borders from any page.",
       illustration: CropPdfIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-page-size",
       category: "organize-edit",
-      tag: "Utility",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
-      title: "Change Page Size",
-      desc: "Rescale to standard A4, Letter, A3 & Legal.",
-      accentColor: "#FF4E02",
-      icon: FileText,
+      issueNo: "NO. 07",
+      tag: "SCALE",
+      tagBg: "bg-black text-white",
+      title: "RESCALE PAGE SIZE",
+      desc: "Standardize sheets to clean A4, Letter, A3, Legal, or custom sizes.",
       illustration: ResizePdfIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-pages-per-sheet",
       category: "organize-edit",
-      tag: "Paper Saver",
-      tagColor: "bg-emerald-600 text-white",
-      bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
-      title: "Pages Per Sheet",
-      desc: "Combine 2 or 4 pages side-by-side on 1 sheet.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 08",
+      tag: "PAPER SAVER",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "PAGES PER SHEET",
+      desc: "Combine 2 or 4 pages side-by-side on 1 sheet for print saving.",
       illustration: PagesPerSheetIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-page-numbers",
       category: "organize-edit",
-      tag: "Utility",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#EBF7ED] border-[#C2E7C9]",
-      title: "Page Numbers",
-      desc: "Insert header or footer page numbers accurately.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 09",
+      tag: "NUMBERING",
+      tagBg: "bg-black text-white",
+      title: "PAGE NUMBERS",
+      desc: "Insert header or footer page numbers with custom font styling.",
       illustration: PageNumbersIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-compare",
       category: "organize-edit",
-      tag: "Audit",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
-      title: "Compare PDFs",
-      desc: "Side-by-side visual difference audit comparison.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 10",
+      tag: "AUDIT",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "COMPARE PDFS",
+      desc: "Side-by-side visual difference audit comparison between revisions.",
       illustration: ComparePdfIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
 
-    // 3. SECURITY & PRIVACY
+    // 3. SECURITY & PRIVACY (5 Tools)
     {
       id: "pdf-sign",
       category: "security-privacy",
-      tag: "Security",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Sign PDF",
-      desc: "Draw or upload signature & stamp onto any page.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 11",
+      tag: "SECURITY",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "SIGN PDF",
+      desc: "Draw or upload signature & stamp onto any contract page.",
       illustration: SignPdfIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-flatten",
       category: "security-privacy",
-      tag: "Lock",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Flatten PDF",
-      desc: "Lock interactive forms & prevent future tampering.",
-      accentColor: "#FF4E02",
-      icon: FileText,
+      issueNo: "NO. 12",
+      tag: "LOCK",
+      tagBg: "bg-black text-white",
+      title: "FLATTEN PDF",
+      desc: "Lock interactive forms & vector fields to prevent future tampering.",
       illustration: FlattenPdfIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-blacken",
       category: "security-privacy",
-      tag: "Privacy",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
-      title: "Blacken & Redact",
-      desc: "Censor sensitive data with solid black boxes.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 13",
+      tag: "PRIVACY",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "BLACKEN & REDACT",
+      desc: "Censor sensitive confidential text with permanent black boxes.",
       illustration: BlackenIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-watermark",
       category: "security-privacy",
-      tag: "Security",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
-      title: "Watermark PDF",
-      desc: "Stamp text watermarks across every page cleanly.",
-      accentColor: "#FF4E02",
-      icon: FileText,
+      issueNo: "NO. 14",
+      tag: "SECURITY",
+      tagBg: "bg-black text-white",
+      title: "WATERMARK PDF",
+      desc: "Stamp text watermarks across every page cleanly with opacity control.",
       illustration: WatermarkIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-metadata",
       category: "security-privacy",
-      tag: "Security",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Edit Metadata",
-      desc: "Change author, title & sanitize tracking info.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 15",
+      tag: "SANITIZER",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "EDIT METADATA",
+      desc: "Sanitize creator, author, and tracking tags from document headers.",
       illustration: MetadataIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
 
-    // 4. CONVERT, CREATE & OPTIMIZE
+    // 4. CONVERT, CREATE & OPTIMIZE (8 Tools)
     {
       id: "pdf-compress",
       category: "convert-create",
-      tag: "Essential",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
-      title: "Compress PDF",
-      desc: "Shrink PDF filesize with 3 smart strength presets.",
-      accentColor: "#FF4E02",
-      icon: Minimize2,
+      issueNo: "NO. 16",
+      tag: "ESSENTIAL",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "COMPRESS PDF",
+      desc: "Shrink PDF filesize with 3 smart presets (Light, Balanced, Extreme).",
       illustration: CompressPdfIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "images-to-pdf",
       category: "convert-create",
-      tag: "Essential",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
-      title: "Images to PDF",
-      desc: "Merge photos into clean A4 or Letter PDFs.",
-      accentColor: "#FF4E02",
-      icon: FileText,
+      issueNo: "NO. 17",
+      tag: "ESSENTIAL",
+      tagBg: "bg-black text-white",
+      title: "IMAGES TO PDF",
+      desc: "Merge photos into clean A4 or Letter PDFs in custom order.",
       illustration: ImagesToPdfIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-to-images",
       category: "convert-create",
-      tag: "Extract",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
-      title: "PDF to Images",
-      desc: "Extract pages to high-res PNG/JPG & batch ZIP.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 18",
+      tag: "EXTRACT",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "PDF TO IMAGES",
+      desc: "Extract pages to high-res PNG or JPG files & batch download ZIP.",
       illustration: PdfToImagesIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-extract-text",
       category: "convert-create",
-      tag: "Extract",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#F3ECFB] border-[#D8C4F4]",
-      title: "Extract Text",
-      desc: "Pull readable text & export clean .TXT files.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 19",
+      tag: "EXTRACT",
+      tagBg: "bg-black text-white",
+      title: "EXTRACT TEXT",
+      desc: "Pull readable text streams and export clean .TXT files instantly.",
       illustration: ExtractTextIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "camera-to-pdf",
       category: "convert-create",
-      tag: "Live Scan",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFF0D9] border-[#F7D8A8]",
-      title: "Camera Scanner",
-      desc: "Scan physical documents via camera into PDF.",
-      accentColor: "#FF4E02",
-      icon: FileText,
+      issueNo: "NO. 20",
+      tag: "LIVE SCAN",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "CAMERA SCANNER",
+      desc: "Capture physical papers directly via webcam/mobile camera into PDF.",
       illustration: CameraScanIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "screen-to-pdf",
       category: "convert-create",
-      tag: "Capture",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#EAF2FD] border-[#C2D8FA]",
-      title: "Screen to PDF",
-      desc: "Capture active window or screen to high-res PDF.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 21",
+      tag: "CAPTURE",
+      tagBg: "bg-black text-white",
+      title: "SCREEN TO PDF",
+      desc: "Snap high-resolution captures of browser tabs or windows to PDF.",
       illustration: ScreenCaptureIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "pdf-repair",
       category: "convert-create",
-      tag: "Fix",
-      tagColor: "bg-[#FF4E02] text-white",
-      bgClass: "bg-[#FFEBE5] border-[#F8C8BD]",
-      title: "Repair PDF",
-      desc: "Rebuild corrupted xref tables & broken streams.",
-      accentColor: "#FF4E02",
-      icon: FileText,
+      issueNo: "NO. 22",
+      tag: "REPAIR",
+      tagBg: "bg-[#FF3E18] text-white",
+      title: "REPAIR PDF",
+      desc: "Rebuild corrupted cross-reference tables & broken stream objects.",
       illustration: RepairPdfIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
     {
       id: "create-invoice",
       category: "convert-create",
-      tag: "Finance",
-      tagColor: "bg-[#1400C3] text-white",
-      bgClass: "bg-[#FFF4D4] border-[#F2DE9F]",
-      title: "Invoice Maker",
-      desc: "Generate professional billing invoices in seconds.",
-      accentColor: "#1400C3",
-      icon: FileText,
+      issueNo: "NO. 23",
+      tag: "FINANCE",
+      tagBg: "bg-black text-white",
+      title: "INVOICE MAKER",
+      desc: "Generate professional billing invoices & receipts in seconds.",
       illustration: InvoiceIllustration,
-      pillPrice: "Free",
+      price: "FREE",
     },
   ];
 
   return (
-    <div className="space-y-16 sm:space-y-24 relative overflow-hidden pb-12">
-      {/* Background Ambient Floating Glow Lights */}
-      <div className="absolute top-10 left-1/4 w-[500px] h-[500px] bg-[#1400C3]/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-float-slow" />
-      <div className="absolute top-96 right-1/4 w-[450px] h-[450px] bg-[#FF4E02]/15 rounded-full blur-[140px] pointer-events-none -z-10 animate-float-reverse" />
-
+    <div className="w-full bg-[#0C0C0C] text-white font-sans selection:bg-[#FF3E18] selection:text-white">
       {/* ========================================================================= */}
-      {/* HERO SECTION: Matching the Happies Yellow Hero with Hero Product Card   */}
+      {/* SECTION 1: HERO (PITCH BLACK #0C0C0C + HOT COMIC RED-ORANGE #FF3E18)     */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        <ScrollReveal animation="fade-up">
-          <div className="relative rounded-[36px] sm:rounded-[44px] bg-[#F7E7A0] border-2 border-[#EAD585] p-6 sm:p-12 lg:p-16 overflow-hidden shadow-xl shadow-[#1400C3]/5">
-            {/* Decorative background doodles */}
-            <div className="absolute -top-12 -right-12 w-64 h-64 rounded-full bg-[#FFF5C0]/60 blur-2xl pointer-events-none" />
-            <div className="absolute bottom-4 left-1/3 w-72 h-72 rounded-full bg-[#FF4E02]/10 blur-3xl pointer-events-none" />
+      <section className="relative pt-6 sm:pt-10 pb-16 sm:pb-24 overflow-hidden">
+        {/* Subtle halftone background overlay */}
+        <div className="absolute inset-0 bg-halftone-white opacity-20 pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
-              {/* Left Column: Hero Copy */}
-              <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                {/* Big Handcrafted Headline */}
-                <h1 className="font-display text-5xl sm:text-7xl lg:text-[76px] leading-[0.95] text-[#1400C3] tracking-tight uppercase">
-                  PROCESS SMARTER.
-                  <span className="block mt-2 text-[#FF4E02]">
-                    <span className="marker-highlight-yellow text-[#1400C3]">LIVE BRIGHTER.</span>
-                  </span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Top Row: Massive Bebas Neue Headline + Editorial Description */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Giant Comic Headline */}
+            <div className="lg:col-span-8">
+              <ScrollReveal animation="fade-up" duration={700}>
+                <h1 className="font-comic text-5xl sm:text-8xl md:text-9xl lg:text-[108px] text-[#FF3E18] leading-[0.88] tracking-tight uppercase select-none">
+                  BEST IN-BROWSER
+                  <span className="block text-white">UTILITY SUITE</span>
+                  <span className="block text-[#FF3E18]">YOU&apos;VE EVER SEEN</span>
                 </h1>
+              </ScrollReveal>
+            </div>
 
-                {/* Friendly Subtitle */}
-                <p className="text-sm sm:text-base lg:text-lg text-[#3B3355] font-semibold max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  Fast, private in-browser image and document tools. Compress photos, resize dimensions, convert formats, and merge or split PDFs without uploading a single byte to cloud servers.
-                </p>
+            {/* Right-Hand Editorial Copy & Fast Actions */}
+            <div className="lg:col-span-4 lg:pt-3 space-y-5">
+              <ScrollReveal animation="fade-up" delay={120} duration={700}>
+                <div className="space-y-5">
+                  <p className="text-sm sm:text-base text-gray-300 font-medium leading-relaxed font-sans">
+                    Explore a suite of 23 fast, private in-browser tools. Zero file uploads to cloud servers, zero waiting, and military-grade privacy. Everything executes inside your device memory.
+                  </p>
 
-                {/* CTA Buttons in Pill Form */}
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("exam-resizer")}
-                    className="px-8 py-4 rounded-full font-black bg-[#1400C3] hover:bg-[#0E008F] text-white shadow-xl shadow-[#1400C3]/25 flex items-center gap-2.5 transition-all transform hover:-translate-y-1 cursor-pointer active:scale-95 text-sm sm:text-base group"
-                  >
-                    <span>Photo Resizer</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" />
-                  </button>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => onNavigate("exam-resizer")}
+                      className="px-6 py-3 rounded-full bg-white text-black hover:bg-[#FF3E18] hover:text-white font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-lg cursor-pointer active:scale-95 flex items-center gap-2"
+                    >
+                      <span>PHOTO RESIZER</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => onNavigate("compress-image")}
+                      className="px-6 py-3 rounded-full bg-transparent border-2 border-white/30 text-white hover:border-[#FF3E18] hover:text-[#FF3E18] font-black text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer active:scale-95"
+                    >
+                      <span>BULK COMPRESS</span>
+                    </button>
+                  </div>
 
-                  <button
-                    type="button"
-                    onClick={() => onNavigate("compress-image")}
-                    className="px-7 py-4 rounded-full font-black bg-white hover:bg-[#FFFDF5] text-[#1400C3] border-2 border-[#1400C3] shadow-md flex items-center gap-2 transition-all transform hover:-translate-y-1 cursor-pointer active:scale-95 text-sm sm:text-base"
-                  >
-                    <span>Compress Images</span>
-                  </button>
+                  {/* Verified Tag */}
+                  <div className="pt-1 flex items-center gap-2 text-xs font-bold text-gray-400">
+                    <span className="w-2 h-2 rounded-full bg-[#FF3E18] animate-ping" />
+                    <span>100% Client-Side RAM Processing • Free Forever</span>
+                  </div>
                 </div>
+              </ScrollReveal>
+            </div>
+          </div>
 
-                {/* Studio Attribution */}
-                <div className="pt-2 flex items-center justify-center lg:justify-start gap-2 text-xs font-bold text-[#6B627F]">
-                  <span>Engineered with pure craftsmanship by</span>
+          {/* Comic Showcase Shelf: 4 Vintage Comic Book Covers Tilted with Scotch Tape */}
+          <div className="mt-10 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+            {/* Shelf Item 1: Photo Resizer */}
+            <ScrollReveal animation="tilt-in" delay={0} duration={650}>
+              <div
+                onClick={() => onNavigate("exam-resizer")}
+                className="relative group cursor-pointer sm:-rotate-2 hover:rotate-0 transition-all duration-300 transform hover:-translate-y-2 h-full"
+              >
+                <ScotchTape className="-top-3 left-1/2 -translate-x-1/2" rotate="3deg" />
+                <div className="bg-[#141414] border-2 border-white/20 group-hover:border-[#FF3E18] p-2.5 sm:p-3 rounded-xl shadow-2xl overflow-hidden h-full flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-end items-center text-[9px] sm:text-[10px] font-black tracking-widest text-[#FF3E18] uppercase pb-1.5 sm:pb-2 border-b border-white/10">
+                      <span>NO. 01 • FREE</span>
+                    </div>
+                    <div className="my-2 sm:my-2.5 h-32 sm:h-44 md:h-52 bg-white rounded-lg p-2 sm:p-3 flex items-center justify-center overflow-hidden border border-black/20">
+                      <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <PhotoResizerIllustration />
+                      </div>
+                    </div>
+                    <h3 className="font-comic text-lg sm:text-2xl text-white group-hover:text-[#FF3E18] transition-colors uppercase leading-none truncate">
+                      PHOTO RESIZER
+                    </h3>
+                    <p className="text-[10px] sm:text-[11px] text-gray-400 mt-1 line-clamp-1">Exact KB lock & px crop</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Shelf Item 2: Image Compressor */}
+            <ScrollReveal animation="tilt-in" delay={90} duration={650}>
+              <div
+                onClick={() => onNavigate("compress-image")}
+                className="relative group cursor-pointer sm:rotate-1 hover:rotate-0 transition-all duration-300 transform hover:-translate-y-2 h-full"
+              >
+                <ScotchTape className="-top-3 left-1/2 -translate-x-1/2" rotate="-2deg" />
+                <div className="bg-[#141414] border-2 border-white/20 group-hover:border-[#FF3E18] p-2.5 sm:p-3 rounded-xl shadow-2xl overflow-hidden h-full flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-end items-center text-[9px] sm:text-[10px] font-black tracking-widest text-[#FF3E18] uppercase pb-1.5 sm:pb-2 border-b border-white/10">
+                      <span>NO. 02 • FREE</span>
+                    </div>
+                    <div className="my-2 sm:my-2.5 h-32 sm:h-44 md:h-52 bg-white rounded-lg p-2 sm:p-3 flex items-center justify-center overflow-hidden border border-black/20">
+                      <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <CompressorIllustration />
+                      </div>
+                    </div>
+                    <h3 className="font-comic text-lg sm:text-2xl text-white group-hover:text-[#FF3E18] transition-colors uppercase leading-none truncate">
+                      IMAGE COMPRESSOR
+                    </h3>
+                    <p className="text-[10px] sm:text-[11px] text-gray-400 mt-1 line-clamp-1">Up to 90% size reduction</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Shelf Item 3: Merge & Split PDF */}
+            <ScrollReveal animation="tilt-in" delay={180} duration={650}>
+              <div
+                onClick={() => onNavigate("pdf-merge-split")}
+                className="relative group cursor-pointer sm:-rotate-1 hover:rotate-0 transition-all duration-300 transform hover:-translate-y-2 h-full"
+              >
+                <ScotchTape className="-top-3 left-1/2 -translate-x-1/2" rotate="4deg" />
+                <div className="bg-[#141414] border-2 border-white/20 group-hover:border-[#FF3E18] p-2.5 sm:p-3 rounded-xl shadow-2xl overflow-hidden h-full flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-end items-center text-[9px] sm:text-[10px] font-black tracking-widest text-[#FF3E18] uppercase pb-1.5 sm:pb-2 border-b border-white/10">
+                      <span>NO. 04 • FREE</span>
+                    </div>
+                    <div className="my-2 sm:my-2.5 h-32 sm:h-44 md:h-52 bg-white rounded-lg p-2 sm:p-3 flex items-center justify-center overflow-hidden border border-black/20">
+                      <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <MergeSplitIllustration />
+                      </div>
+                    </div>
+                    <h3 className="font-comic text-lg sm:text-2xl text-white group-hover:text-[#FF3E18] transition-colors uppercase leading-none truncate">
+                      MERGE &amp; SPLIT
+                    </h3>
+                    <p className="text-[10px] sm:text-[11px] text-gray-400 mt-1 line-clamp-1">Reorder &amp; combine pages</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Shelf Item 4: Sign & Stamp PDF */}
+            <ScrollReveal animation="tilt-in" delay={270} duration={650}>
+              <div
+                onClick={() => onNavigate("pdf-sign")}
+                className="relative group cursor-pointer sm:rotate-2 hover:rotate-0 transition-all duration-300 transform hover:-translate-y-2 h-full"
+              >
+                <ScotchTape className="-top-3 left-1/2 -translate-x-1/2" rotate="-3deg" />
+                <div className="bg-[#141414] border-2 border-white/20 group-hover:border-[#FF3E18] p-2.5 sm:p-3 rounded-xl shadow-2xl overflow-hidden h-full flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-end items-center text-[9px] sm:text-[10px] font-black tracking-widest text-[#FF3E18] uppercase pb-1.5 sm:pb-2 border-b border-white/10">
+                      <span>NO. 11 • FREE</span>
+                    </div>
+                    <div className="my-2 sm:my-2.5 h-32 sm:h-44 md:h-52 bg-white rounded-lg p-2 sm:p-3 flex items-center justify-center overflow-hidden border border-black/20">
+                      <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <SignPdfIllustration />
+                      </div>
+                    </div>
+                    <h3 className="font-comic text-lg sm:text-2xl text-white group-hover:text-[#FF3E18] transition-colors uppercase leading-none truncate">
+                      SIGN &amp; STAMP
+                    </h3>
+                    <p className="text-[10px] sm:text-[11px] text-gray-400 mt-1 line-clamp-1">Draw digital signatures</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Crumpled Dark Paper Banner with Taped Badges */}
+          <div className="mt-14 sm:mt-20 relative">
+            <ScrollReveal animation="pop-in" duration={650} threshold={0.1}>
+              <div className="relative rounded-2xl bg-[#141414] border-2 border-white/15 p-6 sm:p-10 shadow-2xl text-center">
+                {/* Halftone texture */}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden bg-halftone-white opacity-10 pointer-events-none" />
+
+                <ScotchTape className="-top-3.5 left-8 sm:left-12" rotate="-5deg" />
+                <ScotchTape className="-top-3.5 right-8 sm:right-12" rotate="4deg" />
+
+                <h2 className="relative z-10 font-comic text-3xl sm:text-5xl md:text-6xl text-white leading-[0.95] uppercase tracking-tight max-w-4xl mx-auto">
+                  WE HAVE A WIDE SELECTION OF
+                  <span className="text-[#FF3E18]"> 23 POWER UTILITIES, </span>
+                  INCLUDING <span className="underline decoration-[#FF3E18] decoration-4">RESIZER</span>,
+                  <span className="underline decoration-[#FF3E18] decoration-4"> COMPRESSOR</span>,
+                  <span className="underline decoration-[#FF3E18] decoration-4"> PDF MERGE</span>,
+                  AND <span className="text-[#FF3E18]">ZERO CLOUD PRIVACY</span>
+                </h2>
+
+                <p className="text-xs sm:text-sm text-gray-400 mt-4 max-w-2xl mx-auto font-medium">
+                  Engineered with pure craftsmanship by{" "}
                   <a
                     href={siteConfig.company.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-black text-[#1400C3] hover:text-[#FF4E02] underline transition-colors"
+                    className="text-white hover:text-[#FF3E18] underline font-bold transition-colors"
                   >
-                    {siteConfig.company.name} ↗
+                    TAGX Labs™
                   </a>
-                </div>
+                  . Zero subscriptions, zero signups, and 100% free forever.
+                </p>
               </div>
-
-              {/* Right Column: Hero Showcase Visual (The "Snack Bag" Equivalent) */}
-              <div className="lg:col-span-5 flex justify-center relative">
-                <div className="relative w-full max-w-sm sm:max-w-md">
-                  {/* Decorative Hand-drawn Rays */}
-                  <DoodleRays className="absolute -top-6 -left-4 text-[#FF4E02] animate-bounce" />
-                  <DoodleRays className="absolute -bottom-6 -right-4 text-[#1400C3] rotate-180" />
-
-                  {/* Main Hero Product Bag / Package Card - Bespoke 3D Vector Illustration */}
-                  <div className="transform hover:-translate-y-1 transition-transform duration-300">
-                    <HeroShowcaseIllustration />
-                  </div>
-                </div>
-              </div>
-            </div>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
-
-        {/* Scroll Down Indicator - Exactly where user drew the box */}
-        <div className="flex justify-center -mt-6 sm:-mt-7 relative z-20">
-          <button
-            type="button"
-            onClick={() => {
-              const target = document.getElementById("tools-section");
-              if (target) {
-                target.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-            className="group inline-flex items-center gap-2.5 px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-[#FFFDF5] text-[#1400C3] hover:text-[#FF4E02] border-2 border-[#1400C3] shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer text-xs font-black uppercase tracking-wider active:scale-95"
-            aria-label="Scroll down to start your work"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4E02] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF4E02]" />
-            </span>
-            <span>Scroll down to start your work</span>
-            <div className="w-5 h-5 rounded-full bg-[#1400C3] group-hover:bg-[#FF4E02] text-white flex items-center justify-center transition-colors shadow-xs animate-bounce">
-              <ArrowDown className="w-3 h-3 stroke-[3]" />
-            </div>
-          </button>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* "OUR FAVORITES / TOOLS YOU'LL LOVE" COLOR-BLOCK CARDS SECTION             */}
+      {/* TORN PAPER TRANSITION 1: Black Hero tearing into White Paper Section       */}
       {/* ========================================================================= */}
+      <TornPaperTop fill="#FFFFFF" />
+
       {/* ========================================================================= */}
-      {/* "OUR FAVORITES / TOOLS YOU'LL LOVE" CATEGORIZED COLOR-BLOCK CARDS SECTION */}
+      {/* SECTION 2: WHITE PAPER CATALOG ("WIDE SELECTION OF 23 POWER TOOLS")        */}
       {/* ========================================================================= */}
-      <section id="tools-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal animation="fade-up">
-          <div className="rounded-[32px] sm:rounded-[44px] bg-[#F7EDBE] border-2 border-[#E6D799] p-5 sm:p-8 lg:p-10 shadow-sm space-y-8">
-            {/* Main Section Header */}
-            <div className="border-b border-[#E6D799] pb-5">
-              <span className="text-xs font-black uppercase tracking-wider text-[#FF4E02] block mb-1">
-                CATEGORIZED UTILITY ENGINE • 23 POWER TOOLS
-              </span>
-              <h2 className="font-display text-2xl sm:text-4xl text-[#1400C3] tracking-tight uppercase">
-                TOOLS YOU&apos;LL LOVE
+      <section id="tools-catalog" className="scroll-mt-16 bg-white text-black py-12 sm:py-20 relative">
+        {/* Subtle halftone paper texture */}
+        <div className="absolute inset-0 bg-halftone opacity-40 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+          {/* Section Header: Left Bebas Neue Headline + Right Description */}
+          <ScrollReveal animation="fade-up" duration={650}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end pb-4 border-b-2 border-black/10">
+              <div className="lg:col-span-7">
+                <span className="text-xs font-black uppercase tracking-widest text-[#FF3E18] block mb-1">
+                  COMPLETE CLIENT-SIDE SUITE
+                </span>
+                <h2 className="font-comic text-5xl sm:text-8xl lg:text-9xl text-[#FF3E18] leading-[0.85] tracking-tight uppercase">
+                  WIDE SELECTION
+                </h2>
+              </div>
+
+              <div className="lg:col-span-5 space-y-4">
+                <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">
+                  Explore a vast selection of 23 offline-capable tools from timeless classics to modern features. With zero bytes sent to servers, your privacy is always guaranteed.
+                </p>
+
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      document.getElementById("tools-grid")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="px-6 py-2.5 rounded-sm bg-black hover:bg-[#FF3E18] text-white text-xs font-black uppercase tracking-wider transition-colors cursor-pointer shadow-md inline-flex items-center gap-2"
+                  >
+                    <span>SEE MORE</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Render Categorized Comic Cards Shelves */}
+          <div id="tools-grid" className="space-y-12">
+          {categories.map((cat) => {
+            const catTools = toolCards.filter((t) => t.category === cat.id);
+
+            if (catTools.length === 0) return null;
+
+            const CatIcon = cat.icon;
+
+            return (
+              <div key={cat.id} className="space-y-6 pt-4">
+                {/* Category Header Row */}
+                <ScrollReveal animation="fade-up" duration={500}>
+                  <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black/10 pb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-black text-white flex items-center justify-center">
+                        <CatIcon className="w-4 h-4 text-[#FF3E18]" />
+                      </div>
+                      <div>
+                        <h3 className="font-comic text-2xl sm:text-3xl text-black uppercase tracking-tight flex items-center gap-2.5">
+                          <span>{cat.title}</span>
+                          <span className="text-[11px] font-sans font-black px-2 py-0.5 rounded-full bg-[#FF3E18] text-white tracking-wider">
+                            {catTools.length} ISSUES
+                          </span>
+                        </h3>
+                        <p className="text-xs text-gray-600 font-medium">{cat.desc}</p>
+                      </div>
+                    </div>
+
+                    <span className="hidden sm:inline-block text-[11px] font-black uppercase tracking-wider text-black bg-gray-100 px-3 py-1 rounded-full border border-black/10">
+                      {cat.badge}
+                    </span>
+                  </div>
+                </ScrollReveal>
+
+                {/* Comic Book Covers Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-6">
+                  {catTools.map((tool, toolIndex) => {
+                    const Illustration = tool.illustration;
+
+                    return (
+                      <ScrollReveal
+                        key={tool.id}
+                        animation="fade-up"
+                        delay={(toolIndex % 4) * 70}
+                        duration={550}
+                        className="h-full"
+                      >
+                        <div
+                          onClick={() => onNavigate(tool.id)}
+                          className="comic-card bg-white border-2 border-black rounded-xl p-2.5 sm:p-4 cursor-pointer flex flex-col justify-between shadow-[3px_3px_0px_0px_#0C0C0C] sm:shadow-[4px_4px_0px_0px_#0C0C0C] hover:shadow-[4px_4px_0px_0px_#FF3E18] sm:hover:shadow-[6px_6px_0px_0px_#FF3E18] hover:border-[#FF3E18] transition-all duration-200 group h-full"
+                        >
+                          <div>
+                            {/* Comic Book Issue Header Bar */}
+                            <div className="flex flex-wrap items-center justify-between gap-1 pb-1.5 sm:pb-2 border-b border-black/10 text-[9px] sm:text-[10px] font-black uppercase tracking-wider">
+                              <span className="text-gray-500">{tool.issueNo}</span>
+                              <span className={`px-1.5 sm:px-2 py-0.5 rounded-sm font-black ${tool.tagBg}`}>
+                                {tool.tag}
+                              </span>
+                            </div>
+
+                            {/* Illustration Comic Frame */}
+                            <div className="my-2 sm:my-2.5 h-24 sm:h-32 md:h-36 rounded-lg bg-gray-50 border border-black/15 flex items-center justify-center p-2 sm:p-2.5 overflow-hidden group-hover:bg-[#FFF4EB] transition-colors">
+                              <div className="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                                <Illustration />
+                              </div>
+                            </div>
+
+                            {/* Comic Title & Description */}
+                            <h4 className="font-comic text-base sm:text-xl text-black group-hover:text-[#FF3E18] transition-colors uppercase leading-none truncate mt-1.5 sm:mt-2">
+                              {tool.title}
+                            </h4>
+                            <p className="text-[11px] sm:text-xs text-gray-600 font-medium leading-snug line-clamp-2 mt-1 min-h-[30px] sm:min-h-[32px]">
+                              {tool.desc}
+                            </p>
+                          </div>
+
+                          {/* Bottom Bar: Free Price Tag + Open Button */}
+                          <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-black/10 flex items-center justify-between">
+                            <span className="font-comic text-sm sm:text-base text-black tracking-wide">
+                              {tool.price}
+                            </span>
+                            <button
+                              type="button"
+                              className="px-2.5 sm:px-3 py-1 rounded-full bg-black group-hover:bg-[#FF3E18] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider transition-colors shadow-sm flex items-center gap-1 cursor-pointer"
+                            >
+                              <span>OPEN</span>
+                              <span className="font-bold">+</span>
+                            </button>
+                          </div>
+                        </div>
+                      </ScrollReveal>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+          </div>
+
+          {/* Giant Bottom Headline (Matching "OF BEST COMICS" in the Reference) */}
+          <ScrollReveal animation="pop-in" duration={650}>
+            <div className="pt-10 text-center sm:text-left">
+              <h2 className="font-comic text-5xl sm:text-8xl lg:text-9xl text-[#FF3E18] leading-[0.85] tracking-tight uppercase">
+                OF 23 POWER TOOLS
               </h2>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
 
-            {/* Render Category Sections */}
-            <div className="space-y-10">
-              {categories.map((cat, catIdx, arr) => {
-                const CatIcon = cat.icon;
-                const catTools = toolCards.filter((t) => t.category === cat.id);
-                if (catTools.length === 0) return null;
+      {/* ========================================================================= */}
+      {/* TORN PAPER TRANSITION 2: White Paper tearing into Fiery Red-Orange Section */}
+      {/* ========================================================================= */}
+      <TornPaperTop fill="#FF3E18" />
 
-                return (
-                  <div key={cat.id} className="space-y-4">
-                    {/* Category Header Row */}
-                    <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-[#1400C3] text-white flex items-center justify-center shadow-xs">
-                          <CatIcon className="w-4 h-4 text-[#F8F2D8]" />
-                        </div>
-                        <div>
-                          <h3 className="font-display text-lg sm:text-xl text-[#1400C3] tracking-tight uppercase flex items-center gap-2">
-                            <span>{cat.title}</span>
-                            <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#FF4E02] text-white tracking-wider">
-                              {catTools.length} TOOLS
-                            </span>
-                          </h3>
-                          <p className="text-xs text-[#6B627F] font-semibold">{cat.desc}</p>
-                        </div>
-                      </div>
-                      <span className="hidden sm:inline-block text-[11px] font-black uppercase tracking-wider text-[#1400C3] bg-white px-3 py-1 rounded-full border border-[#E6D799]">
-                        {cat.badge}
+      {/* ========================================================================= */}
+      {/* SECTION 3: FIERY RED-ORANGE SECTION ("CHOOSE YOUR TOOLKIT")                */}
+      {/* ========================================================================= */}
+      <section className="bg-[#FF3E18] text-white py-16 sm:py-24 relative overflow-hidden">
+        {/* Subtle halftone texture overlay */}
+        <div className="absolute inset-0 bg-halftone-white opacity-20 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+          {/* Header Row: White Bebas Neue Title + Subtitle */}
+          <ScrollReveal animation="fade-up" duration={650}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+              <div className="lg:col-span-8">
+                <span className="text-xs font-black uppercase tracking-widest text-black block mb-1">
+                  100% FREE FOREVER • ZERO SUBSCRIPTION
+                </span>
+                <h2 className="font-comic text-5xl sm:text-8xl lg:text-9xl text-white leading-[0.85] tracking-tight uppercase">
+                  CHOOSE YOUR TOOLKIT
+                </h2>
+              </div>
+              <div className="lg:col-span-4">
+                <p className="text-xs sm:text-sm text-white/90 font-medium leading-relaxed">
+                  Unlock the full power of fast client-side utilities. Everything runs 100% inside your browser memory with zero paywalls, zero cloud uploads, and zero tracking.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* 3 Tilted Comic Plan Cards with Scotch Tape (Matching the reference's 3 Plan Cards) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pt-4 sm:pt-6">
+            {/* Plan Card 1: BASIC (Image Studio) */}
+            <ScrollReveal animation="tilt-in" delay={0} duration={650} className="h-full">
+              <div className="relative group md:-rotate-2 hover:rotate-0 transition-all duration-300 transform hover:-translate-y-2 h-full">
+                <ScotchTape className="-top-3 left-1/2 -translate-x-1/2" rotate="3deg" />
+                <div className="bg-white text-black border-2 border-black rounded-2xl p-5 sm:p-7 shadow-[4px_4px_0px_0px_#0C0C0C] sm:shadow-[8px_8px_0px_0px_#0C0C0C] flex flex-col justify-between h-full">
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap justify-between items-center gap-2 border-b border-black/10 pb-3">
+                      <span className="font-comic text-xl sm:text-2xl text-black">IMAGE STUDIO</span>
+                      <span className="text-[10px] font-black uppercase tracking-wider bg-black text-white px-2.5 py-1 rounded-sm">
+                        $0.00 / FOREVER
                       </span>
                     </div>
 
-                    {/* Category Cards Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
-                      {catTools.map((tool) => {
-                        const Illustration = tool.illustration;
-
-                        return (
-                          <div
-                            key={tool.id}
-                            onClick={() => onNavigate(tool.id)}
-                            className={`human-card rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 border-2 transition-all cursor-pointer flex flex-col justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 ${tool.bgClass}`}
-                          >
-                            <div>
-                              {/* Top Tag */}
-                              <div className="flex items-center mb-2">
-                                <span
-                                  className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-xs truncate ${tool.tagColor}`}
-                                >
-                                  {tool.tag}
-                                </span>
-                              </div>
-
-                              {/* Tool Graphic Showcase Box with Bespoke 3D Vector Illustration */}
-                              <div className="my-1.5 h-24 sm:h-28 rounded-xl bg-white border border-black/5 flex items-center justify-center p-2 overflow-hidden shadow-inner group">
-                                <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                  <Illustration />
-                                </div>
-                              </div>
-
-                              {/* Title & Description */}
-                              <h4
-                                className="font-display text-sm sm:text-base text-[#1400C3] tracking-tight leading-tight mt-1.5 truncate"
-                                title={tool.title}
-                              >
-                                {tool.title}
-                              </h4>
-                              <p className="text-[10px] sm:text-[11px] text-[#3B3355] font-semibold leading-snug line-clamp-2 mt-1 min-h-[28px]">
-                                {tool.desc}
-                              </p>
-                            </div>
-
-                            {/* Bottom Action Pill */}
-                            <div className="mt-3 pt-2.5 border-t border-black/10 flex items-center justify-between">
-                              <span className="text-[11px] font-black text-[#1400C3]">
-                                {tool.pillPrice}
-                              </span>
-                              <button
-                                type="button"
-                                className="px-2.5 py-1 rounded-full font-black text-[10px] sm:text-[11px] bg-[#1400C3] hover:bg-[#FF4E02] text-white transition-all shadow-xs flex items-center gap-1 cursor-pointer active:scale-95"
-                              >
-                                <span>open</span>
-                                <span className="text-xs font-bold">+</span>
-                              </button>
-                            </div>
-                          </div>
-                        );
-                      })}
+                    <div className="h-32 bg-gray-50 rounded-lg p-2 border border-black/15 flex items-center justify-center overflow-hidden">
+                      <PhotoResizerIllustration />
                     </div>
 
-                    {/* Divider between categories */}
-                    {catIdx < arr.length - 1 && (
-                      <div className="pt-6 border-b-2 border-dashed border-[#E6D799]" />
-                    )}
+                    <ul className="space-y-2 text-xs font-medium text-gray-700 pt-1">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Govt exam photo resizer with exact KB limits</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Bulk lossy &amp; lossless image compression</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Batch convert WebP, JPG, and PNG formats</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Zero watermarks &amp; unlimited file sizes</span>
+                      </li>
+                    </ul>
                   </div>
-                );
-              })}
-            </div>
+
+                  <div className="pt-6 mt-4 border-t border-black/10">
+                    <button
+                      type="button"
+                      onClick={() => onNavigate("exam-resizer")}
+                      className="w-full py-3 rounded-xl bg-black hover:bg-[#FF3E18] text-white font-comic text-xl uppercase tracking-wider transition-colors cursor-pointer"
+                    >
+                      BASIC STUDIO
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Plan Card 2: ULTIMATE (Full PDF Powerhouse) - Black Card in Center */}
+            <ScrollReveal animation="pop-in" delay={120} duration={650} className="h-full">
+              <div className="relative group md:-translate-y-3 hover:translate-y-0 transition-all duration-300 h-full">
+                <ScotchTape className="-top-3 left-1/2 -translate-x-1/2" rotate="-2deg" />
+                <div className="bg-[#0C0C0C] text-white border-2 border-white rounded-2xl p-5 sm:p-7 shadow-[4px_4px_0px_0px_#FFFFFF] sm:shadow-[8px_8px_0px_0px_#FFFFFF] flex flex-col justify-between h-full">
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap justify-between items-center gap-2 border-b border-white/20 pb-3">
+                      <span className="font-comic text-xl sm:text-2xl text-[#FF3E18]">PDF POWERHOUSE</span>
+                      <span className="text-[10px] font-black uppercase tracking-wider bg-[#FF3E18] text-white px-2.5 py-1 rounded-sm">
+                        $0.00 / FOREVER
+                      </span>
+                    </div>
+
+                    <div className="h-32 bg-[#1A1A1A] rounded-lg p-2 border border-white/20 flex items-center justify-center overflow-hidden">
+                      <MergeSplitIllustration />
+                    </div>
+
+                    <ul className="space-y-2 text-xs font-medium text-gray-300 pt-1">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Merge, split &amp; reorder PDF pages</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Compress PDF files with 3 strength levels</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Crop margins, rescale A4/Letter &amp; N-up sheets</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Convert images to PDF and PDF back to images</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="pt-6 mt-4 border-t border-white/20">
+                    <button
+                      type="button"
+                      onClick={() => onNavigate("pdf-merge-split")}
+                      className="w-full py-3 rounded-xl bg-[#FF3E18] hover:bg-white hover:text-black text-white font-comic text-xl uppercase tracking-wider transition-colors cursor-pointer"
+                    >
+                      ULTIMATE PDF
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Plan Card 3: PREMIUM (Security & Redaction) */}
+            <ScrollReveal animation="tilt-in" delay={240} duration={650} className="h-full">
+              <div className="relative group md:rotate-2 hover:rotate-0 transition-all duration-300 transform hover:-translate-y-2 h-full">
+                <ScotchTape className="-top-3 left-1/2 -translate-x-1/2" rotate="4deg" />
+                <div className="bg-white text-black border-2 border-black rounded-2xl p-5 sm:p-7 shadow-[4px_4px_0px_0px_#0C0C0C] sm:shadow-[8px_8px_0px_0px_#0C0C0C] flex flex-col justify-between h-full">
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap justify-between items-center gap-2 border-b border-black/10 pb-3">
+                      <span className="font-comic text-xl sm:text-2xl text-black">PRIVACY &amp; SECURITY</span>
+                      <span className="text-[10px] font-black uppercase tracking-wider bg-black text-white px-2.5 py-1 rounded-sm">
+                        $0.00 / FOREVER
+                      </span>
+                    </div>
+
+                    <div className="h-32 bg-gray-50 rounded-lg p-2 border border-black/15 flex items-center justify-center overflow-hidden">
+                      <SignPdfIllustration />
+                    </div>
+
+                    <ul className="space-y-2 text-xs font-medium text-gray-700 pt-1">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Draw or upload digital signature on contracts</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Blacken &amp; censor sensitive PII / secret text</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Flatten interactive PDF forms to lock editing</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF3E18] shrink-0" />
+                        <span>Sanitize metadata &amp; compare file versions</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="pt-6 mt-4 border-t border-black/10">
+                    <button
+                      type="button"
+                      onClick={() => onNavigate("pdf-sign")}
+                      className="w-full py-3 rounded-xl bg-black hover:bg-[#FF3E18] text-white font-comic text-xl uppercase tracking-wider transition-colors cursor-pointer"
+                    >
+                      SECURITY SUITE
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
+        </div>
       </section>
 
-      {/* Middle Banner Ad */}
-      <div className="max-w-6xl mx-auto px-4">
-        <ScrollReveal animation="fade-in">
-          <AdBanner slotId="1000000002" />
-        </ScrollReveal>
+      {/* ========================================================================= */}
+      {/* TORN PAPER TRANSITION 3: Fiery Red-Orange tearing into Black Footer        */}
+      {/* ========================================================================= */}
+      <TornPaperTop fill="#0C0C0C" />
+
+      {/* Responsive AdSense Banner */}
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <AdBanner slotId="1000000002" />
       </div>
     </div>
   );

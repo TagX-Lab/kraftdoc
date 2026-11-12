@@ -13,7 +13,7 @@ export default class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error("DocuPix ErrorBoundary caught an exception:", error, errorInfo);
+    console.error("KraftDoc ErrorBoundary caught an exception:", error, errorInfo);
   }
 
   handleReset = () => {
@@ -30,17 +30,17 @@ export default class ErrorBoundary extends React.Component {
         this.state.error?.message?.includes("Failed to fetch");
 
       return (
-        <div className="min-h-screen bg-[#F8F2D8] flex items-center justify-center p-6 text-center">
-          <div className="max-w-md w-full p-8 rounded-3xl bg-white border-2 border-[#E5DCB8] shadow-2xl space-y-5">
-            <div className="w-16 h-16 rounded-2xl bg-[#FF4E02]/15 text-[#FF4E02] flex items-center justify-center mx-auto">
+        <div className="min-h-screen bg-[#0C0C0C] text-white flex items-center justify-center p-6 text-center font-sans">
+          <div className="max-w-md w-full p-8 rounded-2xl bg-[#141414] border-2 border-white/20 shadow-2xl space-y-5">
+            <div className="w-16 h-16 rounded-2xl bg-[#FF3E18]/15 border border-[#FF3E18]/30 text-[#FF3E18] flex items-center justify-center mx-auto shadow-lg">
               <AlertTriangle className="w-8 h-8 stroke-[2.2]" />
             </div>
 
-            <h2 className="text-2xl font-black text-[#1400C3]">
+            <h2 className="font-comic text-3xl text-white uppercase tracking-wider">
               {isChunkError ? "Server Temporarily Busy" : "Something went wrong"}
             </h2>
 
-            <p className="text-sm text-[#3B3355] font-semibold leading-relaxed">
+            <p className="text-sm text-gray-300 font-medium leading-relaxed">
               {isChunkError
                 ? "The server is momentarily busy or network connection dropped. Please reconnect and reload the tool."
                 : "An unexpected error occurred while processing your file. Your data is safe on your device."}
@@ -53,7 +53,7 @@ export default class ErrorBoundary extends React.Component {
                 size="md"
                 icon={RefreshCw}
               >
-                Reload DocuPix
+                Reload KraftDoc
               </Button>
             </div>
           </div>

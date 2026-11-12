@@ -56,13 +56,13 @@ export default function ServerBusyModal({
         </p>
 
         {/* Client-Side In-Browser Guarantee Card */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#D6CA9E] text-left space-y-2 mb-6 shadow-sm">
-          <div className="flex items-center gap-2 text-xs font-black uppercase text-[#1400C3]">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#1A1A1A]/20 text-left space-y-2 mb-6 shadow-sm">
+          <div className="flex items-center gap-2 text-xs font-black uppercase text-[#1A1A1A]">
+            <ShieldCheck className="w-4 h-4 text-[#007BFF] shrink-0" />
             <span>Good News: Your Open Tools Still Work!</span>
           </div>
-          <p className="text-xs text-[#3B3355] font-medium leading-relaxed">
-            DocuPix tools run <strong>100% inside your browser</strong> using WebAssembly and Canvas. Any tool currently loaded in your tab will continue to compress images, resize exam photos, and merge PDFs with zero interruption!
+          <p className="text-xs text-[#1A1A1A]/80 font-medium leading-relaxed">
+            KraftDoc tools run <strong>100% inside your browser</strong> using WebAssembly and Canvas. Any tool currently loaded in your tab will continue to compress images, resize exam photos, and merge PDFs with zero interruption!
           </p>
         </div>
 

@@ -23,8 +23,8 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      {/* Toast container floating on bottom-right */}
-      <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
+      {/* Toast container floating cleanly within mobile and desktop viewports */}
+      <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:bottom-5 sm:right-5 z-50 flex flex-col gap-2 sm:max-w-sm pointer-events-none">
         {toasts.map((toast) => {
           const isSuccess = toast.type === "success";
           const isError = toast.type === "error";
@@ -32,17 +32,17 @@ export function ToastProvider({ children }) {
           return (
             <div
               key={toast.id}
-              className={`pointer-events-auto flex items-start gap-3 p-4 rounded-2xl shadow-2xl border-2 backdrop-blur-md transition-all duration-300 animate-slide-up bg-white ${
+              className={`pointer-events-auto flex items-start gap-3 p-4 rounded-xl shadow-2xl border-2 backdrop-blur-md transition-all duration-300 animate-slide-up bg-[#141414] text-white ${
                 isSuccess
-                  ? "border-[#FF4E02] text-[#1400C3]"
+                  ? "border-[#FF3E18]"
                   : isError
-                  ? "border-rose-500 text-rose-700"
-                  : "border-[#1400C3] text-[#1400C3]"
+                  ? "border-rose-500 text-rose-300"
+                  : "border-white/20"
               }`}
             >
-              {isSuccess && <CheckCircle2 className="w-5 h-5 text-[#FF4E02] shrink-0 mt-0.5" />}
+              {isSuccess && <CheckCircle2 className="w-5 h-5 text-[#FF3E18] shrink-0 mt-0.5" />}
               {isError && <AlertCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />}
-              {!isSuccess && !isError && <Info className="w-5 h-5 text-[#1400C3] shrink-0 mt-0.5" />}
+              {!isSuccess && !isError && <Info className="w-5 h-5 text-white shrink-0 mt-0.5" />}
 
               <div className="flex-1 text-sm font-bold">
                 {toast.message}
@@ -51,7 +51,7 @@ export function ToastProvider({ children }) {
               <button
                 type="button"
                 onClick={() => removeToast(toast.id)}
-                className="text-[#6B627F] hover:text-[#1400C3] transition-colors shrink-0"
+                className="text-[#5A5450] hover:text-[#2038E2] transition-colors shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
